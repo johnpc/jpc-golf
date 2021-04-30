@@ -1,4 +1,5 @@
 import 'antd/dist/antd.css';
+import ReportScore from "./components/ReportScore";
 import DisplayPlayer from "./components/DisplayPlayer";
 import DisplayMatches from "./components/DisplayMatches";
 import DisplayLeaderboard from "./components/DisplayLeaderboard";
@@ -9,7 +10,8 @@ Amplify.configure(aws_exports);
 function App() {
   return (
     <div className="App">
-      <DisplayPlayer playerId={'johnId'} />
+      <ReportScore />
+      <DisplayPlayer playerId="emilyId" />
     </div>
   );
 }

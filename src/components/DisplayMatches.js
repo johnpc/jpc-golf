@@ -13,16 +13,13 @@ class DisplayLeaderboard extends Component {
 
   componentDidMount = async () => {
     const matches = await this.getMatches();
-    const teams = await this.getTeams();
     this.setState({
       matches,
-      teams,
     });
   };
 
   getMatches = async () => {
     const result = await API.graphql(graphqlOperation(listMatchs));
-    console.log("All matches", result.data.listMatchs.items);
     return result.data.listMatchs.items.sort((match, match2) => {
       return Date.parse(match.date) > Date.parse(match2.date);
     });

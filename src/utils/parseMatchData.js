@@ -50,6 +50,7 @@ const parseMatchData = (match) => {
       awayHandicap: awayLowHandicap,
       awayRaw: awayLowRawScore,
       awayAdj: awayLowAdjScore,
+      key: `${match.id}LowHandicap`,
     },
     {
       homeName: homeHighHandicapPlayer.name,
@@ -66,6 +67,7 @@ const parseMatchData = (match) => {
       awayHandicap: awayHighHandicap,
       awayRaw: awayHighRawScore,
       awayAdj: awayHighAdjScore,
+      key: `${match.id}HighHandicap`,
     },
     {
       homeName: match.homeTeam.name,
@@ -84,6 +86,7 @@ const parseMatchData = (match) => {
       awayHandicap: awayLowHandicap + awayHighHandicap,
       awayRaw: awayLowRawScore + awayHighRawScore,
       awayAdj: awayLowAdjScore + awayHighAdjScore,
+      key: `${match.id}Team`,
     },
   ];
   return data;

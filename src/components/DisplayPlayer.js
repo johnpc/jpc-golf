@@ -17,11 +17,12 @@ class DisplayPlayer extends Component {
   };
 
   getPlayer = async () => {
-	  console.log('getting player', this.props.playerId)
     const result = await API.graphql(
-      graphqlOperation(getPlayer, {id: this.props.playerId, input: {id: this.props.playerId}})
+      graphqlOperation(getPlayer, {
+        id: this.props.playerId,
+        input: {id: this.props.playerId},
+      })
     );
-    console.log("Player", result.data);
     return result.data.getPlayer;
   };
 
@@ -60,6 +61,7 @@ class DisplayPlayer extends Component {
               ? score.match.awayTeam.name
               : score.match.homeTeam.name,
           score: score.score,
+          key: score.id,
         };
       })
       .sort((score1, score2) => {

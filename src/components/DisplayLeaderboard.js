@@ -58,6 +58,7 @@ class DisplayMatches extends Component {
         return {
           teamName: team.name,
           points: homePoints + awayPoints,
+          key: team.id,
         };
       })
       .sort((team1, team2) => {
