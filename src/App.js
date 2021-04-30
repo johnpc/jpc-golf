@@ -3,6 +3,7 @@ import ReportScore from "./components/ReportScore";
 import DisplayPlayer from "./components/DisplayPlayer";
 import DisplayMatches from "./components/DisplayMatches";
 import DisplayDirectory from "./components/DisplayDirectory";
+import DisplayInformation from "./components/DisplayInformation";
 import DisplayLeaderboard from "./components/DisplayLeaderboard";
 import Amplify from "aws-amplify";
 import aws_exports from "./aws-exports";
@@ -25,6 +26,9 @@ function App() {
             <li>
               <Link to="/directory">Player Directory</Link>
             </li>
+            <li>
+              <Link to="/info">About</Link>
+            </li>
           </ul>
         </nav>
         <Switch>
@@ -39,6 +43,9 @@ function App() {
           </Route>
           <Route path="/directory">
             <DisplayDirectory />
+          </Route>
+          <Route path="/info">
+            <DisplayInformation />
           </Route>
           <Route path="/">
             <ReportScore />
