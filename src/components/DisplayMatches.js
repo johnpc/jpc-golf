@@ -12,6 +12,7 @@ class DisplayLeaderboard extends Component {
   state = {
     matches: [],
     teamId: this.props.match.params.teamId,
+    matchId: this.props.match.params.matchId,
   };
 
   componentDidMount = async () => {
@@ -89,7 +90,7 @@ class DisplayLeaderboard extends Component {
       },
     ];
 
-    const {matches, teamId} = this.state;
+    const {matches, teamId, matchId} = this.state;
     if (matches.length === 0) {
       return <div>Loading... (no matches found)</div>;
     }
@@ -98,6 +99,12 @@ class DisplayLeaderboard extends Component {
       .filter((match) => {
         if (teamId) {
           return match.homeTeam.id === teamId || match.awayTeam.id === teamId;
+        }
+        return true;
+      })
+      .filter((match) => {
+        if (matchId) {
+          return match.id === matchId;
         }
         return true;
       })

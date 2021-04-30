@@ -66,7 +66,7 @@ class DisplayDirectory extends Component {
     }).reduce((acc, cur) => {
       return acc.concat(cur);
     }, []);
-    
+
     return <Table columns={columns} dataSource={data} pagination={false} />;
   }
 }

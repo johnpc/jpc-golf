@@ -5,6 +5,8 @@ mutation seedData {
       id: "johnId"
       name: "John"
       playerTeamId: "winnersId"
+      email: "johnId@gmail.com"
+      phone: "9895987705"
     }
   ) {
     id
@@ -16,6 +18,8 @@ mutation seedData {
       id: "emilyId"
       name: "Emily"
       playerTeamId: "winnersId"
+      email: "emilyId@gmail.com"
+      phone: "9895987705"
     }
   ) {
     id
@@ -27,6 +31,8 @@ mutation seedData {
       id: "alexId"
       name: "alex"
       playerTeamId: "losersId"
+      email: "alexId@gmail.com"
+      phone: "9895987705"
     }
   ) {
     id
@@ -38,6 +44,8 @@ mutation seedData {
       id: "jamesId"
       name: "james"
       playerTeamId: "losersId"
+      email: "jamesId@gmail.com"
+      phone: "9895987705"
     }
   ) {
     id

@@ -4,6 +4,7 @@ import {API, graphqlOperation} from "aws-amplify";
 import {Table} from "antd";
 import getHandicap from "../utils/getHandicap";
 import {withRouter} from "react-router";
+import {Link} from "react-router-dom";
 class DisplayPlayer extends Component {
   state = {
     player: {},
@@ -31,13 +32,17 @@ class DisplayPlayer extends Component {
         title: "Match Date",
         dataIndex: "matchDate",
         key: "matchDate",
-        render: (text) => <a>{text}</a>,
+        render: (text, record) => {
+          return <Link to={`/matches/match/${record.matchId}`}>{text}</Link>;
+        },
       },
       {
         title: "VS",
         dataIndex: "vs",
         key: "vs",
-        render: (text) => <a>{text}</a>,
+        render: (text, record) => {
+          return <Link to={`/matches/${record.vsId}`}>{text}</Link>;
+        },
       },
       {
         title: "Score",
@@ -54,11 +59,15 @@ class DisplayPlayer extends Component {
     const data = player.scores.items
       .map((score) => {
         return {
+          matchId: score.match.id,
           matchDate: score.match.date,
           vs:
             score.match.homeTeam.id === player.team.id
               ? score.match.awayTeam.name
               : score.match.homeTeam.name,
+          vsId: score.match.homeTeam.id === player.team.id
+          ? score.match.awayTeam.id
+          : score.match.homeTeam.id,
           score: score.score,
           key: score.id,
         };

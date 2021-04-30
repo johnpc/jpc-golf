@@ -8,6 +8,9 @@ import DisplayLeaderboard from "./components/DisplayLeaderboard";
 import Amplify from "aws-amplify";
 import aws_exports from "./aws-exports";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {Layout, Menu} from "antd";
+
+const {Header, Content, Footer} = Layout;
 
 Amplify.configure(aws_exports);
 
@@ -15,43 +18,50 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <ul>
-            <li>
+        <Header>
+          <div className="logo" />
+          <Menu theme="dark" mode="horizontal">
+            <Menu.Item key="1">
               <Link to="/">Report Your Score</Link>
-            </li>
-            <li>
+            </Menu.Item>
+            <Menu.Item key="2">
               <Link to="/matches">View Past/Upcoming Matches</Link>
-            </li>
-            <li>
+            </Menu.Item>
+            <Menu.Item key="3">
               <Link to="/directory">Player Directory</Link>
-            </li>
-            <li>
+            </Menu.Item>
+            <Menu.Item key="4">
               <Link to="/info">About</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route path="/matches/:teamId">
-            <DisplayMatches />
-          </Route>
-          <Route path="/matches">
-            <DisplayMatches />
-          </Route>
-          <Route path="/players/:playerId">
-            <DisplayPlayer />
-          </Route>
-          <Route path="/directory">
-            <DisplayDirectory />
-          </Route>
-          <Route path="/info">
-            <DisplayInformation />
-          </Route>
-          <Route path="/">
-            <ReportScore />
-            <DisplayLeaderboard />
-          </Route>
-        </Switch>
+            </Menu.Item>
+          </Menu>
+        </Header>
+        <Content style={{padding: "0 50px"}}>
+          <Switch>
+            <Route path="/matches/match/:matchId">
+              <DisplayMatches />
+            </Route>
+            <Route path="/matches/:teamId">
+              <DisplayMatches />
+            </Route>
+            <Route path="/matches">
+              <DisplayMatches />
+            </Route>
+            <Route path="/players/:playerId">
+              <DisplayPlayer />
+            </Route>
+            <Route path="/directory">
+              <DisplayDirectory />
+            </Route>
+            <Route path="/info">
+              <DisplayInformation />
+            </Route>
+            <Route path="/">
+              <ReportScore />
+              <DisplayLeaderboard />
+            </Route>
+          </Switch>
+        </Content>
+        <Footer style={{textAlign: "center"}}>John Corser ©2021</Footer>
       </div>
     </Router>
   );
