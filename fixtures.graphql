@@ -1,0 +1,318 @@
+mutation seedData {
+  johnPlayer: createPlayer(
+    input: {
+      userId: "johnUserId"
+      id: "johnId"
+      name: "John"
+      playerTeamId: "winnersId"
+    }
+  ) {
+    id
+    name
+  }
+  emilyPlayer: createPlayer(
+    input: {
+      userId: "emilyUserId"
+      id: "emilyId"
+      name: "Emily"
+      playerTeamId: "winnersId"
+    }
+  ) {
+    id
+    name
+  }
+  alexPlayer: createPlayer(
+    input: {
+      userId: "alexUserId"
+      id: "alexId"
+      name: "alex"
+      playerTeamId: "losersId"
+    }
+  ) {
+    id
+    name
+  }
+  jamesPlayer: createPlayer(
+    input: {
+      userId: "jamesUserId"
+      id: "jamesId"
+      name: "james"
+      playerTeamId: "losersId"
+    }
+  ) {
+    id
+    name
+  }
+
+  winningTeam: createTeam(input: {name: "The Winners", id: "winnersId"}) {
+    id
+    name
+  }
+
+  losingTeam: createTeam(input: {name: "The Losers", id: "losersId"}) {
+    id
+    name
+  }
+
+  createMatch1: createMatch(
+    input: {
+      id: "firstMatchId"
+      date: "2021-04-28T21:47:30.499Z"
+      matchHomeTeamId: "winnersId"
+      matchAwayTeamId: "losersId"
+    }
+  ) {
+    id
+    date
+    homeTeam {
+      name
+      players {
+        items {
+          name
+        }
+      }
+    }
+    awayTeam {
+      name
+      players {
+        items {
+          name
+        }
+      }
+    }
+  }
+
+  johnScore: createScore(
+    input: {
+      id: "johnFirstScoreId"
+      score: 8
+      scorePlayerId: "johnId"
+      scoreMatchId: "firstMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  emilyScore: createScore(
+    input: {
+      id: "emilyFirstScoreId"
+      score: 10
+      scorePlayerId: "emilyId"
+      scoreMatchId: "firstMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  alexScore: createScore(
+    input: {
+      id: "alexFirstScoreId"
+      score: 7
+      scorePlayerId: "alexId"
+      scoreMatchId: "firstMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  jamesScore: createScore(
+    input: {
+      id: "jamesFirstScoreId"
+      score: 14
+      scorePlayerId: "jamesId"
+      scoreMatchId: "firstMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+
+  createMatch2: createMatch(
+    input: {
+      id: "secondMatchId"
+      date: "2021-04-29T21:47:30.499Z"
+      matchHomeTeamId: "winnersId"
+      matchAwayTeamId: "losersId"
+    }
+  ) {
+    id
+    date
+    homeTeam {
+      name
+      players {
+        items {
+          name
+        }
+      }
+    }
+    awayTeam {
+      name
+      players {
+        items {
+          name
+        }
+      }
+    }
+  }
+
+  johnScore2: createScore(
+    input: {
+      id: "johnsecondScoreId"
+      score: 8
+      scorePlayerId: "johnId"
+      scoreMatchId: "secondMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  emilyScore2: createScore(
+    input: {
+      id: "emilysecondScoreId"
+      score: 10
+      scorePlayerId: "emilyId"
+      scoreMatchId: "secondMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  alexScore2: createScore(
+    input: {
+      id: "alexsecondScoreId"
+      score: 11
+      scorePlayerId: "alexId"
+      scoreMatchId: "secondMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  jamesScore2: createScore(
+    input: {
+      id: "jamessecondScoreId"
+      score: 14
+      scorePlayerId: "jamesId"
+      scoreMatchId: "secondMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+}
+
+query showEveryone {
+  listPlayers(limit: 100) {
+    items {
+      id
+      name
+    }
+  }
+}
+
+mutation deleteSeedData {
+  deleteJohn: deletePlayer(input: {id: "johnId"}) {
+    id
+  }
+  deleteEmily: deletePlayer(input: {id: "emilyId"}) {
+    id
+  }
+  deleteAlex: deletePlayer(input: {id: "alexId"}) {
+    id
+  }
+  deleteJames: deletePlayer(input: {id: "jamesId"}) {
+    id
+  }
+  deleteWinners: deleteTeam(input: {id: "winnersId"}) {
+    id
+  }
+  deleteLosers: deleteTeam(input: {id: "losersId"}) {
+    id
+  }
+  deleteMatch(input: {id: "firstMatchId"}) {
+    id
+  }
+  deleteScoreJohn: deleteScore(input: {id: "johnFirstScoreId"}) {
+    id
+  }
+  deleteScoreEmily: deleteScore(input: {id: "emilyFirstScoreId"}) {
+    id
+  }
+  deleteScoreAlex: deleteScore(input: {id: "alexFirstScoreId"}) {
+    id
+  }
+  deleteScoreJames: deleteScore(input: {id: "jamesFirstScoreId"}) {
+    id
+  }
+
+  deleteMatch2: deleteMatch(input: {id: "secondMatchId"}) {
+    id
+  }
+  deleteScoreJohn2: deleteScore(input: {id: "johnsecondScoreId"}) {
+    id
+  }
+  deleteScoreEmily2: deleteScore(input: {id: "emilysecondScoreId"}) {
+    id
+  }
+  deleteScoreAlex2: deleteScore(input: {id: "alexsecondScoreId"}) {
+    id
+  }
+  deleteScoreJames2: deleteScore(input: {id: "jamessecondScoreId"}) {
+    id
+  }
+}

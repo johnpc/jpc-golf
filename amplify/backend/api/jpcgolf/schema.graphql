@@ -1,0 +1,30 @@
+type Player @model {
+  id: ID!
+  userId: ID!
+  team: Team @connection(name: "TeamPlayer")
+  scores: [Score] @connection(name: "PlayerScore")
+  name: String!
+}
+
+type Team @model {
+  id: ID!
+  name: String!
+  homeMatches: [Match] @connection(name: "MatchHomeTeam")
+  awayMatches: [Match] @connection(name: "MatchAwayTeam")
+  players: [Player] @connection(name: "TeamPlayer")
+}
+
+type Score @model {
+  id: ID!
+  match: Match @connection(name: "MatchScore")
+  player: Player @connection(name: "PlayerScore")
+  score: Int!
+}
+
+type Match @model {
+  id: ID!
+  date: String!
+  homeTeam: Team @connection(name: "MatchHomeTeam")
+  awayTeam: Team @connection(name: "MatchAwayTeam")
+  scores: [Score] @connection(name: "MatchScore")
+}
