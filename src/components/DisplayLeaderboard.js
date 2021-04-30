@@ -4,6 +4,7 @@ import {API, graphqlOperation} from "aws-amplify";
 import {Table} from "antd";
 import parseMatchData from "../utils/parseMatchData";
 import {Link} from "react-router-dom";
+import {onCreateScore, onUpdateScore} from "../graphql/subscriptions";
 
 class DisplayLeaderboard extends Component {
   state = {
@@ -15,7 +16,32 @@ class DisplayLeaderboard extends Component {
     this.setState({
       teams,
     });
+    this.createScoreListener = API.graphql(
+      graphqlOperation(onCreateScore)
+    ).subscribe({
+      next: async () => {
+        const teams = await this.getTeams();
+        this.setState({
+          teams,
+        });
+      },
+    });
+    this.updateScoreListener = API.graphql(
+      graphqlOperation(onUpdateScore)
+    ).subscribe({
+      next: async () => {
+        const teams = await this.getTeams();
+        this.setState({
+          teams,
+        });
+      },
+    });
   };
+
+  componentWillUnmount() {
+    this.updateScoreListener.unsubscribe();
+    this.createScoreListener.unsubscribe();
+  }
 
   getTeams = async () => {
     const result = await API.graphql(graphqlOperation(listTeams));
@@ -69,7 +95,7 @@ class DisplayLeaderboard extends Component {
         return team1.points > team2.points;
       });
 
-    return <Table columns={columns} dataSource={data} pagination={false} />;
+    return <Table style={{padding: "10px"}} columns={columns} dataSource={data} pagination={false} />;
   }
 }
 

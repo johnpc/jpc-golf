@@ -10,7 +10,7 @@ class DisplayUpcomingMatch extends Component {
   state = {
     matches: [],
     players: [],
-    playerId: null,
+    player: {},
   };
 
   componentDidMount = async () => {
@@ -44,14 +44,15 @@ class DisplayUpcomingMatch extends Component {
     const playerSelectDropdown = (
       <Select
         showSearch
-        style={{width: 200}}
+        style={{width: 500, padding: "50px"}}
         placeholder="Select a player"
         optionFilterProp="children"
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
         onChange={(value) => {
-          console.log("value", value);
+          const player = players.find(player => player.id === value)
+          this.setState({player});
         }}
       >
         {players.map((player) => {
@@ -180,18 +181,18 @@ class DisplayUpcomingMatch extends Component {
       });
     if (matchJsx.length === 0) {
       return (
-        <>
+        <div style={{padding: "10px"}}>
           {playerSelectDropdown}
-          <Alert message="No match scheduled for this week." />
-        </>
+          <Alert message={this.state.player.name ? `No match scheduled for this week for ${this.state.player.name}.` : 'Please select a player to view their upcoming match.'} />
+        </div>
       );
     }
 
     return (
-      <>
+      <div style={{padding: "10px"}}>
         {playerSelectDropdown}
         {matchJsx}
-      </>
+      </div>
     );
   }
 }

@@ -112,7 +112,7 @@ class DisplayMatches extends Component {
         const awayPoints = data.filter((datum) => datum.vs === "➡️").length;
 
         return (
-          <div key={match.id}>
+          <div style={{padding: "10px"}} key={match.id}>
             <h1>
               {match.homeTeam.name} vs {match.awayTeam.name}:{" "}
               {new Date(match.date).toDateString()}

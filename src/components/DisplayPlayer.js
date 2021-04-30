@@ -77,12 +77,12 @@ class DisplayPlayer extends Component {
       });
 
     return (
-      <>
+      <div style={{padding: "10px"}}>
         <h1>{player.name}</h1>
         <h2>{player.team.name}</h2>
         <p>{getHandicap(player, new Date())} handicap</p>
         <Table columns={columns} dataSource={data} pagination={false} />
-      </>
+      </div>
     );
   }
 }

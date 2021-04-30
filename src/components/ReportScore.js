@@ -53,6 +53,7 @@ class ReportScore extends Component {
       (score) =>
         score.match.id === values.match && score.player.id === values.player
     );
+
     if (existingScore) {
       await API.graphql(
         graphqlOperation(updateScore, {
@@ -128,9 +129,9 @@ class ReportScore extends Component {
     );
 
     return (
-      <>
+      <div style={{padding: "50px"}}>
         {success ? <Alert message="Score submitted!" /> : ""}
-        <Form initialValues={{remember: true}} onFinish={this.updateScore}>
+        <Form layout="inline" initialValues={{remember: true}} onFinish={this.updateScore}>
           <Form.Item label="Player" name="player">
             {playerSelectDropdown}
           </Form.Item>
@@ -146,7 +147,7 @@ class ReportScore extends Component {
             </Button>
           </Form.Item>
         </Form>
-      </>
+      </div>
     );
   }
 }

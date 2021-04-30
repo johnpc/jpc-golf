@@ -3,7 +3,7 @@ import React, {Component} from "react";
 class DisplayInformation extends Component {
   render() {
     return (
-      <>
+      <div style={{padding: "10px"}}>
         <h1>Information about the League</h1>
         <ul>
           <li>
@@ -72,7 +72,7 @@ class DisplayInformation extends Component {
             until I have you in my contacts calling is not an option.
           </li>
         </ul>
-      </>
+      </div>
     );
   }
 }

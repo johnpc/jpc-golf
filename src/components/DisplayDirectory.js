@@ -67,7 +67,7 @@ class DisplayDirectory extends Component {
       return acc.concat(cur);
     }, []);
 
-    return <Table columns={columns} dataSource={data} pagination={false} />;
+    return <Table style={{padding: "10px"}} columns={columns} dataSource={data} pagination={false} />;
   }
 }
 
