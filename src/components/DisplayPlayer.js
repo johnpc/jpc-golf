@@ -37,7 +37,10 @@ class DisplayPlayer extends Component {
         dataIndex: "vs",
         key: "vs",
         render: (text, record) => {
-          return <Link to={`/matches/${record.vsId}`}>{text}</Link>;
+          if (record.vsId) {
+            return <Link to={`/matches/${record.vsId}`}>{text}</Link>;
+          }
+          return text;
         },
       },
       {
@@ -59,12 +62,12 @@ class DisplayPlayer extends Component {
           matchDate: score.match.date,
           vs:
             score.match.homeTeam.id === player.team.id
-              ? score.match.awayTeam.name
-              : score.match.homeTeam.name,
+              ? score.match.awayTeam?.name ?? "No opponent"
+              : score.match.homeTeam?.name ?? "No opponent",
           vsId:
             score.match.homeTeam.id === player.team.id
-              ? score.match.awayTeam.id
-              : score.match.homeTeam.id,
+              ? score.match.awayTeam?.id
+              : score.match.homeTeam?.id,
           score: score.score,
           key: score.id,
         };

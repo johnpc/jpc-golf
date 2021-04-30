@@ -1,5 +1,5 @@
 const getHighHandicap = (players) => {
-	return players[1];
+	return players ? players[1] : null;
 }
 
 export default getHighHandicap;

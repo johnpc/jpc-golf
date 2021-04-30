@@ -3,6 +3,7 @@ import getMatches from "../data/getMatches";
 import getTeams from "../data/getTeams";
 import getScores from "../data/getScores";
 import getPlayers from "../data/getPlayers";
+import ManageTeams from "./admin/ManageTeams";
 class Admin extends Component {
   state = {
     teams: [],
@@ -27,7 +28,7 @@ class Admin extends Component {
   };
 
   render() {
-    return <div>Hello admin</div>;
+    return <div><ManageTeams /></div>;
   }
 }
 

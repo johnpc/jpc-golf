@@ -4,6 +4,7 @@ import createTeam from "../data/createTeam";
 import getPlayers from "../data/getPlayers";
 import getTeams from "../data/getTeams";
 import {Input, Button, Spin, Form, Alert} from "antd";
+import listenCreateTeam from "../data/listenCreateTeam";
 
 class Registration extends Component {
   state = {
@@ -14,7 +15,7 @@ class Registration extends Component {
     teams: [],
   };
 
-  componentDidMount = async () => {
+  syncState = async () => {
     const players = await getPlayers();
     const teams = await getTeams();
     this.setState({
@@ -22,6 +23,18 @@ class Registration extends Component {
       teams,
     });
   };
+
+  componentDidMount = async () => {
+    this.syncState();
+
+    this.createTeamListener = listenCreateTeam().subscribe({
+      next: this.syncState,
+    });
+  };
+
+  componentWillUnmount() {
+    this.createTeamListener.unsubscribe();
+  }
 
   validatePhoneNumber = (number) => {
     return Number.isInteger(parseInt(number)) && number.length === 10;
@@ -143,11 +156,7 @@ class Registration extends Component {
   };
 
   render() {
-    const {players, teams, loading, success, error} = this.state;
-    if (players.length === 0 || teams.length === 0) {
-      return <div>Loading... (no players found)</div>;
-    }
-
+    const {loading, success, error} = this.state;
     return (
       <div>
         {success ? (

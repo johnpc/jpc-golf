@@ -19,8 +19,6 @@ class DisplayMatches extends Component {
     });
   };
 
-
-
   render() {
     const columns = [
       {
@@ -29,7 +27,9 @@ class DisplayMatches extends Component {
         key: "homeName",
         render: (playerName, record) => {
           if (record.homePlayerId) {
-            return <Link to={`/players/${record.homePlayerId}`}>{playerName}</Link>;
+            return (
+              <Link to={`/players/${record.homePlayerId}`}>{playerName}</Link>
+            );
           }
           return playerName;
         },
@@ -60,7 +60,9 @@ class DisplayMatches extends Component {
         key: "awayName",
         render: (playerName, record) => {
           if (record.awayPlayerId) {
-            return <Link to={`/players/${record.awayPlayerId}`}>{playerName}</Link>;
+            return (
+              <Link to={`/players/${record.awayPlayerId}`}>{playerName}</Link>
+            );
           }
           return playerName;
         },
@@ -90,7 +92,7 @@ class DisplayMatches extends Component {
     return matches
       .filter((match) => {
         if (teamId) {
-          return match.homeTeam.id === teamId || match.awayTeam.id === teamId;
+          return match.homeTeam?.id === teamId || match.awayTeam?.id === teamId;
         }
         return true;
       })
@@ -104,29 +106,37 @@ class DisplayMatches extends Component {
         const data = parseMatchData(match);
         const homePoints = data.filter((datum) => datum.vs === "⬅️").length;
         const awayPoints = data.filter((datum) => datum.vs === "➡️").length;
-
-        return (
-          <div style={{padding: "1vw"}} key={match.id}>
-            <h1>
-              {match.homeTeam.name} vs {match.awayTeam.name}:{" "}
-              {new Date(match.date).toDateString()}
-            </h1>
+        const pointsAwardedJsx = [match.homeTeam, match.awayTeam].some(
+          (team) => !team
+        ) ? (
+          ""
+        ) : (
+          <>
             <Alert
               message={
                 homePoints > awayPoints
-                  ? `${match.homeTeam.name} is awarded ${homePoints} points`
-                  : `${match.awayTeam.name} is awarded ${awayPoints} points`
+                  ? `${match.homeTeam?.name} is awarded ${homePoints} points`
+                  : `${match.awayTeam?.name} is awarded ${awayPoints} points`
               }
               type="success"
             />
             <Alert
               message={
                 homePoints < awayPoints
-                  ? `${match.homeTeam.name} is awarded ${homePoints} points`
-                  : `${match.awayTeam.name} is awarded ${awayPoints} points`
+                  ? `${match.homeTeam?.name} is awarded ${homePoints} points`
+                  : `${match.awayTeam?.name} is awarded ${awayPoints} points`
               }
               type="info"
             />
+          </>
+        );
+        return (
+          <div style={{padding: "1vw"}} key={match.id}>
+            <h1>
+              {match.homeTeam?.name} vs {match.awayTeam?.name}:{" "}
+              {new Date(match.date).toDateString()}
+            </h1>
+            {pointsAwardedJsx}
             <Table columns={columns} dataSource={data} pagination={false} />
           </div>
         );

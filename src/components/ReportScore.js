@@ -65,7 +65,7 @@ class ReportScore extends Component {
 
   render() {
     const {players, matches, loading, success, error} = this.state;
-    if (players.length === 0 || matches.length === 0) {
+    if (players.length === 0) {
       return <div>Loading... (no players found)</div>;
     }
 
