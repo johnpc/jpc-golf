@@ -5,6 +5,7 @@ import DisplayMatches from "./components/DisplayMatches";
 import DisplayDirectory from "./components/DisplayDirectory";
 import DisplayInformation from "./components/DisplayInformation";
 import DisplayLeaderboard from "./components/DisplayLeaderboard";
+import DisplayUpcomingMatch from "./components/DisplayUpcomingMatch";
 import Amplify from "aws-amplify";
 import aws_exports from "./aws-exports";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
@@ -33,6 +34,9 @@ function App() {
             <Menu.Item key="4">
               <Link to="/info">About</Link>
             </Menu.Item>
+            <Menu.Item key="5">
+              <Link to="/upcoming-match">Upcoming Match</Link>
+            </Menu.Item>
           </Menu>
         </Header>
         <Content style={{padding: "0 50px"}}>
@@ -45,6 +49,9 @@ function App() {
             </Route>
             <Route path="/matches">
               <DisplayMatches />
+            </Route>
+            <Route path="/upcoming-match">
+              <DisplayUpcomingMatch />
             </Route>
             <Route path="/players/:playerId">
               <DisplayPlayer />

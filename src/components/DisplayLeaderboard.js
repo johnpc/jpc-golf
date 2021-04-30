@@ -5,7 +5,7 @@ import {Table} from "antd";
 import parseMatchData from "../utils/parseMatchData";
 import {Link} from "react-router-dom";
 
-class DisplayMatches extends Component {
+class DisplayLeaderboard extends Component {
   state = {
     teams: [],
   };
@@ -73,4 +73,4 @@ class DisplayMatches extends Component {
   }
 }
 
-export default DisplayMatches;
+export default DisplayLeaderboard;

@@ -1,22 +1,26 @@
 import React, {Component} from "react";
-import {listMatchs} from "../graphql/queries";
+import {listPlayers, listMatchs} from "../graphql/queries";
 import {API, graphqlOperation} from "aws-amplify";
-import {Table, Alert} from "antd";
+import {Table, Alert, Select} from "antd";
 import parseMatchData from "../utils/parseMatchData";
-import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
+const {Option} = Select;
 
-class DisplayMatches extends Component {
+class DisplayUpcomingMatch extends Component {
   state = {
     matches: [],
-    teamId: this.props.match.params.teamId,
-    matchId: this.props.match.params.matchId,
+    players: [],
+    playerId: null,
   };
 
   componentDidMount = async () => {
-    const matches = await this.getMatches();
+    const [matches, players] = await Promise.all([
+      this.getMatches(),
+      this.getPlayers(),
+    ]);
     this.setState({
       matches,
+      players,
     });
   };
 
@@ -27,7 +31,39 @@ class DisplayMatches extends Component {
     });
   };
 
+  getPlayers = async () => {
+    const players = await API.graphql(graphqlOperation(listPlayers));
+    return players.data.listPlayers.items;
+  };
+
   render() {
+    const {players, matches, playerId} = this.state;
+    if (players.length === 0) {
+      return <div>Loading... (no players found)</div>;
+    }
+    const playerSelectDropdown = (
+      <Select
+        showSearch
+        style={{width: 200}}
+        placeholder="Select a player"
+        optionFilterProp="children"
+        filterOption={(input, option) =>
+          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        }
+        onChange={(value) => {
+          console.log("value", value);
+        }}
+      >
+        {players.map((player) => {
+          return (
+            <Option key={player.id} value={player.id}>
+              {player.name}
+            </Option>
+          );
+        })}
+      </Select>
+    );
+
     const columns = [
       {
         title: "Name",
@@ -35,7 +71,9 @@ class DisplayMatches extends Component {
         key: "homeName",
         render: (playerName, record) => {
           if (record.homePlayerId) {
-            return <Link to={`/players/${record.homePlayerId}`}>{playerName}</Link>;
+            return (
+              <Link to={`/players/${record.homePlayerId}`}>{playerName}</Link>
+            );
           }
           return playerName;
         },
@@ -66,7 +104,9 @@ class DisplayMatches extends Component {
         key: "awayName",
         render: (playerName, record) => {
           if (record.awayPlayerId) {
-            return <Link to={`/players/${record.awayPlayerId}`}>{playerName}</Link>;
+            return (
+              <Link to={`/players/${record.awayPlayerId}`}>{playerName}</Link>
+            );
           }
           return playerName;
         },
@@ -88,23 +128,24 @@ class DisplayMatches extends Component {
       },
     ];
 
-    const {matches, teamId, matchId} = this.state;
-    if (matches.length === 0) {
-      return <div>Loading... (no matches found)</div>;
-    }
-
-    return matches
+    const matchJsx = matches
       .filter((match) => {
-        if (teamId) {
-          return match.homeTeam.id === teamId || match.awayTeam.id === teamId;
+        if (playerId) {
+          return (
+            match.homeTeam.players.items.any(
+              (player) => player.id === playerId
+            ) ||
+            match.awayTeam.players.items.any((player) => player.id === playerId)
+          );
         }
         return true;
       })
       .filter((match) => {
-        if (matchId) {
-          return match.id === matchId;
-        }
-        return true;
+        return (
+          Date.parse(match.date) > new Date().getTime() &&
+          Date.parse(match.date) <
+            new Date().getTime() + 7 * 24 * 60 * 60 * 1000
+        );
       })
       .map((match) => {
         const data = parseMatchData(match);
@@ -137,7 +178,22 @@ class DisplayMatches extends Component {
           </div>
         );
       });
+    if (matchJsx.length === 0) {
+      return (
+        <>
+          {playerSelectDropdown}
+          <Alert message="No match scheduled for this week." />
+        </>
+      );
+    }
+
+    return (
+      <>
+        {playerSelectDropdown}
+        {matchJsx}
+      </>
+    );
   }
 }
 
-export default withRouter(DisplayMatches);
+export default DisplayUpcomingMatch;
