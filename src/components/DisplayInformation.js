@@ -3,7 +3,7 @@ import React, {Component} from "react";
 class DisplayInformation extends Component {
   render() {
     return (
-      <div style={{padding: "10px"}}>
+      <div style={{padding: "1vw"}}>
         <h1>Information about the League</h1>
         <ul>
           <li>

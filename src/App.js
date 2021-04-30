@@ -22,24 +22,24 @@ function App() {
         <Header>
           <div className="logo" />
           <Menu theme="dark" mode="horizontal">
-            <Menu.Item key="1">
+            <Menu.Item key="home">
               <Link to="/">Report Your Score</Link>
             </Menu.Item>
-            <Menu.Item key="2">
+            <Menu.Item key="matches">
               <Link to="/matches">View Past/Upcoming Matches</Link>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item key="directory">
               <Link to="/directory">Player Directory</Link>
             </Menu.Item>
-            <Menu.Item key="4">
-              <Link to="/info">About</Link>
-            </Menu.Item>
-            <Menu.Item key="5">
+            <Menu.Item key="upcoming">
               <Link to="/upcoming-match">Upcoming Match</Link>
+            </Menu.Item>
+            <Menu.Item key="about">
+              <Link to="/info">About</Link>
             </Menu.Item>
           </Menu>
         </Header>
-        <Content style={{padding: "0 50px"}}>
+        <Content style={{padding: "0 10vw"}}>
           <Switch>
             <Route path="/matches/match/:matchId">
               <DisplayMatches />

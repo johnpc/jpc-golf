@@ -11,6 +11,7 @@ class ReportScore extends Component {
     matches: [],
     scores: [],
     loading: false,
+    error: false,
     success: null,
   };
 
@@ -45,14 +46,37 @@ class ReportScore extends Component {
   };
 
   updateScore = async (values) => {
+    if (!values.match || !values.player) {
+      this.setState({
+        error:
+          "Please fill in all the required form fields to submit your score.",
+      });
+      return;
+    }
+
+    if (
+      !Number.isInteger(values.score) ||
+      parseInt(values.score) > 36 ||
+      parseInt(values.score) < -27
+    ) {
+      this.setState({
+        error:
+          "Please select a valid number for your score over/under par. Value must be between -27 and 36",
+      });
+      return;
+    }
+
     this.setState({
+      error: false,
       loading: true,
     });
 
-    const existingScore = this.state.scores.find(
-      (score) =>
+    const existingScore = this.state.scores.find((score) => {
+      console.log("JC", score);
+      return (
         score.match.id === values.match && score.player.id === values.player
-    );
+      );
+    });
 
     if (existingScore) {
       await API.graphql(
@@ -78,12 +102,13 @@ class ReportScore extends Component {
     }
 
     this.setState({
+      success: true,
       loading: false,
     });
   };
 
   render() {
-    const {players, matches, loading, success} = this.state;
+    const {players, matches, loading, success, error} = this.state;
     if (players.length === 0 || matches.length === 0) {
       return <div>Loading... (no players found)</div>;
     }
@@ -91,7 +116,7 @@ class ReportScore extends Component {
     const playerSelectDropdown = (
       <Select
         showSearch
-        style={{width: 200}}
+        style={{width: "80vw"}}
         placeholder="Select a player"
         optionFilterProp="children"
         filterOption={(input, option) =>
@@ -101,7 +126,7 @@ class ReportScore extends Component {
         {players.map((player) => {
           return (
             <Option key={player.id} value={player.id}>
-              {player.name}
+              {player.name} - {player.team.name}
             </Option>
           );
         })}
@@ -111,7 +136,7 @@ class ReportScore extends Component {
     const matchSelectDropdown = (
       <Select
         showSearch
-        style={{width: 200}}
+        style={{width: "80vw"}}
         placeholder="Select a date"
         optionFilterProp="children"
         filterOption={(input, option) =>
@@ -129,19 +154,52 @@ class ReportScore extends Component {
     );
 
     return (
-      <div style={{padding: "50px"}}>
-        {success ? <Alert message="Score submitted!" /> : ""}
-        <Form layout="inline" initialValues={{remember: true}} onFinish={this.updateScore}>
-          <Form.Item label="Player" name="player">
+      <div>
+        {success ? (
+          <Alert
+            type="success"
+            style={{margin: "1vw"}}
+            message="Score submitted!"
+          />
+        ) : (
+          ""
+        )}
+        {error ? (
+          <Alert type="error" style={{margin: "1vw"}} message={error} />
+        ) : (
+          ""
+        )}
+        <h1>Submit your score</h1>
+        <Form
+          colon={false}
+          initialValues={{remember: true}}
+          onFinish={this.updateScore}
+        >
+          <Form.Item
+            required
+            tooltip="This is the player you are reporting the score on behalf of. Please be honest!"
+            label="Player"
+            name="player"
+          >
             {playerSelectDropdown}
           </Form.Item>
-          <Form.Item label="Date" name="match">
+          <Form.Item
+            required
+            tooltip="Select the match for the score you're reporting."
+            label="Date"
+            name="match"
+          >
             {matchSelectDropdown}
           </Form.Item>
-          <Form.Item label="Score" name="score">
-            <InputNumber min={-25} max={25} />
+          <Form.Item
+            required
+            tooltip="Your score over/under par. Use negative values for scores below par."
+            label="Score"
+            name="score"
+          >
+            <InputNumber style={{width: "80vw"}} />
           </Form.Item>
-          <Form.Item name="submit">
+          <Form.Item name="submit" style={{padding: "1vw 0"}}>
             <Button type="primary" htmlType="submit">
               {loading ? <Spin /> : "Report Score"}
             </Button>

@@ -44,7 +44,7 @@ class DisplayUpcomingMatch extends Component {
     const playerSelectDropdown = (
       <Select
         showSearch
-        style={{width: 500, padding: "50px"}}
+        style={{width: "80vw", padding: "1vw 0"}}
         placeholder="Select a player"
         optionFilterProp="children"
         filterOption={(input, option) =>
@@ -58,7 +58,7 @@ class DisplayUpcomingMatch extends Component {
         {players.map((player) => {
           return (
             <Option key={player.id} value={player.id}>
-              {player.name}
+              {player.name} - {player.team.name}
             </Option>
           );
         })}
@@ -181,15 +181,15 @@ class DisplayUpcomingMatch extends Component {
       });
     if (matchJsx.length === 0) {
       return (
-        <div style={{padding: "10px"}}>
+        <div style={{padding: "1vw"}}>
+          <Alert type="warning" message={this.state.player.name ? `No match scheduled for this week for ${this.state.player.name}.` : 'Please select a player to view their upcoming match.'} />
           {playerSelectDropdown}
-          <Alert message={this.state.player.name ? `No match scheduled for this week for ${this.state.player.name}.` : 'Please select a player to view their upcoming match.'} />
         </div>
       );
     }
 
     return (
-      <div style={{padding: "10px"}}>
+      <div style={{padding: "1vw"}}>
         {playerSelectDropdown}
         {matchJsx}
       </div>

@@ -95,7 +95,17 @@ class DisplayLeaderboard extends Component {
         return team1.points > team2.points;
       });
 
-    return <Table style={{padding: "10px"}} columns={columns} dataSource={data} pagination={false} />;
+    return (
+      <>
+        <h1>Leaderboard:</h1>
+        <Table
+          style={{padding: "1vw"}}
+          columns={columns}
+          dataSource={data}
+          pagination={false}
+        />
+      </>
+    );
   }
 }
 

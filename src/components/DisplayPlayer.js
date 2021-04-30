@@ -33,7 +33,11 @@ class DisplayPlayer extends Component {
         dataIndex: "matchDate",
         key: "matchDate",
         render: (text, record) => {
-          return <Link to={`/matches/match/${record.matchId}`}>{text}</Link>;
+          return (
+            <Link to={`/matches/match/${record.matchId}`}>
+              {new Date(Date.parse(text)).toDateString()}
+            </Link>
+          );
         },
       },
       {
@@ -65,9 +69,10 @@ class DisplayPlayer extends Component {
             score.match.homeTeam.id === player.team.id
               ? score.match.awayTeam.name
               : score.match.homeTeam.name,
-          vsId: score.match.homeTeam.id === player.team.id
-          ? score.match.awayTeam.id
-          : score.match.homeTeam.id,
+          vsId:
+            score.match.homeTeam.id === player.team.id
+              ? score.match.awayTeam.id
+              : score.match.homeTeam.id,
           score: score.score,
           key: score.id,
         };
@@ -77,9 +82,11 @@ class DisplayPlayer extends Component {
       });
 
     return (
-      <div style={{padding: "10px"}}>
+      <div style={{padding: "1vw"}}>
         <h1>{player.name}</h1>
-        <h2>{player.team.name}</h2>
+        <h2>
+          <Link to={`/matches/${player.team.id}`}>{player.team.name}</Link>
+        </h2>
         <p>{getHandicap(player, new Date())} handicap</p>
         <Table columns={columns} dataSource={data} pagination={false} />
       </div>
