@@ -112,13 +112,81 @@ export const listTeams = /* GraphQL */ `
         id
         name
         homeMatches {
-          nextToken
+          items {
+            id
+            date
+            homeTeam {
+              id
+              name
+              players {
+                items {
+                  id
+                  name
+                }
+              }
+            }
+            awayTeam {
+              id
+              name
+              players {
+                items {
+                  id
+                  name
+                }
+              }
+            }
+            scores {
+              items {
+                player {
+                  id
+                  name
+                }
+                score
+              }
+            }
+          }
         }
         awayMatches {
-          nextToken
+          items {
+            id
+            date
+
+            homeTeam {
+              id
+              name
+              players {
+                items {
+                  id
+                  name
+                }
+              }
+            }
+            awayTeam {
+              id
+              name
+              players {
+                items {
+                  id
+                  name
+                }
+              }
+            }
+            scores {
+              items {
+                player {
+                  id
+                  name
+                }
+                score
+              }
+            }
+          }
         }
         players {
-          nextToken
+          items {
+            id
+            name
+          }
         }
         createdAt
         updatedAt
