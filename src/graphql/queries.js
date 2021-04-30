@@ -25,6 +25,18 @@ export const getPlayer = /* GraphQL */ `
         items {
           id
           score
+          match {
+            id
+            date
+            homeTeam {
+              id
+              name
+            }
+            awayTeam {
+              id
+              name
+            }
+          }
           createdAt
           updatedAt
         }
