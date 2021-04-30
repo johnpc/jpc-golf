@@ -1,9 +1,11 @@
 type Player @model {
   id: ID!
   userId: ID!
+  name: String!
+  email: String!
+  phone: String!
   team: Team @connection(name: "TeamPlayer")
   scores: [Score] @connection(name: "PlayerScore")
-  name: String!
 }
 
 type Team @model {

@@ -6,6 +6,9 @@ export const onCreatePlayer = /* GraphQL */ `
     onCreatePlayer {
       id
       userId
+      name
+      email
+      phone
       team {
         id
         name
@@ -30,7 +33,6 @@ export const onCreatePlayer = /* GraphQL */ `
         }
         nextToken
       }
-      name
       createdAt
       updatedAt
     }
@@ -41,6 +43,9 @@ export const onUpdatePlayer = /* GraphQL */ `
     onUpdatePlayer {
       id
       userId
+      name
+      email
+      phone
       team {
         id
         name
@@ -65,7 +70,6 @@ export const onUpdatePlayer = /* GraphQL */ `
         }
         nextToken
       }
-      name
       createdAt
       updatedAt
     }
@@ -76,6 +80,9 @@ export const onDeletePlayer = /* GraphQL */ `
     onDeletePlayer {
       id
       userId
+      name
+      email
+      phone
       team {
         id
         name
@@ -100,7 +107,6 @@ export const onDeletePlayer = /* GraphQL */ `
         }
         nextToken
       }
-      name
       createdAt
       updatedAt
     }
@@ -134,6 +140,8 @@ export const onCreateTeam = /* GraphQL */ `
           id
           userId
           name
+          email
+          phone
           createdAt
           updatedAt
         }
@@ -172,6 +180,8 @@ export const onUpdateTeam = /* GraphQL */ `
           id
           userId
           name
+          email
+          phone
           createdAt
           updatedAt
         }
@@ -210,6 +220,8 @@ export const onDeleteTeam = /* GraphQL */ `
           id
           userId
           name
+          email
+          phone
           createdAt
           updatedAt
         }
@@ -248,6 +260,9 @@ export const onCreateScore = /* GraphQL */ `
       player {
         id
         userId
+        name
+        email
+        phone
         team {
           id
           name
@@ -257,7 +272,6 @@ export const onCreateScore = /* GraphQL */ `
         scores {
           nextToken
         }
-        name
         createdAt
         updatedAt
       }
@@ -295,6 +309,9 @@ export const onUpdateScore = /* GraphQL */ `
       player {
         id
         userId
+        name
+        email
+        phone
         team {
           id
           name
@@ -304,7 +321,6 @@ export const onUpdateScore = /* GraphQL */ `
         scores {
           nextToken
         }
-        name
         createdAt
         updatedAt
       }
@@ -342,6 +358,9 @@ export const onDeleteScore = /* GraphQL */ `
       player {
         id
         userId
+        name
+        email
+        phone
         team {
           id
           name
@@ -351,7 +370,6 @@ export const onDeleteScore = /* GraphQL */ `
         scores {
           nextToken
         }
-        name
         createdAt
         updatedAt
       }

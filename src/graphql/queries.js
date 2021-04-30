@@ -6,6 +6,9 @@ export const getPlayer = /* GraphQL */ `
     getPlayer(id: $id) {
       id
       userId
+      name
+      email
+      phone
       team {
         id
         name
@@ -25,24 +28,11 @@ export const getPlayer = /* GraphQL */ `
         items {
           id
           score
-          match {
-            id
-            date
-            homeTeam {
-              id
-              name
-            }
-            awayTeam {
-              id
-              name
-            }
-          }
           createdAt
           updatedAt
         }
         nextToken
       }
-      name
       createdAt
       updatedAt
     }
@@ -58,6 +48,9 @@ export const listPlayers = /* GraphQL */ `
       items {
         id
         userId
+        name
+        email
+        phone
         team {
           id
           name
@@ -67,7 +60,6 @@ export const listPlayers = /* GraphQL */ `
         scores {
           nextToken
         }
-        name
         createdAt
         updatedAt
       }
@@ -103,6 +95,8 @@ export const getTeam = /* GraphQL */ `
           id
           userId
           name
+          email
+          phone
           createdAt
           updatedAt
         }
@@ -124,81 +118,13 @@ export const listTeams = /* GraphQL */ `
         id
         name
         homeMatches {
-          items {
-            id
-            date
-            homeTeam {
-              id
-              name
-              players {
-                items {
-                  id
-                  name
-                }
-              }
-            }
-            awayTeam {
-              id
-              name
-              players {
-                items {
-                  id
-                  name
-                }
-              }
-            }
-            scores {
-              items {
-                player {
-                  id
-                  name
-                }
-                score
-              }
-            }
-          }
+          nextToken
         }
         awayMatches {
-          items {
-            id
-            date
-
-            homeTeam {
-              id
-              name
-              players {
-                items {
-                  id
-                  name
-                }
-              }
-            }
-            awayTeam {
-              id
-              name
-              players {
-                items {
-                  id
-                  name
-                }
-              }
-            }
-            scores {
-              items {
-                player {
-                  id
-                  name
-                }
-                score
-              }
-            }
-          }
+          nextToken
         }
         players {
-          items {
-            id
-            name
-          }
+          nextToken
         }
         createdAt
         updatedAt
@@ -235,6 +161,9 @@ export const getScore = /* GraphQL */ `
       player {
         id
         userId
+        name
+        email
+        phone
         team {
           id
           name
@@ -244,7 +173,6 @@ export const getScore = /* GraphQL */ `
         scores {
           nextToken
         }
-        name
         createdAt
         updatedAt
       }
@@ -273,6 +201,8 @@ export const listScores = /* GraphQL */ `
           id
           userId
           name
+          email
+          phone
           createdAt
           updatedAt
         }
@@ -348,37 +278,14 @@ export const listMatchs = /* GraphQL */ `
           name
           createdAt
           updatedAt
-          players {
-            items {
-              id
-              name
-            }
-          }
         }
         awayTeam {
           id
           name
           createdAt
           updatedAt
-          players {
-            items {
-              id
-              name
-            }
-          }
         }
         scores {
-          items {
-            player {
-              id
-              name
-              team {
-                id
-                name
-              }
-            }
-            score
-          }
           nextToken
         }
         createdAt

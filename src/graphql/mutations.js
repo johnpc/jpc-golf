@@ -9,6 +9,9 @@ export const createPlayer = /* GraphQL */ `
     createPlayer(input: $input, condition: $condition) {
       id
       userId
+      name
+      email
+      phone
       team {
         id
         name
@@ -33,7 +36,6 @@ export const createPlayer = /* GraphQL */ `
         }
         nextToken
       }
-      name
       createdAt
       updatedAt
     }
@@ -47,6 +49,9 @@ export const updatePlayer = /* GraphQL */ `
     updatePlayer(input: $input, condition: $condition) {
       id
       userId
+      name
+      email
+      phone
       team {
         id
         name
@@ -71,7 +76,6 @@ export const updatePlayer = /* GraphQL */ `
         }
         nextToken
       }
-      name
       createdAt
       updatedAt
     }
@@ -85,6 +89,9 @@ export const deletePlayer = /* GraphQL */ `
     deletePlayer(input: $input, condition: $condition) {
       id
       userId
+      name
+      email
+      phone
       team {
         id
         name
@@ -109,7 +116,6 @@ export const deletePlayer = /* GraphQL */ `
         }
         nextToken
       }
-      name
       createdAt
       updatedAt
     }
@@ -146,6 +152,8 @@ export const createTeam = /* GraphQL */ `
           id
           userId
           name
+          email
+          phone
           createdAt
           updatedAt
         }
@@ -187,6 +195,8 @@ export const updateTeam = /* GraphQL */ `
           id
           userId
           name
+          email
+          phone
           createdAt
           updatedAt
         }
@@ -228,6 +238,8 @@ export const deleteTeam = /* GraphQL */ `
           id
           userId
           name
+          email
+          phone
           createdAt
           updatedAt
         }
@@ -269,6 +281,9 @@ export const createScore = /* GraphQL */ `
       player {
         id
         userId
+        name
+        email
+        phone
         team {
           id
           name
@@ -278,7 +293,6 @@ export const createScore = /* GraphQL */ `
         scores {
           nextToken
         }
-        name
         createdAt
         updatedAt
       }
@@ -319,6 +333,9 @@ export const updateScore = /* GraphQL */ `
       player {
         id
         userId
+        name
+        email
+        phone
         team {
           id
           name
@@ -328,7 +345,6 @@ export const updateScore = /* GraphQL */ `
         scores {
           nextToken
         }
-        name
         createdAt
         updatedAt
       }
@@ -369,6 +385,9 @@ export const deleteScore = /* GraphQL */ `
       player {
         id
         userId
+        name
+        email
+        phone
         team {
           id
           name
@@ -378,7 +397,6 @@ export const deleteScore = /* GraphQL */ `
         scores {
           nextToken
         }
-        name
         createdAt
         updatedAt
       }
