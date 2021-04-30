@@ -3,6 +3,7 @@ import {listTeams} from "../graphql/queries";
 import {API, graphqlOperation} from "aws-amplify";
 import {Table} from "antd";
 import parseMatchData from "../utils/parseMatchData";
+import {Link} from "react-router-dom";
 
 class DisplayMatches extends Component {
   state = {
@@ -27,7 +28,9 @@ class DisplayMatches extends Component {
         title: "Team Name",
         dataIndex: "teamName",
         key: "teamName",
-        render: (text) => <a>{text}</a>,
+        render: (teamName, record) => {
+          return <Link to={`/matches/${record.teamId}`}>{teamName}</Link>;
+        },
       },
       {
         title: "Points",
@@ -59,6 +62,7 @@ class DisplayMatches extends Component {
           teamName: team.name,
           points: homePoints + awayPoints,
           key: team.id,
+          teamId: team.id,
         };
       })
       .sort((team1, team2) => {

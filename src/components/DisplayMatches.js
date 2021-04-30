@@ -5,10 +5,13 @@ import {listMatchs} from "../graphql/queries";
 import {API, graphqlOperation} from "aws-amplify";
 import {Table, Alert} from "antd";
 import parseMatchData from "../utils/parseMatchData";
+import {withRouter} from "react-router";
+import {Link} from "react-router-dom";
 
 class DisplayLeaderboard extends Component {
   state = {
     matches: [],
+    teamId: this.props.match.params.teamId,
   };
 
   componentDidMount = async () => {
@@ -31,7 +34,12 @@ class DisplayLeaderboard extends Component {
         title: "Name",
         dataIndex: "homeName",
         key: "homeName",
-        render: (text) => <a>{text}</a>,
+        render: (playerName, record) => {
+          if (record.homePlayerId) {
+            return <Link to={`/players/${record.homePlayerId}`}>{playerName}</Link>;
+          }
+          return playerName;
+        },
       },
       {
         title: "Handicap",
@@ -57,7 +65,12 @@ class DisplayLeaderboard extends Component {
         title: "Name",
         dataIndex: "awayName",
         key: "awayName",
-        render: (text) => <a>{text}</a>,
+        render: (playerName, record) => {
+          if (record.awayPlayerId) {
+            return <Link to={`/players/${record.awayPlayerId}`}>{playerName}</Link>;
+          }
+          return playerName;
+        },
       },
       {
         title: "Handicap",
@@ -76,43 +89,50 @@ class DisplayLeaderboard extends Component {
       },
     ];
 
-    const {matches} = this.state;
+    const {matches, teamId} = this.state;
     if (matches.length === 0) {
       return <div>Loading... (no matches found)</div>;
     }
 
-    return matches.map((match) => {
-      const data = parseMatchData(match);
-      const homePoints = data.filter((datum) => datum.vs === "⬅️").length;
-      const awayPoints = data.filter((datum) => datum.vs === "➡️").length;
+    return matches
+      .filter((match) => {
+        if (teamId) {
+          return match.homeTeam.id === teamId || match.awayTeam.id === teamId;
+        }
+        return true;
+      })
+      .map((match) => {
+        const data = parseMatchData(match);
+        const homePoints = data.filter((datum) => datum.vs === "⬅️").length;
+        const awayPoints = data.filter((datum) => datum.vs === "➡️").length;
 
-      return (
-        <div key={match.id}>
-          <h1>
-            {match.homeTeam.name} vs {match.awayTeam.name}:{" "}
-            {new Date(match.date).toDateString()}
-          </h1>
-          <Alert
-            message={
-              homePoints > awayPoints
-                ? `${match.homeTeam.name} is awarded ${homePoints} points`
-                : `${match.awayTeam.name} is awarded ${awayPoints} points`
-            }
-            type="success"
-          />
-          <Alert
-            message={
-              homePoints < awayPoints
-                ? `${match.homeTeam.name} is awarded ${homePoints} points`
-                : `${match.awayTeam.name} is awarded ${awayPoints} points`
-            }
-            type="info"
-          />
-          <Table columns={columns} dataSource={data} pagination={false} />
-        </div>
-      );
-    });
+        return (
+          <div key={match.id}>
+            <h1>
+              {match.homeTeam.name} vs {match.awayTeam.name}:{" "}
+              {new Date(match.date).toDateString()}
+            </h1>
+            <Alert
+              message={
+                homePoints > awayPoints
+                  ? `${match.homeTeam.name} is awarded ${homePoints} points`
+                  : `${match.awayTeam.name} is awarded ${awayPoints} points`
+              }
+              type="success"
+            />
+            <Alert
+              message={
+                homePoints < awayPoints
+                  ? `${match.homeTeam.name} is awarded ${homePoints} points`
+                  : `${match.awayTeam.name} is awarded ${awayPoints} points`
+              }
+              type="info"
+            />
+            <Table columns={columns} dataSource={data} pagination={false} />
+          </div>
+        );
+      });
   }
 }
 
-export default DisplayLeaderboard;
+export default withRouter(DisplayLeaderboard);

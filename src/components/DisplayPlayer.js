@@ -3,7 +3,7 @@ import {getPlayer} from "../graphql/queries";
 import {API, graphqlOperation} from "aws-amplify";
 import {Table} from "antd";
 import getHandicap from "../utils/getHandicap";
-
+import {withRouter} from "react-router";
 class DisplayPlayer extends Component {
   state = {
     player: {},
@@ -19,8 +19,7 @@ class DisplayPlayer extends Component {
   getPlayer = async () => {
     const result = await API.graphql(
       graphqlOperation(getPlayer, {
-        id: this.props.playerId,
-        input: {id: this.props.playerId},
+        id: this.props.playerId ?? this.props.match.params.playerId,
       })
     );
     return result.data.getPlayer;
@@ -79,4 +78,4 @@ class DisplayPlayer extends Component {
   }
 }
 
-export default DisplayPlayer;
+export default withRouter(DisplayPlayer);
