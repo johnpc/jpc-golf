@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import {listPlayers, listTeams} from "../graphql/queries";
-import {createTeam, createPlayer} from "../graphql/mutations";
-import {API, graphqlOperation} from "aws-amplify";
+import createPlayer from "../data/createPlayer";
+import createTeam from "../data/createTeam";
+import getPlayers from "../data/getPlayers";
+import getTeams from "../data/getTeams";
 import {Input, Button, Spin, Form, Alert} from "antd";
 
 class Registration extends Component {
@@ -14,22 +15,12 @@ class Registration extends Component {
   };
 
   componentDidMount = async () => {
-    const players = await this.getPlayers();
-    const teams = await this.getTeams();
+    const players = await getPlayers();
+    const teams = await getTeams();
     this.setState({
       players,
       teams,
     });
-  };
-
-  getTeams = async () => {
-    const result = await API.graphql(graphqlOperation(listTeams));
-    return result.data.listTeams.items;
-  };
-
-  getPlayers = async () => {
-    const players = await API.graphql(graphqlOperation(listPlayers));
-    return players.data.listPlayers.items;
   };
 
   validatePhoneNumber = (number) => {
@@ -130,37 +121,18 @@ class Registration extends Component {
       success: false,
     });
 
-    const teamResponse = await API.graphql(
-      graphqlOperation(createTeam, {
-        input: {
-          name: values.teamName,
-        },
-      })
+    const team = await createTeam(values.teamName);
+    await createPlayer(
+      values.player1Name,
+      team,
+      values.player1Email,
+      values.player1Phone
     );
-
-    const team = teamResponse.data.createTeam;
-    await API.graphql(
-      graphqlOperation(createPlayer, {
-        input: {
-          name: values.player1Name,
-          userId: `${values.player1Name}-${values.teamName}`,
-          email: values.player1Email,
-          phone: values.player1Phone,
-          playerTeamId: team.id,
-        },
-      })
-    );
-
-    await API.graphql(
-      graphqlOperation(createPlayer, {
-        input: {
-          name: values.player2Name,
-          userId: `${values.player2Name}-${values.teamName}`,
-          email: values.player2Email,
-          phone: values.player2Phone,
-          playerTeamId: team.id,
-        },
-      })
+    await createPlayer(
+      values.player2Name,
+      team,
+      values.player2Email,
+      values.player2Phone
     );
 
     this.setState({

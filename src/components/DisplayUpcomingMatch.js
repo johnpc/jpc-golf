@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import {listPlayers, listMatchs} from "../graphql/queries";
-import {API, graphqlOperation} from "aws-amplify";
 import {Table, Alert, Select} from "antd";
+import getMatches from "../data/getMatches";
+import getPlayers from "../data/getPlayers";
 import parseMatchData from "../utils/parseMatchData";
 import {Link} from "react-router-dom";
 const {Option} = Select;
@@ -15,25 +15,13 @@ class DisplayUpcomingMatch extends Component {
 
   componentDidMount = async () => {
     const [matches, players] = await Promise.all([
-      this.getMatches(),
-      this.getPlayers(),
+      getMatches(),
+      getPlayers(),
     ]);
     this.setState({
       matches,
       players,
     });
-  };
-
-  getMatches = async () => {
-    const result = await API.graphql(graphqlOperation(listMatchs));
-    return result.data.listMatchs.items.sort((match, match2) => {
-      return Date.parse(match.date) > Date.parse(match2.date);
-    });
-  };
-
-  getPlayers = async () => {
-    const players = await API.graphql(graphqlOperation(listPlayers));
-    return players.data.listPlayers.items;
   };
 
   render() {

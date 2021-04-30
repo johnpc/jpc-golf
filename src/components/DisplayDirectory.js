@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import {listTeams} from "../graphql/queries";
-import {API, graphqlOperation} from "aws-amplify";
+import getTeams from "../data/getTeams";
 import {Table} from "antd";
 import {Link} from "react-router-dom";
 import getHandicap from "../utils/getHandicap";
@@ -11,15 +10,10 @@ class DisplayDirectory extends Component {
   };
 
   componentDidMount = async () => {
-    const teams = await this.getTeams();
+    const teams = await getTeams();
     this.setState({
       teams,
     });
-  };
-
-  getTeams = async () => {
-    const result = await API.graphql(graphqlOperation(listTeams));
-    return result.data.listTeams.items;
   };
 
   render() {

@@ -1,29 +1,21 @@
 import React, {Component} from "react";
-import {getPlayer} from "../graphql/queries";
-import {API, graphqlOperation} from "aws-amplify";
 import {Table} from "antd";
 import getHandicap from "../utils/getHandicap";
 import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
+import getPlayer from "../data/getPlayer";
 class DisplayPlayer extends Component {
   state = {
     player: {},
   };
 
   componentDidMount = async () => {
-    const player = await this.getPlayer();
+    const player = await getPlayer(
+      this.props.playerId ?? this.props.match.params.playerId
+    );
     this.setState({
       player,
     });
-  };
-
-  getPlayer = async () => {
-    const result = await API.graphql(
-      graphqlOperation(getPlayer, {
-        id: this.props.playerId ?? this.props.match.params.playerId,
-      })
-    );
-    return result.data.getPlayer;
   };
 
   render() {

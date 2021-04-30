@@ -1,8 +1,7 @@
 import React, {Component} from "react";
-import {listMatchs} from "../graphql/queries";
-import {API, graphqlOperation} from "aws-amplify";
 import {Table, Alert} from "antd";
 import parseMatchData from "../utils/parseMatchData";
+import getMatches from "../data/getMatches";
 import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
 
@@ -14,18 +13,13 @@ class DisplayMatches extends Component {
   };
 
   componentDidMount = async () => {
-    const matches = await this.getMatches();
+    const matches = await getMatches();
     this.setState({
       matches,
     });
   };
 
-  getMatches = async () => {
-    const result = await API.graphql(graphqlOperation(listMatchs));
-    return result.data.listMatchs.items.sort((match, match2) => {
-      return Date.parse(match.date) > Date.parse(match2.date);
-    });
-  };
+
 
   render() {
     const columns = [

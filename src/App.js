@@ -1,4 +1,5 @@
 import "antd/dist/antd.css";
+import Admin from "./components/Admin";
 import ReportScore from "./components/ReportScore";
 import DisplayPlayer from "./components/DisplayPlayer";
 import DisplayMatches from "./components/DisplayMatches";
@@ -45,6 +46,9 @@ function App() {
         </Header>
         <Content style={{padding: "0 10vw"}}>
           <Switch>
+            <Route path="/admin">
+              <Admin />
+            </Route>
             <Route path="/registration">
               <Registration />
             </Route>

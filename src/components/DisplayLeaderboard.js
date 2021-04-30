@@ -1,40 +1,31 @@
 import React, {Component} from "react";
-import {listTeams} from "../graphql/queries";
-import {API, graphqlOperation} from "aws-amplify";
+import getTeams from "../data/getTeams";
+import listenCreateScore from "../data/listenCreateScore";
+import listenUpdateScore from "../data/listenUpdateScore";
 import {Table} from "antd";
 import parseMatchData from "../utils/parseMatchData";
 import {Link} from "react-router-dom";
-import {onCreateScore, onUpdateScore} from "../graphql/subscriptions";
 
 class DisplayLeaderboard extends Component {
   state = {
     teams: [],
   };
 
-  componentDidMount = async () => {
-    const teams = await this.getTeams();
+  setTeamState = async () => {
+    const teams = await getTeams();
     this.setState({
       teams,
     });
-    this.createScoreListener = API.graphql(
-      graphqlOperation(onCreateScore)
-    ).subscribe({
-      next: async () => {
-        const teams = await this.getTeams();
-        this.setState({
-          teams,
-        });
-      },
+  };
+  componentDidMount = async () => {
+    this.setTeamState();
+
+    this.createScoreListener = listenCreateScore().subscribe({
+      next: this.setTeamState,
     });
-    this.updateScoreListener = API.graphql(
-      graphqlOperation(onUpdateScore)
-    ).subscribe({
-      next: async () => {
-        const teams = await this.getTeams();
-        this.setState({
-          teams,
-        });
-      },
+
+    this.updateScoreListener = listenUpdateScore().subscribe({
+      next: this.setTeamState,
     });
   };
 
@@ -42,11 +33,6 @@ class DisplayLeaderboard extends Component {
     this.updateScoreListener.unsubscribe();
     this.createScoreListener.unsubscribe();
   }
-
-  getTeams = async () => {
-    const result = await API.graphql(graphqlOperation(listTeams));
-    return result.data.listTeams.items;
-  };
 
   render() {
     const columns = [
