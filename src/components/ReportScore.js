@@ -72,7 +72,6 @@ class ReportScore extends Component {
     });
 
     const existingScore = this.state.scores.find((score) => {
-      console.log("JC", score);
       return (
         score.match.id === values.match && score.player.id === values.player
       );

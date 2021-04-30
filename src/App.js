@@ -5,6 +5,7 @@ import DisplayMatches from "./components/DisplayMatches";
 import DisplayDirectory from "./components/DisplayDirectory";
 import DisplayInformation from "./components/DisplayInformation";
 import DisplayLeaderboard from "./components/DisplayLeaderboard";
+import Registration from "./components/Registration";
 import DisplayUpcomingMatch from "./components/DisplayUpcomingMatch";
 import Amplify from "aws-amplify";
 import aws_exports from "./aws-exports";
@@ -37,10 +38,16 @@ function App() {
             <Menu.Item key="about">
               <Link to="/info">About</Link>
             </Menu.Item>
+            <Menu.Item key="registration">
+              <Link to="/registration">Register</Link>
+            </Menu.Item>
           </Menu>
         </Header>
         <Content style={{padding: "0 10vw"}}>
           <Switch>
+            <Route path="/registration">
+              <Registration />
+            </Route>
             <Route path="/matches/match/:matchId">
               <DisplayMatches />
             </Route>
