@@ -55,10 +55,6 @@ class DisplayPlayer extends Component {
       return <div>Loading... (no player found)</div>;
     }
 
-    if (player.scores.items.length === 0) {
-      return <Empty />;
-    }
-
     const data = player.scores.items
       .map((score) => {
         return {
@@ -80,6 +76,12 @@ class DisplayPlayer extends Component {
         return Date.parse(score1.matchDate) > Date.parse(score2.matchDate);
       });
 
+    const content =
+      player.scores.items.length === 0 ? (
+        <Empty />
+      ) : (
+        <Table columns={columns} dataSource={data} pagination={false} />
+      );
     return (
       <div style={{padding: "1vw"}}>
         <h1>{player.name}</h1>
@@ -87,7 +89,7 @@ class DisplayPlayer extends Component {
           <Link to={`/matches/${player.team.id}`}>{player.team.name}</Link>
         </h2>
         <p>{getHandicap(player, new Date())} handicap</p>
-        <Table columns={columns} dataSource={data} pagination={false} />
+        {content}
       </div>
     );
   }

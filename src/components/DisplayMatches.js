@@ -4,18 +4,22 @@ import parseMatchData from "../utils/parseMatchData";
 import getMatches from "../data/getMatches";
 import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
+import getTeams from "../data/getTeams";
 
 class DisplayMatches extends Component {
   state = {
     matches: [],
+    teams: [],
     teamId: this.props.match.params.teamId,
     matchId: this.props.match.params.matchId,
   };
 
   componentDidMount = async () => {
     const matches = await getMatches();
+    const teams = await getTeams();
     this.setState({
       matches,
+      teams,
     });
   };
 
@@ -142,11 +146,23 @@ class DisplayMatches extends Component {
         );
       });
 
-      if (matchJsx.length === 0) {
-        return <Empty />
-      }
-
-      return matchJsx;
+    let headerContent = "Matches";
+    if (this.state.matchId) {
+      const match = this.state.matches.find((match) => match.id === matchId);
+      headerContent = `${match.homeTeam.name} vs ${
+        match.awayTeam.name
+      } on ${new Date(Date.parse(match.date).toDateString())}`;
+    }
+    if (this.state.teamId) {
+      const team = this.state.teams.find((team) => team.id === teamId);
+      headerContent = `Matches played by ${team.name}`;
+    }
+    return (
+      <>
+        <h1>{headerContent}</h1>
+        {matchJsx.length === 0 ? <Empty /> : matchJsx}
+      </>
+    );
   }
 }
 
