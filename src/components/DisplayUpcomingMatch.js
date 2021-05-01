@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Table, Alert, Select} from "antd";
+import {Table, Alert, Select, Empty} from "antd";
 import getMatches from "../data/getMatches";
 import getPlayers from "../data/getPlayers";
 import parseMatchData from "../utils/parseMatchData";
@@ -172,6 +172,7 @@ class DisplayUpcomingMatch extends Component {
         <div style={{padding: "1vw"}}>
           <Alert type="warning" message={this.state.player.name ? `No match scheduled for this week for ${this.state.player.name}.` : 'Please select a player to view their upcoming match.'} />
           {playerSelectDropdown}
+          <Empty />
         </div>
       );
     }

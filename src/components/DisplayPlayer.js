@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Table} from "antd";
+import {Empty, Table} from "antd";
 import getHandicap from "../utils/getHandicap";
 import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
@@ -53,6 +53,10 @@ class DisplayPlayer extends Component {
     const {player} = this.state;
     if (!player.id) {
       return <div>Loading... (no player found)</div>;
+    }
+
+    if (player.scores.items.length === 0) {
+      return <Empty />;
     }
 
     const data = player.scores.items

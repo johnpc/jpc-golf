@@ -1,15 +1,23 @@
 {
-  "develop": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-jpcgolf-develop-183317-authRole",
-      "UnauthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-develop-183317-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-develop-183317-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-jpcgolf-develop-183317-deployment",
-      "UnauthRoleName": "amplify-jpcgolf-develop-183317-unauthRole",
-      "StackName": "amplify-jpcgolf-develop-183317",
-      "StackId": "arn:aws:cloudformation:us-east-1:566092841021:stack/amplify-jpcgolf-develop-183317/e5b84c30-a93a-11eb-8e0d-0e23aa861d3d",
-      "AmplifyAppId": "d2bg4421igchao"
+    "develop": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-jpcgolf-develop-183317-authRole",
+            "UnauthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-develop-183317-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-develop-183317-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-jpcgolf-develop-183317-deployment",
+            "UnauthRoleName": "amplify-jpcgolf-develop-183317-unauthRole",
+            "StackName": "amplify-jpcgolf-develop-183317",
+            "StackId": "arn:aws:cloudformation:us-east-1:566092841021:stack/amplify-jpcgolf-develop-183317/e5b84c30-a93a-11eb-8e0d-0e23aa861d3d",
+            "AmplifyAppId": "d2bg4421igchao"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d2bg4421igchao",
+                    "type": "cicd"
+                }
+            }
+        }
     }
-  }
 }

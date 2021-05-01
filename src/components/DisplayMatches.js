@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Table, Alert} from "antd";
+import {Table, Alert, Empty} from "antd";
 import parseMatchData from "../utils/parseMatchData";
 import getMatches from "../data/getMatches";
 import {withRouter} from "react-router";
@@ -89,7 +89,7 @@ class DisplayMatches extends Component {
       return <div>Loading... (no matches found)</div>;
     }
 
-    return matches
+    const matchJsx = matches
       .filter((match) => {
         if (teamId) {
           return match.homeTeam?.id === teamId || match.awayTeam?.id === teamId;
@@ -141,6 +141,12 @@ class DisplayMatches extends Component {
           </div>
         );
       });
+
+      if (matchJsx.length === 0) {
+        return <Empty />
+      }
+
+      return matchJsx;
   }
 }
 
