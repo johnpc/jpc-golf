@@ -61,7 +61,7 @@ class DisplayUpcomingMatch extends Component {
         render: (playerName, record) => {
           if (record.homePlayerId) {
             return (
-              <Link to={`/players/${record.homePlayerId}`}>{playerName}</Link>
+              <Link to={`/app/players/${record.homePlayerId}`}>{playerName}</Link>
             );
           }
           return playerName;
@@ -94,7 +94,7 @@ class DisplayUpcomingMatch extends Component {
         render: (playerName, record) => {
           if (record.awayPlayerId) {
             return (
-              <Link to={`/players/${record.awayPlayerId}`}>{playerName}</Link>
+              <Link to={`/app/players/${record.awayPlayerId}`}>{playerName}</Link>
             );
           }
           return playerName;

@@ -35,8 +35,6 @@ const deleteTeam = async (id) => {
         })
       );
       const deletedScore = scoreResponse.data.deleteScore;
-      console.log("deletedScore", deletedScore);
-      console.log("deletedTeam", deletedTeam);
       const matchTeams = [
         deletedScore.match.awayTeam,
         deletedScore.match.homeTeam,

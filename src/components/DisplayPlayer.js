@@ -26,7 +26,7 @@ class DisplayPlayer extends Component {
         key: "matchDate",
         render: (text, record) => {
           return (
-            <Link to={`/matches/match/${record.matchId}`}>
+            <Link to={`/app/matches/match/${record.matchId}`}>
               {new Date(Date.parse(text)).toDateString()}
             </Link>
           );
@@ -38,7 +38,7 @@ class DisplayPlayer extends Component {
         key: "vs",
         render: (text, record) => {
           if (record.vsId) {
-            return <Link to={`/matches/${record.vsId}`}>{text}</Link>;
+            return <Link to={`/app/matches/${record.vsId}`}>{text}</Link>;
           }
           return text;
         },
@@ -86,7 +86,7 @@ class DisplayPlayer extends Component {
       <div style={{padding: "1vw"}}>
         <h1>{player.name}</h1>
         <h2>
-          <Link to={`/matches/${player.team.id}`}>{player.team.name}</Link>
+          <Link to={`/app/matches/${player.team.id}`}>{player.team.name}</Link>
         </h2>
         <p>{getHandicap(player, new Date())} handicap</p>
         {content}

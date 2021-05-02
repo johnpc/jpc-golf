@@ -23,7 +23,7 @@ class DisplayDirectory extends Component {
         dataIndex: "playerName",
         key: "playerName",
         render: (playerName, record) => {
-          return <Link to={`/players/${record.playerId}`}>{playerName}</Link>;
+          return <Link to={`/app/players/${record.playerId}`}>{playerName}</Link>;
         },
       },
       {
@@ -31,7 +31,7 @@ class DisplayDirectory extends Component {
         dataIndex: "teamName",
         key: "teamName",
         render: (teamName, record) => {
-          return <Link to={`/matches/${record.teamId}`}>{teamName}</Link>;
+          return <Link to={`/app/matches/${record.teamId}`}>{teamName}</Link>;
         },
       },
       {

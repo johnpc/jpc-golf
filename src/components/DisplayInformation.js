@@ -6,15 +6,11 @@ class DisplayInformation extends Component {
       <div style={{padding: "1vw"}}>
         <h1>Information about the League</h1>
         <ul>
+          <li>League is hosted at Huron Hills Golf Course</li>
           <li>
-            League is hosted at{" "}
-            <a href="https://www.lakeforestgc.com/leagues/">
-              Lake Forest Golf Club
-            </a>
-          </li>
-          <li>
-            League price is $300 for 12 weeks of play. Cost includes $18 green
-            fee and $7 cart fee.
+            League price is $106 for 8 weeks of play. Cost includes $13 green
+            fee. An additional $7 cart fee may be paid if you'd like to use a
+            cart.
           </li>
           <li>
             Payment must be recieved in advance to complete your registration.
@@ -22,9 +18,9 @@ class DisplayInformation extends Component {
             to @johnpc
           </li>
           <li>
-            12 weeks beginning week of June 7 concluding week of August 23
+            8 weeks beginning week of June 7
           </li>
-          <li>Tee times starting at 5:30pm each Thursday</li>
+          <li>Tee times starting at 5:45pm each Thursday</li>
           <li>9-hole rounds with cart</li>
           <li>Play rotates between the back and front 9</li>
           <li>Teams include two golfers</li>
@@ -61,10 +57,6 @@ class DisplayInformation extends Component {
           <li>
             There is no prize for winning the league except bragging rights, but
             we encourage side bets among your playing partners.
-          </li>
-          <li>
-            Some of us will be enjoying snacks and drinks at Lake Forest's
-            dining area after each match. We'd love to have you there!
           </li>
           <li>
             Contact me at john@johncorser.com or text me at 989-598-7705. Note:

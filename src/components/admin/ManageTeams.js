@@ -58,7 +58,7 @@ class ManageTeams extends Component {
         dataIndex: "teamName",
         key: "teamName",
         render: (teamName, record) => {
-          return <Link to={`/matches/${record.teamId}`}>{teamName}</Link>;
+          return <Link to={`/app/matches/${record.teamId}`}>{teamName}</Link>;
         },
       },
       {
@@ -66,7 +66,7 @@ class ManageTeams extends Component {
         dataIndex: "player1",
         key: "player1",
         render: (playerName, record) => {
-          return <Link to={`/players/${record.player1Id}`}>{playerName}</Link>;
+          return <Link to={`/app/players/${record.player1Id}`}>{playerName}</Link>;
         },
       },
       {
@@ -74,7 +74,7 @@ class ManageTeams extends Component {
         dataIndex: "player2",
         key: "player2",
         render: (playerName, record) => {
-          return <Link to={`/players/${record.player2Id}`}>{playerName}</Link>;
+          return <Link to={`/app/players/${record.player2Id}`}>{playerName}</Link>;
         },
       },
       {

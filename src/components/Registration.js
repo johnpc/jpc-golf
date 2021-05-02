@@ -239,7 +239,7 @@ class Registration extends Component {
 
           <Form.Item
             required
-            tooltip="The league costs $300/person. Check this box to note that you understand that by registering, you will be responsible for paying this fee before the league kicks off. Failure to pay in advance will result in you losing your position in the league."
+            tooltip="The league costs $106/person. Check this box to note that you understand that by registering, you will be responsible for paying this fee before the league kicks off. Failure to pay in advance will result in you losing your position in the league."
             label="Acknowledge league fee"
             name="ack"
           >
