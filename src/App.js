@@ -15,7 +15,7 @@ function App() {
   const adminLink = useRef(null);
   const registrationLink = useRef(null);
   useEffect(() => {
-    if (window.location.href === window.location.origin) {
+    if (window.location.pathname === "/") {
       registrationLink.current.click();
     }
   }, []);
