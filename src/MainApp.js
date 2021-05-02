@@ -7,7 +7,7 @@ import DisplayDirectory from "./components/DisplayDirectory";
 import DisplayInformation from "./components/DisplayInformation";
 import DisplayLeaderboard from "./components/DisplayLeaderboard";
 import DisplayUpcomingMatch from "./components/DisplayUpcomingMatch";
-import {BrowserRouter as Switch, Route, Link} from "react-router-dom";
+import {Switch, Route, Link} from "react-router-dom";
 import {Layout, Menu} from "antd";
 
 const {Header, Content, Footer} = Layout;
@@ -19,7 +19,7 @@ function MainApp({match}) {
         <div className="logo" />
         <Menu theme="dark" mode="horizontal">
           <Menu.Item key="home">
-            <Link to={match.url + "/"}>Report Your Score</Link>
+            <Link to={match.url}>Report Your Score</Link>
           </Menu.Item>
           <Menu.Item key="matches">
             <Link to={match.url + "/matches"}>All Matches</Link>
@@ -37,26 +37,30 @@ function MainApp({match}) {
       </Header>
       <Content style={{padding: "0 10vw"}}>
         <Switch>
-          <Route path={match.url + "/admin"} component={Admin} />
-          <Route
-            path={match.url + "/matches/match/:matchId"}
-            component={DisplayMatches}
-          />
-          <Route
-            path={match.url + "/matches/:teamId"}
-            component={DisplayMatches}
-          />
-          <Route path={match.url + "/matches"} component={DisplayMatches} />
-          <Route
-            path={match.url + "/upcoming"}
-            component={DisplayUpcomingMatch}
-          />
-          <Route
-            path={match.url + "/players/:playerId"}
-            component={DisplayPlayer}
-          />
-          <Route path={match.url + "/directory"} component={DisplayDirectory} />
-          <Route path={match.url + "/about"} component={DisplayInformation} />
+          <Route path={match.url + "/admin"}>
+            <Admin />
+          </Route>
+          <Route path={match.url + "/matches/match/:matchId"}>
+            <DisplayMatches />
+          </Route>
+          <Route path={match.url + "/matches/:teamId"}>
+            <DisplayMatches />
+          </Route>
+          <Route path={match.url + "/matches"}>
+            <DisplayMatches />
+          </Route>
+          <Route path={match.url + "/upcoming"}>
+            <DisplayUpcomingMatch />
+          </Route>
+          <Route path={match.url + "/players/:playerId"}>
+            <DisplayPlayer />
+          </Route>
+          <Route path={match.url + "/directory"}>
+            <DisplayDirectory />
+          </Route>
+          <Route path={match.url + "/about"}>
+            <DisplayInformation />
+          </Route>
           <Route path={match.url}>
             <ReportScore />
             <DisplayLeaderboard match={match} />
