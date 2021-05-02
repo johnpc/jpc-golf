@@ -16,7 +16,7 @@ function RegistrationApp({match}) {
             <Link to={match.url + "/"}>Register</Link>
           </Menu.Item>
           <Menu.Item key="about">
-            <Link to={match.url + "/info"}>About</Link>
+            <Link to={match.url + "/about"}>About</Link>
           </Menu.Item>
           <Menu.Item key="preview">
             <Link to="/app">Preview</Link>
@@ -25,8 +25,8 @@ function RegistrationApp({match}) {
       </Header>
       <Content style={{padding: "0 10vw"}}>
         <Switch>
-          <Route path={match.url + "/info"} component={DisplayInformation} />
-          <Route path={match.url + "/"} component={Registration} />
+          <Route path={match.url + "/about"} component={DisplayInformation} />
+          <Route path={match.url} component={Registration} />
         </Switch>
       </Content>
       <Footer style={{textAlign: "center"}}>John Corser ©2021</Footer>

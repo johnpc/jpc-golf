@@ -57,7 +57,7 @@ function MainApp({match}) {
           />
           <Route path={match.url + "/directory"} component={DisplayDirectory} />
           <Route path={match.url + "/about"} component={DisplayInformation} />
-          <Route path={match.url + "/"}>
+          <Route path={match.url}>
             <ReportScore />
             <DisplayLeaderboard match={match} />
           </Route>
