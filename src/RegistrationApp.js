@@ -30,7 +30,7 @@ function RegistrationApp({match}) {
           <Route exact path={path} component={Registration} />
         </Switch>
       </Content>
-      <Footer style={{textAlign: "center"}}>John Corser ©2021</Footer>
+      <Footer style={{textAlign: "center"}}>GolfA2 ©2021</Footer>
     </div>
   );
 }

@@ -6,7 +6,7 @@ import {Table} from "antd";
 import parseMatchData from "../utils/parseMatchData";
 import {Link} from "react-router-dom";
 
-function DisplayLeaderboard({match}) {
+function DisplayLeaderboard() {
   const [teams, setTeams] = useState([]);
   useEffect(() => {
     async function setupState() {
