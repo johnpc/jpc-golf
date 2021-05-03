@@ -1,9 +1,9 @@
 const getHandicap = (player, thruDate) => {
-  const scores = player.scores.items.filter((score) => {
+  const scores = player.scores?.items.filter((score) => {
     return Date.parse(score.match.date) < Date.parse(thruDate);
   });
 
-  if (scores < 2) {
+  if (scores < 2 || !scores) {
     return 0;
   }
 

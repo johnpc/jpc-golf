@@ -70,7 +70,7 @@ function DisplayPlayer(props) {
       };
     })
     .sort((score1, score2) => {
-      return Date.parse(score1.matchDate) > Date.parse(score2.matchDate);
+      return Date.parse(score1.matchDate) - Date.parse(score2.matchDate);
     });
 
   const content =

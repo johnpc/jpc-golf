@@ -6,9 +6,8 @@ import Amplify from "aws-amplify";
 import aws_exports from "./aws-exports";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import React, {useEffect, useRef} from "react";
-import getPlayers from "./data/getPlayers";
+import { FIRST_MATCH_DATE, MS_PER_WEEK } from "./utils/setMatchSchedule";
 Amplify.configure(aws_exports);
-const LEAGUE_SIZE = 8;
 
 function App() {
   const appLink = useRef(null);
@@ -16,11 +15,11 @@ function App() {
   const registrationLink = useRef(null);
   useEffect(() => {
     const navigate = async () => {
-      const players = await getPlayers();
-      if (players.length >= LEAGUE_SIZE) {
-        appLink.current.click();
-      }
       if (window.location.pathname === "/") {
+        // End registration a week prior to league start
+        if (Date.now() > Date.parse(FIRST_MATCH_DATE - MS_PER_WEEK)) {
+          appLink.current.click();
+        }
         registrationLink.current.click();
       }
     };

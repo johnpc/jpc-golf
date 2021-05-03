@@ -131,10 +131,10 @@ function DisplayUpcomingMatch() {
     .filter((match) => {
       if (player.id) {
         return (
-          match.homeTeam.players.items.any(
+          match.homeTeam.players.items.some(
             (matchPlayer) => player.id === matchPlayer.id
           ) ||
-          match.awayTeam.players.items.any((matchPlayer) => player.id === matchPlayer.id)
+          match.awayTeam.players.items.some((matchPlayer) => player.id === matchPlayer.id)
         );
       }
       return true;
@@ -149,29 +149,37 @@ function DisplayUpcomingMatch() {
       const data = parseMatchData(match);
       const homePoints = data.filter((datum) => datum.vs === "⬅️").length;
       const awayPoints = data.filter((datum) => datum.vs === "➡️").length;
-
-      return (
-        <div key={match.id}>
-          <h1>
-            {match.homeTeam.name} vs {match.awayTeam.name}:{" "}
-            {new Date(match.date).toDateString()}
-          </h1>
+      const pointsAwardedJsx =
+      [match.homeTeam, match.awayTeam].some((team) => !team) ||
+      Date.parse(match.date) > Date.now() ? (
+        ""
+      ) : (
+        <>
           <Alert
             message={
-              homePoints > awayPoints
-                ? `${match.homeTeam.name} is awarded ${homePoints} points`
-                : `${match.awayTeam.name} is awarded ${awayPoints} points`
+              homePoints >= awayPoints
+                ? `${match.homeTeam?.name} is awarded ${homePoints} points`
+                : `${match.awayTeam?.name} is awarded ${awayPoints} points`
             }
             type="success"
           />
           <Alert
             message={
               homePoints < awayPoints
-                ? `${match.homeTeam.name} is awarded ${homePoints} points`
-                : `${match.awayTeam.name} is awarded ${awayPoints} points`
+                ? `${match.homeTeam?.name} is awarded ${homePoints} points`
+                : `${match.awayTeam?.name} is awarded ${awayPoints} points`
             }
             type="info"
           />
+        </>
+      );
+      return (
+        <div key={match.id}>
+          <h1>
+            {match.homeTeam.name} vs {match.awayTeam.name}:{" "}
+            {new Date(match.date).toDateString()}
+          </h1>
+          {pointsAwardedJsx}
           <Table columns={columns} dataSource={data} pagination={false} />
         </div>
       );

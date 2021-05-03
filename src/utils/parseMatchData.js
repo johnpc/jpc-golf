@@ -1,14 +1,14 @@
 import getHandicap from "./getHandicap";
 import getHighHandicap from "./getHighHandicap";
 import getLowHandicap from "./getLowHandicap";
-const FIRST_MATCH_DATE = "2021-05-07T21:47:30.499Z";
+import {FIRST_MATCH_DATE, MS_PER_WEEK} from "./setMatchSchedule";
 const HANDICAP_ESTABLISHMENT_WEEKS = 2;
 
 const parseMatchData = (match) => {
   const isHandicapEstablishmentMatch =
     Date.parse(match.date) <
-    Date.parse(FIRST_MATCH_DATE) +
-      1000 * 60 * 60 * 24 * 7 * HANDICAP_ESTABLISHMENT_WEEKS;
+    Date.parse(FIRST_MATCH_DATE) + MS_PER_WEEK * HANDICAP_ESTABLISHMENT_WEEKS;
+
   const homeLowHandicapPlayer = getLowHandicap(
     match.homeTeam?.players.items,
     match.date
@@ -66,7 +66,7 @@ const parseMatchData = (match) => {
       homeHandicap: homeLowHandicap + homeHighHandicap,
       homeRaw: homeLowRawScore + homeHighRawScore,
       homeAdj: homeLowAdjScore + homeHighAdjScore,
-      vs: isHandicapEstablishmentMatch
+      vs: !isHandicapEstablishmentMatch
         ? homeLowAdjScore + homeHighAdjScore !==
             awayLowAdjScore + awayHighAdjScore &&
           ![
@@ -93,7 +93,7 @@ const parseMatchData = (match) => {
       homeHandicap: homeLowHandicap,
       homeRaw: homeLowRawScore,
       homeAdj: homeLowAdjScore,
-      vs: isHandicapEstablishmentMatch
+      vs: !isHandicapEstablishmentMatch
         ? homeLowAdjScore !== awayLowAdjScore &&
           ![homeLowHandicapPlayer, awayLowHandicapPlayer].some(
             (player) => !player
@@ -116,7 +116,7 @@ const parseMatchData = (match) => {
       homeHandicap: homeHighHandicap,
       homeRaw: homeHighRawScore,
       homeAdj: homeHighAdjScore,
-      vs: isHandicapEstablishmentMatch
+      vs: !isHandicapEstablishmentMatch
         ? homeHighAdjScore !== awayHighAdjScore &&
           ![homeHighHandicapPlayer, awayHighHandicapPlayer].some(
             (player) => !player

@@ -71,7 +71,7 @@ function DisplayLeaderboard() {
       };
     })
     .sort((team1, team2) => {
-      return team1.points > team2.points;
+      return team1.points - team2.points;
     });
 
   return (

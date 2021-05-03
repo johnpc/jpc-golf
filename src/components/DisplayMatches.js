@@ -115,34 +115,37 @@ function DisplayMatches({match}) {
       }
       return true;
     })
+    .sort((match1, match2) => {
+      return Date.parse(match1.date) - Date.parse(match2.date);
+    })
     .map((match) => {
       const data = parseMatchData(match);
       const homePoints = data.filter((datum) => datum.vs === "⬅️").length;
       const awayPoints = data.filter((datum) => datum.vs === "➡️").length;
-      const pointsAwardedJsx = [match.homeTeam, match.awayTeam].some(
-        (team) => !team
-      ) ? (
-        ""
-      ) : (
-        <>
-          <Alert
-            message={
-              homePoints > awayPoints
-                ? `${match.homeTeam?.name} is awarded ${homePoints} points`
-                : `${match.awayTeam?.name} is awarded ${awayPoints} points`
-            }
-            type="success"
-          />
-          <Alert
-            message={
-              homePoints < awayPoints
-                ? `${match.homeTeam?.name} is awarded ${homePoints} points`
-                : `${match.awayTeam?.name} is awarded ${awayPoints} points`
-            }
-            type="info"
-          />
-        </>
-      );
+      const pointsAwardedJsx =
+        [match.homeTeam, match.awayTeam].some((team) => !team) ||
+        Date.parse(match.date) > Date.now() ? (
+          ""
+        ) : (
+          <>
+            <Alert
+              message={
+                homePoints >= awayPoints
+                  ? `${match.homeTeam?.name} is awarded ${homePoints} points`
+                  : `${match.awayTeam?.name} is awarded ${awayPoints} points`
+              }
+              type="success"
+            />
+            <Alert
+              message={
+                homePoints < awayPoints
+                  ? `${match.homeTeam?.name} is awarded ${homePoints} points`
+                  : `${match.awayTeam?.name} is awarded ${awayPoints} points`
+              }
+              type="info"
+            />
+          </>
+        );
       return (
         <div style={{padding: "1vw"}} key={match.id}>
           <h1>
@@ -154,8 +157,7 @@ function DisplayMatches({match}) {
         </div>
       );
     });
-
-  let headerContent = "Matches";
+  let headerContent = `Matches (${matchJsx.length})`;
   if (matchId) {
     const match = matches.find((match) => match.id === matchId);
     headerContent = `${match.homeTeam.name} vs ${
