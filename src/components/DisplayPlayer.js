@@ -15,7 +15,7 @@ function DisplayPlayer(props) {
       setPlayer(player);
     }
     syncState();
-  });
+  }, [props.playerId, props.match.params.playerId]);
 
   const columns = [
     {

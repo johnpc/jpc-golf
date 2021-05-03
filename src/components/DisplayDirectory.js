@@ -26,7 +26,7 @@ function DisplayDirectory() {
       createTeamListener.unsubscribe();
       deleteTeamListener.unsubscribe();
     };
-  });
+  }, []);
   const columns = [
     {
       title: "Player Name",

@@ -73,6 +73,24 @@ export const listPlayers = /* GraphQL */ `
           updatedAt
         }
         scores {
+          items {
+            id
+            score
+            match {
+              id
+              date
+              homeTeam {
+                id
+                name
+              }
+              awayTeam {
+                id
+                name
+              }
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -112,6 +130,27 @@ export const getTeam = /* GraphQL */ `
           name
           email
           phone
+          scores {
+            items {
+              id
+              score
+              match {
+                id
+                date
+                homeTeam {
+                  id
+                  name
+                }
+                awayTeam {
+                  id
+                  name
+                }
+              }
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -152,6 +191,27 @@ export const listTeams = /* GraphQL */ `
                 items {
                   id
                   name
+                  scores {
+                    items {
+                      id
+                      score
+                      match {
+                        id
+                        date
+                        homeTeam {
+                          id
+                          name
+                        }
+                        awayTeam {
+                          id
+                          name
+                        }
+                      }
+                      createdAt
+                      updatedAt
+                    }
+                    nextToken
+                  }
                 }
               }
             }
@@ -162,6 +222,27 @@ export const listTeams = /* GraphQL */ `
                 items {
                   id
                   name
+                  scores {
+                    items {
+                      id
+                      score
+                      match {
+                        id
+                        date
+                        homeTeam {
+                          id
+                          name
+                        }
+                        awayTeam {
+                          id
+                          name
+                        }
+                      }
+                      createdAt
+                      updatedAt
+                    }
+                    nextToken
+                  }
                 }
               }
             }
@@ -187,6 +268,27 @@ export const listTeams = /* GraphQL */ `
                 items {
                   id
                   name
+                  scores {
+                    items {
+                      id
+                      score
+                      match {
+                        id
+                        date
+                        homeTeam {
+                          id
+                          name
+                        }
+                        awayTeam {
+                          id
+                          name
+                        }
+                      }
+                      createdAt
+                      updatedAt
+                    }
+                    nextToken
+                  }
                 }
               }
             }
@@ -197,6 +299,27 @@ export const listTeams = /* GraphQL */ `
                 items {
                   id
                   name
+                  scores {
+                    items {
+                      id
+                      score
+                      match {
+                        id
+                        date
+                        homeTeam {
+                          id
+                          name
+                        }
+                        awayTeam {
+                          id
+                          name
+                        }
+                      }
+                      createdAt
+                      updatedAt
+                    }
+                    nextToken
+                  }
                 }
               }
             }
@@ -206,6 +329,27 @@ export const listTeams = /* GraphQL */ `
           items {
             id
             name
+            scores {
+              items {
+                id
+                score
+                match {
+                  id
+                  date
+                  homeTeam {
+                    id
+                    name
+                  }
+                  awayTeam {
+                    id
+                    name
+                  }
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
           }
         }
         createdAt
@@ -364,6 +508,27 @@ export const listMatchs = /* GraphQL */ `
             items {
               id
               name
+              scores {
+                items {
+                  id
+                  score
+                  match {
+                    id
+                    date
+                    homeTeam {
+                      id
+                      name
+                    }
+                    awayTeam {
+                      id
+                      name
+                    }
+                  }
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
             }
           }
           createdAt
@@ -376,6 +541,27 @@ export const listMatchs = /* GraphQL */ `
             items {
               id
               name
+              scores {
+                items {
+                  id
+                  score
+                  match {
+                    id
+                    date
+                    homeTeam {
+                      id
+                      name
+                    }
+                    awayTeam {
+                      id
+                      name
+                    }
+                  }
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
             }
           }
           createdAt

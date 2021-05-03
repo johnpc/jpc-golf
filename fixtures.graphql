@@ -262,6 +262,208 @@ mutation seedData {
       date
     }
   }
+
+
+  createMatch3: createMatch(
+    input: {
+      id: "thirdMatchId"
+      date: "2021-05-07T21:47:30.499Z"
+      matchHomeTeamId: "winnersId"
+      matchAwayTeamId: "losersId"
+    }
+  ) {
+    id
+    date
+    homeTeam {
+      name
+      players {
+        items {
+          name
+        }
+      }
+    }
+    awayTeam {
+      name
+      players {
+        items {
+          name
+        }
+      }
+    }
+  }
+
+  johnScore3: createScore(
+    input: {
+      id: "johnThirdScoreId"
+      score: 8
+      scorePlayerId: "johnId"
+      scoreMatchId: "thirdMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  emilyScore3: createScore(
+    input: {
+      id: "emilyThirdScoreId"
+      score: 10
+      scorePlayerId: "emilyId"
+      scoreMatchId: "thirdMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  alexScore3: createScore(
+    input: {
+      id: "alexThirdScoreId"
+      score: 11
+      scorePlayerId: "alexId"
+      scoreMatchId: "thirdMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  jamesScore3: createScore(
+    input: {
+      id: "jamesThirdScoreId"
+      score: 14
+      scorePlayerId: "jamesId"
+      scoreMatchId: "thirdMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+
+  createMatch4: createMatch(
+    input: {
+      id: "fourthMatchId"
+      date: "2021-05-17T21:47:30.499Z"
+      matchHomeTeamId: "winnersId"
+      matchAwayTeamId: "losersId"
+    }
+  ) {
+    id
+    date
+    homeTeam {
+      name
+      players {
+        items {
+          name
+        }
+      }
+    }
+    awayTeam {
+      name
+      players {
+        items {
+          name
+        }
+      }
+    }
+  }
+
+  johnScore4: createScore(
+    input: {
+      id: "johnFourthScoreId"
+      score: 8
+      scorePlayerId: "johnId"
+      scoreMatchId: "fourthMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  emilyScore4: createScore(
+    input: {
+      id: "emilyFourthScoreId"
+      score: 10
+      scorePlayerId: "emilyId"
+      scoreMatchId: "fourthMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  alexScore4: createScore(
+    input: {
+      id: "alexFourthScoreId"
+      score: 11
+      scorePlayerId: "alexId"
+      scoreMatchId: "fourthMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
+
+  jamesScore4: createScore(
+    input: {
+      id: "jamesFourthScoreId"
+      score: 14
+      scorePlayerId: "jamesId"
+      scoreMatchId: "fourthMatchId"
+    }
+  ) {
+    id
+    score
+    player {
+      name
+    }
+    match {
+      date
+    }
+  }
 }
 
 query showEveryone {
@@ -321,6 +523,39 @@ mutation deleteSeedData {
     id
   }
   deleteScoreJames2: deleteScore(input: {id: "jamessecondScoreId"}) {
+    id
+  }
+
+
+  deleteMatch3: deleteMatch(input: {id: "thirdMatchId"}) {
+    id
+  }
+  deleteScoreJohn3: deleteScore(input: {id: "johnThirdScoreId"}) {
+    id
+  }
+  deleteScoreEmily3: deleteScore(input: {id: "emilyThirdScoreId"}) {
+    id
+  }
+  deleteScoreAlex3: deleteScore(input: {id: "alexThirdScoreId"}) {
+    id
+  }
+  deleteScoreJames3: deleteScore(input: {id: "jamesThirdScoreId"}) {
+    id
+  }
+
+  deleteMatch4: deleteMatch(input: {id: "fourthMatchId"}) {
+    id
+  }
+  deleteScoreJohn4: deleteScore(input: {id: "johnFourthScoreId"}) {
+    id
+  }
+  deleteScoreEmily4: deleteScore(input: {id: "emilyFourthScoreId"}) {
+    id
+  }
+  deleteScoreAlex4: deleteScore(input: {id: "alexFourthScoreId"}) {
+    id
+  }
+  deleteScoreJames4: deleteScore(input: {id: "jamesFourthScoreId"}) {
     id
   }
 }

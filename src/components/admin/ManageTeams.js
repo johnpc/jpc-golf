@@ -28,7 +28,7 @@ function ManageTeams() {
       createTeamListener.unsubscribe();
       deleteTeamListener.unsubscribe();
     };
-  });
+  }, []);
 
   const columns = [
     {
