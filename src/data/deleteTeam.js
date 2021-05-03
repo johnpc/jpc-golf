@@ -8,6 +8,7 @@ import {
 } from "../graphql/mutations";
 
 const deleteTeam = async (id) => {
+  console.log('deleting team ID: ', id);
   const teamResponse = await API.graphql(
     graphqlOperation(deleteTeamQuery, {
       input: {
@@ -18,6 +19,8 @@ const deleteTeam = async (id) => {
 
   const deletedTeam = teamResponse.data.deleteTeam;
   deletedTeam.players.items.map(async (player) => {
+    console.log('deleting player ID: ', player.id);
+
     const playerResponse = await API.graphql(
       graphqlOperation(deletePlayer, {
         input: {
@@ -27,6 +30,8 @@ const deleteTeam = async (id) => {
     );
     const deletedPlayer = playerResponse.data.deletePlayer;
     deletedPlayer.scores.items.map(async (score) => {
+      console.log('deleting score ID: ', score.id);
+
       const scoreResponse = await API.graphql(
         graphqlOperation(deleteScore, {
           input: {
@@ -40,10 +45,12 @@ const deleteTeam = async (id) => {
         deletedScore.match.homeTeam,
       ];
       if (matchTeams.includes(null) && matchTeams.includes(deletedTeam.id)) {
+        console.log('deleting match id: ', deletedScore.match.id)
         await API.graphql(
           graphqlOperation(deleteMatch, {id: deletedScore.match.id})
         );
       } else {
+        console.log('updating match id: ', deletedScore.match.id)
         await API.graphql(
           graphqlOperation(updateMatch, {
             input: {

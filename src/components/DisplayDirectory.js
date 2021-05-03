@@ -5,13 +5,14 @@ import {Link} from "react-router-dom";
 import getHandicap from "../utils/getHandicap";
 import listenDeleteTeam from "../data/listenDeleteTeam";
 import listenCreateTeam from "../data/listenCreateTeam";
+import getScores from "../data/getScores";
 
 function DisplayDirectory() {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
     async function syncState() {
-      const teams = await getTeams();
+      const [teams] = await Promise.all([getTeams(), getScores()]);
       setTeams(teams);
     }
     syncState();
@@ -61,7 +62,7 @@ function DisplayDirectory() {
         return {
           teamName: team.name,
           playerName: player.name,
-          handicap: getHandicap(player, new Date()),
+          handicap: getHandicap(player),
           key: player.id,
           playerId: player.id,
           teamId: team.id,

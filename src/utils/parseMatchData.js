@@ -64,77 +64,86 @@ const parseMatchData = (match) => {
     {
       homeName: match.homeTeam?.name ?? "No opponent",
       homeHandicap: homeLowHandicap + homeHighHandicap,
-      homeRaw: homeLowRawScore + homeHighRawScore,
-      homeAdj: homeLowAdjScore + homeHighAdjScore,
-      vs: !isHandicapEstablishmentMatch
-        ? homeLowAdjScore + homeHighAdjScore !==
-            awayLowAdjScore + awayHighAdjScore &&
-          ![
-            homeHighHandicapPlayer,
-            homeLowHandicapPlayer,
-            awayHighHandicapPlayer,
-            awayLowHandicapPlayer,
-          ].some((player) => !player)
-          ? homeLowAdjScore + homeHighAdjScore <
-            awayLowAdjScore + awayHighAdjScore
-            ? "⬅️"
-            : "➡️"
-          : "="
-        : "N/A",
+      homeRaw: getScore(homeLowRawScore + homeHighRawScore),
+      homeAdj: getScore(homeLowAdjScore + homeHighAdjScore),
+      vs: getVs(
+        isHandicapEstablishmentMatch,
+        homeHighAdjScore + homeLowAdjScore,
+        awayHighAdjScore + awayLowAdjScore,
+        [
+          homeHighHandicapPlayer,
+          awayHighHandicapPlayer,
+          homeLowHandicapPlayer,
+          awayLowHandicapPlayer,
+        ]
+      ),
       awayName: match.awayTeam?.name,
       awayHandicap: awayLowHandicap + awayHighHandicap,
-      awayRaw: awayLowRawScore + awayHighRawScore,
-      awayAdj: awayLowAdjScore + awayHighAdjScore,
+      awayRaw: getScore(awayLowRawScore + awayHighRawScore),
+      awayAdj: getScore(awayLowAdjScore + awayHighAdjScore),
       key: `${match.id}Team`,
     },
     {
       homePlayerId: homeLowHandicapPlayer?.id,
       homeName: homeLowHandicapPlayer?.name,
       homeHandicap: homeLowHandicap,
-      homeRaw: homeLowRawScore,
-      homeAdj: homeLowAdjScore,
-      vs: !isHandicapEstablishmentMatch
-        ? homeLowAdjScore !== awayLowAdjScore &&
-          ![homeLowHandicapPlayer, awayLowHandicapPlayer].some(
-            (player) => !player
-          )
-          ? homeLowAdjScore < awayLowAdjScore
-            ? "⬅️"
-            : "➡️"
-          : "="
-        : "N/A",
+      homeRaw: getScore(homeLowRawScore),
+      homeAdj: getScore(homeLowAdjScore),
+      vs: getVs(
+        isHandicapEstablishmentMatch,
+        homeLowAdjScore,
+        awayLowAdjScore,
+        [homeLowHandicapPlayer, awayLowHandicapPlayer]
+      ),
       awayPlayerId: awayLowHandicapPlayer?.id,
       awayName: awayLowHandicapPlayer?.name,
       awayHandicap: awayLowHandicap,
-      awayRaw: awayLowRawScore,
-      awayAdj: awayLowAdjScore,
+      awayRaw: getScore(awayLowRawScore),
+      awayAdj: getScore(awayLowAdjScore),
       key: `${match.id}LowHandicap`,
     },
     {
       homePlayerId: homeHighHandicapPlayer?.id,
       homeName: homeHighHandicapPlayer?.name,
       homeHandicap: homeHighHandicap,
-      homeRaw: homeHighRawScore,
-      homeAdj: homeHighAdjScore,
-      vs: !isHandicapEstablishmentMatch
-        ? homeHighAdjScore !== awayHighAdjScore &&
-          ![homeHighHandicapPlayer, awayHighHandicapPlayer].some(
-            (player) => !player
-          )
-          ? homeHighAdjScore < awayHighAdjScore
-            ? "⬅️"
-            : "➡️"
-          : "="
-        : "N/A",
+      homeRaw: getScore(homeHighRawScore),
+      homeAdj: getScore(homeHighAdjScore),
+      vs: getVs(
+        isHandicapEstablishmentMatch,
+        homeHighAdjScore,
+        awayHighAdjScore,
+        [homeHighHandicapPlayer, awayHighHandicapPlayer]
+      ),
       awayPlayerId: awayHighHandicapPlayer?.id,
       awayName: awayHighHandicapPlayer?.name,
       awayHandicap: awayHighHandicap,
-      awayRaw: awayHighRawScore,
-      awayAdj: awayHighAdjScore,
+      awayRaw: getScore(awayHighRawScore),
+      awayAdj: getScore(awayHighAdjScore),
       key: `${match.id}HighHandicap`,
     },
   ];
   return data;
 };
+
+function getScore(score) {
+  return !Number.isNaN(score) ? score : "TBD";
+}
+
+function getVs(
+  isHandicapEstablishmentMatch,
+  homeAdjScore,
+  awayAdjScore,
+  players
+) {
+  return !isHandicapEstablishmentMatch
+    ? homeAdjScore !== awayAdjScore &&
+      !players.some((player) => !player) &&
+      !(Number.isNaN(homeAdjScore) && Number.isNaN(awayAdjScore))
+      ? homeAdjScore < awayAdjScore
+        ? "⬅️"
+        : "➡️"
+      : "="
+    : "N/A";
+}
 
 export default parseMatchData;

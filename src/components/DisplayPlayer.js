@@ -79,13 +79,15 @@ function DisplayPlayer(props) {
     ) : (
       <Table columns={columns} dataSource={data} pagination={false} />
     );
+  const handicap = getHandicap(player);
   return (
     <div style={{padding: "1vw"}}>
       <h1>{player.name}</h1>
       <h2>
+        Member of{" "}
         <Link to={`/app/matches/${player.team.id}`}>{player.team.name}</Link>
       </h2>
-      <p>{getHandicap(player, new Date())} handicap</p>
+      <p>{handicap} handicap</p>
       {content}
     </div>
   );

@@ -75,10 +75,10 @@ function ManageTeams() {
   const data = teams.map((team) => {
     return {
       teamName: team.name,
-      player1: getLowHandicap(team.players.items).name,
-      player1Id: getLowHandicap(team.players.items).id,
-      player2: getHighHandicap(team.players.items).name,
-      player2Id: getHighHandicap(team.players.items).id,
+      player1: getLowHandicap(team.players.items)?.name,
+      player1Id: getLowHandicap(team.players.items)?.id,
+      player2: getHighHandicap(team.players.items)?.name,
+      player2Id: getHighHandicap(team.players.items)?.id,
       teamId: team.id,
       key: team.id,
     };
