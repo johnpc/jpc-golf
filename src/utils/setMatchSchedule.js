@@ -1,8 +1,9 @@
 import {API, graphqlOperation} from "aws-amplify";
 import getTeams from "../data/getTeams";
 import {createMatch} from "../graphql/mutations";
-export const FIRST_MATCH_DATE = "2021-05-10T21:47:30.499Z";
-export const MS_PER_WEEK = 1000 * 60 * 60 * 24 * 7;
+export const FIRST_MATCH_DATE = "2021-06-10T21:47:30.499Z";
+export const MS_PER_DAY = 1000 * 60 * 60 * 24;
+export const MS_PER_WEEK = MS_PER_DAY * 7;
 const WEEKS_OF_PLAY = 8;
 
 async function setMatchSchedule() {
