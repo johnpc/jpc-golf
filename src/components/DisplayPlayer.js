@@ -4,6 +4,7 @@ import getHandicap from "../utils/getHandicap";
 import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
 import getPlayer from "../data/getPlayer";
+import getLowHandicap from "../utils/getLowHandicap";
 
 function DisplayPlayer(props) {
   const [player, setPlayer] = useState({});
@@ -79,14 +80,17 @@ function DisplayPlayer(props) {
     ) : (
       <Table columns={columns} dataSource={data} pagination={false} />
     );
+  const partner = player.team.players.items.find(p => p.id !== player.id);
   const handicap = getHandicap(player);
+  const isLowHandicap = getLowHandicap(player.team.players.items).id === player.id;
   return (
     <div style={{padding: "1vw"}}>
       <h1>{player.name}</h1>
       <h2>
-        Member of{" "}
+        Currently the {isLowHandicap ? 'low' : 'high'} handicap player on{" "}
         <Link to={`/app/matches/${player.team.id}`}>{player.team.name}</Link>
       </h2>
+      <p>Partners with <Link to={`/app/players/${partner.id}`}>{partner.name}</Link></p>
       <p>{handicap} handicap</p>
       {content}
     </div>
