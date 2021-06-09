@@ -106,7 +106,7 @@ function ReportScore() {
         })
         .filter((match) => {
           // Only display past matches
-          return Date.parse(match.date) > Date.now() - MS_PER_DAY;
+          return Date.parse(match.date) < Date.now() - MS_PER_DAY;
         })
         .map((match) => {
           return (
