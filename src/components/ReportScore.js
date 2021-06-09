@@ -3,7 +3,7 @@ import createOrUpdateScore from "../data/createOrUpdateScore";
 import {Select, InputNumber, Button, Spin, Form, Alert} from "antd";
 import getMatches from "../data/getMatches";
 import getPlayers from "../data/getPlayers";
-import { MS_PER_DAY } from "../utils/setMatchSchedule";
+import {MS_PER_DAY} from "../utils/setMatchSchedule";
 const {Option} = Select;
 
 function ReportScore() {
@@ -106,7 +106,7 @@ function ReportScore() {
         })
         .filter((match) => {
           // Only display past matches
-          return Date.parse(match.date) < Date.now() - MS_PER_DAY;
+          return Date.parse(match.date) - MS_PER_DAY < Date.now();
         })
         .map((match) => {
           return (
