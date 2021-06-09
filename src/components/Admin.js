@@ -15,6 +15,9 @@ function Admin() {
       <Link to="/app">
         <Button>Visit App</Button>
       </Link>
+      <Link to="/registration">
+        <Button>Registration</Button>
+      </Link>
       <Button onClick={() => setMatchSchedule()}>Generate matches</Button>
       <Button
         disabled={seedDisabled}

@@ -11,6 +11,7 @@ function ReportScore() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(null);
+  const [selectedPlayerId, setSelectedPlayerId] = useState(null);
 
   useEffect(() => {
     async function setupState() {
@@ -62,6 +63,9 @@ function ReportScore() {
       style={{width: "80vw"}}
       placeholder="Select a player"
       optionFilterProp="children"
+      onChange={(playerId) => {
+        setSelectedPlayerId(playerId);
+      }}
       filterOption={(input, option) =>
         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
       }
@@ -79,6 +83,7 @@ function ReportScore() {
   const matchSelectDropdown = (
     <Select
       showSearch
+      disabled={!selectedPlayerId}
       style={{width: "80vw"}}
       placeholder="Select a date"
       optionFilterProp="children"
@@ -86,13 +91,24 @@ function ReportScore() {
         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
       }
     >
-      {matches.map((match) => {
-        return (
-          <Option key={match.id} value={match.id}>
-            {new Date(match.date).toDateString()}
-          </Option>
-        );
-      })}
+      {matches
+        .filter((match) => {
+          return (
+            match.homeTeam.players.items.find(
+              (player) => player.id === selectedPlayerId
+            ) ||
+            match.awayTeam.players.items.find(
+              (player) => player.id === selectedPlayerId
+            )
+          );
+        })
+        .map((match) => {
+          return (
+            <Option key={match.id} value={match.id}>
+              {new Date(match.date).toDateString()}
+            </Option>
+          );
+        })}
     </Select>
   );
 

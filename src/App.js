@@ -17,10 +17,11 @@ function App() {
     const navigate = async () => {
       if (window.location.pathname === "/") {
         // End registration a week prior to league start
-        if (Date.now() > Date.parse(FIRST_MATCH_DATE - MS_PER_WEEK)) {
+        if (Date.now() > Date.parse(FIRST_MATCH_DATE) - MS_PER_WEEK) {
           appLink.current.click();
+        } else {
+          registrationLink.current.click();
         }
-        registrationLink.current.click();
       }
     };
     navigate();
