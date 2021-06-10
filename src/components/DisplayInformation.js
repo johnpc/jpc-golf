@@ -102,7 +102,7 @@ function DisplayInformation() {
         a drink for the other participants in their group.
       </p>
       <p>
-        When a golfer faces a long putt or has to drain their third, the other
+        When a golfer faces a long putt or has to drain their second, the other
         golfers in the group may hissssss like a snake to get in that golfer's
         head.
       </p>
