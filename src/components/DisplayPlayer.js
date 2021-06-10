@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Empty, Table} from "antd";
+import {Empty, Table, Spin} from "antd";
 import getHandicap from "../utils/getHandicap";
 import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
@@ -50,7 +50,7 @@ function DisplayPlayer(props) {
   ];
 
   if (!player.id) {
-    return <div>Loading... (no player found)</div>;
+    return <Spin />;
   }
 
   const data = player.scores.items

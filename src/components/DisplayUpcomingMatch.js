@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Table, Alert, Select, Empty} from "antd";
+import {Table, Alert, Select, Empty, Spin} from "antd";
 import getMatches from "../data/getMatches";
 import getPlayers from "../data/getPlayers";
 import parseMatchData from "../utils/parseMatchData";
@@ -37,7 +37,7 @@ function DisplayUpcomingMatch() {
   }, []);
 
   if (players.length === 0) {
-    return <div>Loading... (no players found)</div>;
+    return <Spin />;
   }
   const playerSelectDropdown = (
     <Select

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import getTeams from "../data/getTeams";
 import listenCreateScore from "../data/listenCreateScore";
 import listenUpdateScore from "../data/listenUpdateScore";
-import {Table} from "antd";
+import {Table, Spin} from "antd";
 import parseMatchData from "../utils/parseMatchData";
 import {Link} from "react-router-dom";
 
@@ -46,7 +46,7 @@ function DisplayLeaderboard() {
   ];
 
   if (teams.length === 0) {
-    return <div>Loading... (no teams found)</div>;
+    return <Spin />;
   }
 
   const data = teams

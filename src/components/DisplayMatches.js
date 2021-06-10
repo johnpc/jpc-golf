@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Table, Alert, Empty} from "antd";
+import {Table, Alert, Empty, Spin} from "antd";
 import parseMatchData from "../utils/parseMatchData";
 import getMatches from "../data/getMatches";
 import {withRouter} from "react-router";
@@ -124,7 +124,7 @@ function DisplayMatches({match}) {
   ];
 
   if (matches.length === 0) {
-    return <div>Loading... (no matches found)</div>;
+    return <Spin />;
   }
 
   const matchJsx = matches

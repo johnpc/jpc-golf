@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import getTeams from "../data/getTeams";
-import {Table} from "antd";
+import {Table, Spin} from "antd";
 import {Link} from "react-router-dom";
 import getHandicap from "../utils/getHandicap";
 import listenDeleteTeam from "../data/listenDeleteTeam";
@@ -54,7 +54,7 @@ function DisplayDirectory() {
   ];
 
   if (teams.length === 0) {
-    return <div>Loading... (no teams found)</div>;
+    return <Spin />;
   }
 
   const data = teams

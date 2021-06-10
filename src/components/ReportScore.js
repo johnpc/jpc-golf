@@ -55,7 +55,7 @@ function ReportScore() {
   };
 
   if (players.length === 0) {
-    return <div>Loading... (no players found)</div>;
+    return <Spin />;
   }
 
   const playerSelectDropdown = (
@@ -153,7 +153,7 @@ function ReportScore() {
         </Form.Item>
         <Form.Item
           required
-          tooltip="Select the match for the score you're reporting."
+          tooltip="Select the match for the score you're reporting (requires player is selected first)."
           label="Date"
           name="match"
         >
