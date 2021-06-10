@@ -145,7 +145,7 @@ function getVs(
         ? "⬅️"
         : "➡️"
       : "="
-    : "N/A";
+    : "-";
 }
 
 export default parseMatchData;

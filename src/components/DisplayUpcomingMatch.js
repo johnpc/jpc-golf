@@ -93,6 +93,7 @@ function DisplayUpcomingMatch() {
       title: "VS",
       dataIndex: "vs",
       key: "vs",
+      className: "ant-tooltip-inner",
     },
     {
       title: "Name",
