@@ -73,6 +73,12 @@ function DisplayUpcomingMatch() {
           return (
             <Link to={`/app/players/${record.homePlayerId}`}>{playerName}</Link>
           );
+        } else if (record.homeTeamId) {
+          return (
+            <Link to={`/app/matches/${record.homeTeamId}`}>
+              <b>{playerName}</b>
+            </Link>
+          );
         }
         return playerName;
       },
@@ -106,6 +112,12 @@ function DisplayUpcomingMatch() {
           return (
             <Link to={`/app/players/${record.awayPlayerId}`}>{playerName}</Link>
           );
+        } else if (record.awayTeamId) {
+          return (
+            <Link to={`/app/matches/${record.awayTeamId}`}>
+              <b>{playerName}</b>
+            </Link>
+          );
         }
         return playerName;
       },
@@ -134,7 +146,9 @@ function DisplayUpcomingMatch() {
           match.homeTeam.players.items.some(
             (matchPlayer) => player.id === matchPlayer.id
           ) ||
-          match.awayTeam.players.items.some((matchPlayer) => player.id === matchPlayer.id)
+          match.awayTeam.players.items.some(
+            (matchPlayer) => player.id === matchPlayer.id
+          )
         );
       }
       return true;
@@ -150,29 +164,29 @@ function DisplayUpcomingMatch() {
       const homePoints = data.filter((datum) => datum.vs === "⬅️").length;
       const awayPoints = data.filter((datum) => datum.vs === "➡️").length;
       const pointsAwardedJsx =
-      [match.homeTeam, match.awayTeam].some((team) => !team) ||
-      Date.parse(match.date) > Date.now() ? (
-        ""
-      ) : (
-        <>
-          <Alert
-            message={
-              homePoints >= awayPoints
-                ? `${match.homeTeam?.name} is awarded ${homePoints} points`
-                : `${match.awayTeam?.name} is awarded ${awayPoints} points`
-            }
-            type="success"
-          />
-          <Alert
-            message={
-              homePoints < awayPoints
-                ? `${match.homeTeam?.name} is awarded ${homePoints} points`
-                : `${match.awayTeam?.name} is awarded ${awayPoints} points`
-            }
-            type="info"
-          />
-        </>
-      );
+        [match.homeTeam, match.awayTeam].some((team) => !team) ||
+        Date.parse(match.date) > Date.now() ? (
+          ""
+        ) : (
+          <>
+            <Alert
+              message={
+                homePoints >= awayPoints
+                  ? `${match.homeTeam?.name} is awarded ${homePoints} points`
+                  : `${match.awayTeam?.name} is awarded ${awayPoints} points`
+              }
+              type="success"
+            />
+            <Alert
+              message={
+                homePoints < awayPoints
+                  ? `${match.homeTeam?.name} is awarded ${homePoints} points`
+                  : `${match.awayTeam?.name} is awarded ${awayPoints} points`
+              }
+              type="info"
+            />
+          </>
+        );
       return (
         <div key={match.id}>
           <h1>

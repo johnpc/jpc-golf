@@ -11,7 +11,7 @@ import listenUpdateScore from "../data/listenUpdateScore";
 function DisplayMatches({match}) {
   const [teams, setTeams] = useState([]);
   const [matches, setMatches] = useState([]);
-  const [teamId] = useState(match.params.teamId);
+  const [teamId, setTeamId] = useState(match.params.teamId);
   const [matchId] = useState(match.params.matchId);
   useEffect(() => {
     async function setupState() {
@@ -43,6 +43,15 @@ function DisplayMatches({match}) {
         if (record.homePlayerId) {
           return (
             <Link to={`/app/players/${record.homePlayerId}`}>{playerName}</Link>
+          );
+        } else if (record.homeTeamId) {
+          return (
+            <Link
+              onClick={() => setTeamId(record.homeTeamId)}
+              to={`/app/matches/${record.homeTeamId}`}
+            >
+              <b>{playerName}</b>
+            </Link>
           );
         }
         return playerName;
@@ -76,6 +85,15 @@ function DisplayMatches({match}) {
         if (record.awayPlayerId) {
           return (
             <Link to={`/app/players/${record.awayPlayerId}`}>{playerName}</Link>
+          );
+        } else if (record.awayTeamId) {
+          return (
+            <Link
+              onClick={() => setTeamId(record.awayTeamId)}
+              to={`/app/matches/${record.awayTeamId}`}
+            >
+              <b>{playerName}</b>
+            </Link>
           );
         }
         return playerName;
