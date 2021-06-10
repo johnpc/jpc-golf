@@ -106,6 +106,7 @@ function DisplayInformation() {
         golfers in the group may hissssss like a snake to get in that golfer's
         head.
       </p>
+      <p>(Shots played with the putter from off the green - including fringe - do not count)</p>
       <hr />
       <small><center>Having trouble with this site? I'm not surprised. Help me resolve any problems by submitting issues or pull requests <a href="https://github.com/johnpc/jpc-golf">on github</a>.</center></small>
     </div>
