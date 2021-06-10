@@ -82,6 +82,7 @@ function DisplayMatches({match}) {
       onChange={(value) => {
         const player = players.find((player) => player.id === value);
         setPlayer(player);
+        setTeamId(null);
       }}
     >
       {players.map((player) => {
@@ -115,16 +116,30 @@ function DisplayMatches({match}) {
           if (cryptoMatch && price) {
             return (
               <Tooltip
-                title={`${cryptoMatch} was ${price} on ${new Date(record.matchDate).toDateString()}.`}
+                title={`${cryptoMatch} was ${price} on ${new Date(
+                  record.matchDate
+                ).toDateString()}.`}
               >
-                <Link to={`/app/matches/${record.homeTeamId}`}>
+                <Link
+                  onClick={() => {
+                    setPlayer({});
+                    setTeamId(record.homeTeamId);
+                  }}
+                  to={`/app/matches/${record.homeTeamId}`}
+                >
                   <b>{playerName}</b>
                 </Link>
               </Tooltip>
             );
           } else {
             return (
-              <Link to={`/app/matches/${record.homeTeamId}`}>
+              <Link
+                onClick={() => {
+                  setPlayer({});
+                  setTeamId(record.homeTeamId);
+                }}
+                to={`/app/matches/${record.homeTeamId}`}
+              >
                 <b>{playerName}</b>
               </Link>
             );
@@ -177,16 +192,24 @@ function DisplayMatches({match}) {
           if (cryptoMatch && price) {
             return (
               <Tooltip
-                title={`${cryptoMatch} was ${price} on ${new Date(record.matchDate).toDateString()}.`}
+                title={`${cryptoMatch} was ${price} on ${new Date(
+                  record.matchDate
+                ).toDateString()}.`}
               >
-                <Link to={`/app/matches/${record.homeTeamId}`}>
+                <Link
+                  onClick={() => {
+                    setPlayer({});
+                    setTeamId(record.awayTeamId);
+                  }}
+                  to={`/app/matches/${record.awayTeamId}`}
+                >
                   <b>{playerName}</b>
                 </Link>
               </Tooltip>
             );
           } else {
             return (
-              <Link to={`/app/matches/${record.homeTeamId}`}>
+              <Link to={`/app/matches/${record.awayTeamId}`}>
                 <b>{playerName}</b>
               </Link>
             );
@@ -278,7 +301,6 @@ function DisplayMatches({match}) {
         );
       return (
         <div style={{padding: "1vw"}} key={match.id}>
-          {playerSelectDropdown}
           <h1>
             {match.homeTeam?.name} vs {match.awayTeam?.name}:{" "}
             {new Date(match.date).toDateString()}
@@ -295,14 +317,21 @@ function DisplayMatches({match}) {
       match.awayTeam.name
     } on ${new Date(Date.parse(match.date)).toDateString()}`;
   }
-  if (teamId) {
+  if (teamId || player.name) {
     const team = teams.find((team) => team.id === teamId);
     headerContent = (
       <div>
         <h1>
-          Matches played by {team.name + " "}
+          Matches played by {player.name ? player.name : team.name + " "} (
+          {matchJsx.length})
           <small>
-            <Link to={"/app/matches"} onClick={() => setTeamId(null)}>
+            <Link
+              to={"/app/matches"}
+              onClick={() => {
+                setTeamId(null);
+                setPlayer({});
+              }}
+            >
               (reset filter)
             </Link>
           </small>
@@ -313,6 +342,7 @@ function DisplayMatches({match}) {
   return (
     <>
       {headerContent}
+      {playerSelectDropdown}
       {matchJsx.length === 0 ? <Empty /> : matchJsx}
     </>
   );
