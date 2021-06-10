@@ -61,19 +61,19 @@ function DisplayMatches({match}) {
       title: "Handicap",
       dataIndex: "homeHandicap",
       key: "homeHandicap",
-      responsive: ['lg'],
+      responsive: ["lg"],
     },
     {
       title: "Raw Score",
       dataIndex: "homeRaw",
       key: "homeRaw",
-      responsive: ['lg'],
+      responsive: ["lg"],
     },
     {
       title: "Adj Score",
       dataIndex: "homeAdj",
       key: "homeAdj",
-      responsive: ['md'],
+      responsive: ["md"],
     },
     {
       title: "VS",
@@ -106,19 +106,19 @@ function DisplayMatches({match}) {
       title: "Handicap",
       dataIndex: "awayHandicap",
       key: "awayHandicap",
-      responsive: ['lg'],
+      responsive: ["lg"],
     },
     {
       title: "Raw Score",
       dataIndex: "awayRaw",
       key: "awayRaw",
-      responsive: ['lg'],
+      responsive: ["lg"],
     },
     {
       title: "Adj Score",
       dataIndex: "awayAdj",
       key: "awayAdj",
-      responsive: ['md'],
+      responsive: ["md"],
     },
   ];
 
@@ -190,11 +190,22 @@ function DisplayMatches({match}) {
   }
   if (teamId) {
     const team = teams.find((team) => team.id === teamId);
-    headerContent = `Matches played by ${team.name}`;
+    headerContent = (
+      <div>
+        <h1>
+          Matches played by {team.name + ' '}
+          <small>
+            <Link to={"/app/matches"} onClick={() => setTeamId(null)}>
+              (reset filter)
+            </Link>
+          </small>
+        </h1>
+      </div>
+    );
   }
   return (
     <>
-      <h1>{headerContent}</h1>
+      {headerContent}
       {matchJsx.length === 0 ? <Empty /> : matchJsx}
     </>
   );
