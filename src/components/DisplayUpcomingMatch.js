@@ -87,19 +87,10 @@ function DisplayUpcomingMatch() {
       title: "Handicap",
       dataIndex: "homeHandicap",
       key: "homeHandicap",
+      responsive: ['md'],
     },
     {
-      title: "Raw Score",
-      dataIndex: "homeRaw",
-      key: "homeRaw",
-    },
-    {
-      title: "Adj Score",
-      dataIndex: "homeAdj",
-      key: "homeAdj",
-    },
-    {
-      title: "| VS |",
+      title: "VS",
       dataIndex: "vs",
       key: "vs",
     },
@@ -126,16 +117,7 @@ function DisplayUpcomingMatch() {
       title: "Handicap",
       dataIndex: "awayHandicap",
       key: "awayHandicap",
-    },
-    {
-      title: "Raw Score",
-      dataIndex: "awayRaw",
-      key: "awayRaw",
-    },
-    {
-      title: "Adj Score",
-      dataIndex: "awayAdj",
-      key: "awayAdj",
+      responsive: ['md'],
     },
   ];
 
@@ -195,6 +177,7 @@ function DisplayUpcomingMatch() {
           </h1>
           {pointsAwardedJsx}
           <Table columns={columns} dataSource={data} pagination={false} />
+          <hr />
         </div>
       );
     });

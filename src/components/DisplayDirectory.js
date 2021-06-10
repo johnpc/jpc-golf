@@ -44,6 +44,7 @@ function DisplayDirectory() {
       render: (teamName, record) => {
         return <Link to={`/app/matches/${record.teamId}`}>{teamName}</Link>;
       },
+      responsive: ['md'],
     },
     {
       title: "Handicap",

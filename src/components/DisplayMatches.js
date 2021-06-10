@@ -61,19 +61,22 @@ function DisplayMatches({match}) {
       title: "Handicap",
       dataIndex: "homeHandicap",
       key: "homeHandicap",
+      responsive: ['lg'],
     },
     {
       title: "Raw Score",
       dataIndex: "homeRaw",
       key: "homeRaw",
+      responsive: ['lg'],
     },
     {
       title: "Adj Score",
       dataIndex: "homeAdj",
       key: "homeAdj",
+      responsive: ['md'],
     },
     {
-      title: "| VS |",
+      title: "VS",
       dataIndex: "vs",
       key: "vs",
     },
@@ -103,16 +106,19 @@ function DisplayMatches({match}) {
       title: "Handicap",
       dataIndex: "awayHandicap",
       key: "awayHandicap",
+      responsive: ['lg'],
     },
     {
       title: "Raw Score",
       dataIndex: "awayRaw",
       key: "awayRaw",
+      responsive: ['lg'],
     },
     {
       title: "Adj Score",
       dataIndex: "awayAdj",
       key: "awayAdj",
+      responsive: ['md'],
     },
   ];
 
