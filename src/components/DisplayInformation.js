@@ -65,11 +65,20 @@ function DisplayInformation() {
         anyone yourself.
       </p>
       <p>
+        Known alternates:
+        <ul>
+          <li>John H</li>
+          <li>Courtney</li>
+          <li>Jimmy</li>
+          <li>Alex's cousin</li>
+        </ul>
+      </p>
+      <p>
         Try to make up your score by playing another round before the next
         league day and report that score - otherwise you will forfeit both your
         point and your team point.
       </p>
-      <h2>Prizes!</h2>
+      <h2>Prizes</h2>
       <p>
         Of course, bragging rights should be your primary motivation to win. But
         to up the stakes, each first place winner will receive a $25 Amazon gift
