@@ -12,10 +12,12 @@ import {Layout, Menu} from "antd";
 import {
   HomeOutlined
 } from "@ant-design/icons";
+import recordAnalytics from "./utils/recordAnalytics";
 
 const {Header, Content, Footer} = Layout;
 
 function MainApp({match}) {
+  recordAnalytics('appVisit');
   return (
     <div className="App">
       <Layout>

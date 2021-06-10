@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/crypto",
+      "lambdaFunction": "jpcgolf8adea8cc",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/crypto"
+    }
+  ],
+  "resourceName": "api763feb7f",
+  "apiName": "api763feb7f",
+  "functionArns": [
+    {
+      "lambdaFunction": "jpcgolf8adea8cc"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-jpcgolf-develop-183317-authRole",
+    "unAuthRoleName": "amplify-jpcgolf-develop-183317-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "jpcgolf8adea8cc",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

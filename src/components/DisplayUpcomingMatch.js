@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from "react";
-import {Table, Alert, Select, Empty, Spin} from "antd";
+import {Table, Alert, Select, Empty, Spin, Tooltip} from "antd";
 import getMatches from "../data/getMatches";
 import getPlayers from "../data/getPlayers";
 import parseMatchData from "../utils/parseMatchData";
 import {Link} from "react-router-dom";
 import listenCreateScore from "../data/listenCreateScore";
 import listenUpdateScore from "../data/listenUpdateScore";
+import getCryptoValue from "../utils/getCryptoValue";
 const {Option} = Select;
 
 function DisplayUpcomingMatch() {
   const [matches, setMatches] = useState([]);
   const [players, setPlayers] = useState([]);
   const [player, setPlayer] = useState({});
+  const [prices, setPrices] = useState({});
 
   useEffect(() => {
     async function setupState() {
@@ -21,6 +23,32 @@ function DisplayUpcomingMatch() {
       ]);
       setMatches(matches);
       setPlayers(players);
+
+      async function setupPrices() {
+        let tempPrices = {};
+        const promises = matches.map(async (match) => {
+          const p = ["BTC", "ETH", "DOGE", "ADA"].map(async (crypto) => {
+            const price = await getCryptoValue(crypto, match.date);
+            if (price && price !== "N/A") {
+              if (!tempPrices[match.date]) {
+                const mapping = {};
+                mapping[crypto] = price;
+                tempPrices[match.date] = mapping;
+              } else {
+                tempPrices[match.date][crypto] = price;
+              }
+            }
+          });
+          return await Promise.all(p);
+        });
+
+        await Promise.all(promises);
+        console.log(tempPrices);
+        setPrices(tempPrices);
+      }
+      if (!Object.keys(prices).length) {
+        await setupPrices();
+      }
     }
     setupState();
     const createScoreListener = listenCreateScore().subscribe({
@@ -74,11 +102,30 @@ function DisplayUpcomingMatch() {
             <Link to={`/app/players/${record.homePlayerId}`}>{playerName}</Link>
           );
         } else if (record.homeTeamId) {
-          return (
-            <Link to={`/app/matches/${record.homeTeamId}`}>
-              <b>{playerName}</b>
-            </Link>
+          const cryptoMatch = ["BTC", "ETH", "DOGE", "ADA"].find((crypto) =>
+            playerName.includes(crypto)
           );
+          const price =
+            cryptoMatch && prices[record.matchDate]
+              ? prices[record.matchDate][cryptoMatch]
+              : false;
+          if (cryptoMatch && price) {
+            return (
+              <Tooltip
+                title={`${cryptoMatch} was ${price} on the day of this match.`}
+              >
+                <Link to={`/app/matches/${record.homeTeamId}`}>
+                  <b>{playerName}</b>
+                </Link>
+              </Tooltip>
+            );
+          } else {
+            return (
+              <Link to={`/app/matches/${record.homeTeamId}`}>
+                <b>{playerName}</b>
+              </Link>
+            );
+          }
         }
         return playerName;
       },
@@ -87,7 +134,7 @@ function DisplayUpcomingMatch() {
       title: "Handicap",
       dataIndex: "homeHandicap",
       key: "homeHandicap",
-      responsive: ['md'],
+      responsive: ["md"],
     },
     {
       title: "VS",
@@ -105,11 +152,24 @@ function DisplayUpcomingMatch() {
             <Link to={`/app/players/${record.awayPlayerId}`}>{playerName}</Link>
           );
         } else if (record.awayTeamId) {
-          return (
-            <Link to={`/app/matches/${record.awayTeamId}`}>
-              <b>{playerName}</b>
-            </Link>
+          const cryptoMatch = ["BTC", "ETH", "DOGE", "ADA"].find((crypto) =>
+            playerName.includes(crypto)
           );
+          const price =
+            cryptoMatch && prices[record.matchDate]
+              ? prices[record.matchDate][cryptoMatch]
+              : false;
+          if (cryptoMatch && price) {
+            return (
+              <Tooltip
+                title={`${cryptoMatch} was ${price} on the day of this match.`}
+              >
+                <Link to={`/app/matches/${record.awayTeamId}`}>
+                  <b>{playerName}</b>
+                </Link>
+              </Tooltip>
+            );
+          }
         }
         return playerName;
       },
@@ -118,7 +178,7 @@ function DisplayUpcomingMatch() {
       title: "Handicap",
       dataIndex: "awayHandicap",
       key: "awayHandicap",
-      responsive: ['md'],
+      responsive: ["md"],
     },
   ];
 

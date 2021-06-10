@@ -15,6 +15,34 @@
           "additionalAuthenticationProviders": []
         }
       }
+    },
+    "api01278f5a": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "jpcgolf8adea8cc",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "api763feb7f": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "jpcgolf8adea8cc",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "hosting": {
@@ -22,6 +50,13 @@
       "service": "amplifyhosting",
       "type": "cicd",
       "lastPushTimeStamp": "2021-04-30T23:45:53.973Z"
+    }
+  },
+  "function": {
+    "jpcgolf8adea8cc": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   }
 }

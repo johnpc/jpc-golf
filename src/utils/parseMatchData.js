@@ -83,6 +83,7 @@ const parseMatchData = (match) => {
       awayHandicap: awayLowHandicap + awayHighHandicap,
       awayRaw: getScore(awayLowRawScore + awayHighRawScore),
       awayAdj: getScore(awayLowAdjScore + awayHighAdjScore),
+      matchDate: match.date,
       key: `${match.id}Team`,
     },
     {
@@ -102,6 +103,7 @@ const parseMatchData = (match) => {
       awayHandicap: awayLowHandicap,
       awayRaw: getScore(awayLowRawScore),
       awayAdj: getScore(awayLowAdjScore),
+      matchDate: match.date,
       key: `${match.id}LowHandicap`,
     },
     {
@@ -121,6 +123,7 @@ const parseMatchData = (match) => {
       awayHandicap: awayHighHandicap,
       awayRaw: getScore(awayHighRawScore),
       awayAdj: getScore(awayHighAdjScore),
+      matchDate: match.date,
       key: `${match.id}HighHandicap`,
     },
   ];

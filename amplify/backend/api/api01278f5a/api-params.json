@@ -1,0 +1,44 @@
+{
+    "paths": [
+        {
+            "name": "/items",
+            "lambdaFunction": "jpcgolf8adea8cc",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/items"
+        },
+        {
+            "name": "/crypto",
+            "lambdaFunction": "jpcgolf8adea8cc",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/crypto"
+        }
+    ],
+    "resourceName": "api01278f5a",
+    "apiName": "api01278f5a",
+    "functionArns": [
+        {
+            "lambdaFunction": "jpcgolf8adea8cc"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-jpcgolf-develop-183317-authRole",
+        "unAuthRoleName": "amplify-jpcgolf-develop-183317-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "jpcgolf8adea8cc",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "ff502e32"
+}

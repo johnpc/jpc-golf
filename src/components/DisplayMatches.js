@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Table, Alert, Empty, Spin} from "antd";
+import {Table, Alert, Empty, Spin, Tooltip} from "antd";
 import parseMatchData from "../utils/parseMatchData";
 import getMatches from "../data/getMatches";
 import {withRouter} from "react-router";
@@ -7,18 +7,47 @@ import {Link} from "react-router-dom";
 import getTeams from "../data/getTeams";
 import listenCreateScore from "../data/listenCreateScore";
 import listenUpdateScore from "../data/listenUpdateScore";
+import getCryptoValue from "../utils/getCryptoValue";
 
 function DisplayMatches({match}) {
   const [teams, setTeams] = useState([]);
   const [matches, setMatches] = useState([]);
   const [teamId, setTeamId] = useState(match.params.teamId);
   const [matchId] = useState(match.params.matchId);
+  const [prices, setPrices] = useState({});
+
   useEffect(() => {
     async function setupState() {
       const teams = await getTeams();
       const matches = await getMatches();
       setTeams(teams);
       setMatches(matches);
+
+      async function setupPrices() {
+        let tempPrices = {};
+        const promises = matches.map(async (match) => {
+          const p = ["BTC", "ETH", "DOGE", "ADA"].map(async (crypto) => {
+            const price = await getCryptoValue(crypto, match.date);
+            if (price && price !== "N/A") {
+              if (!tempPrices[match.date]) {
+                const mapping = {};
+                mapping[crypto] = price;
+                tempPrices[match.date] = mapping;
+              } else {
+                tempPrices[match.date][crypto] = price;
+              }
+            }
+          });
+          return await Promise.all(p);
+        });
+
+        await Promise.all(promises);
+        console.log(tempPrices);
+        setPrices(tempPrices);
+      }
+      if (!Object.keys(prices).length) {
+        await setupPrices();
+      }
     }
     setupState();
     const createScoreListener = listenCreateScore().subscribe({
@@ -45,14 +74,30 @@ function DisplayMatches({match}) {
             <Link to={`/app/players/${record.homePlayerId}`}>{playerName}</Link>
           );
         } else if (record.homeTeamId) {
-          return (
-            <Link
-              onClick={() => setTeamId(record.homeTeamId)}
-              to={`/app/matches/${record.homeTeamId}`}
-            >
-              <b>{playerName}</b>
-            </Link>
+          const cryptoMatch = ["BTC", "ETH", "DOGE", "ADA"].find((crypto) =>
+            playerName.includes(crypto)
           );
+          const price =
+            cryptoMatch && prices[record.matchDate]
+              ? prices[record.matchDate][cryptoMatch]
+              : false;
+          if (cryptoMatch && price) {
+            return (
+              <Tooltip
+                title={`${cryptoMatch} was ${price} on the day of this match.`}
+              >
+                <Link to={`/app/matches/${record.homeTeamId}`}>
+                  <b>{playerName}</b>
+                </Link>
+              </Tooltip>
+            );
+          } else {
+            return (
+              <Link to={`/app/matches/${record.homeTeamId}`}>
+                <b>{playerName}</b>
+              </Link>
+            );
+          }
         }
         return playerName;
       },
@@ -91,14 +136,30 @@ function DisplayMatches({match}) {
             <Link to={`/app/players/${record.awayPlayerId}`}>{playerName}</Link>
           );
         } else if (record.awayTeamId) {
-          return (
-            <Link
-              onClick={() => setTeamId(record.awayTeamId)}
-              to={`/app/matches/${record.awayTeamId}`}
-            >
-              <b>{playerName}</b>
-            </Link>
+          const cryptoMatch = ["BTC", "ETH", "DOGE", "ADA"].find((crypto) =>
+            playerName.includes(crypto)
           );
+          const price =
+            cryptoMatch && prices[record.matchDate]
+              ? prices[record.matchDate][cryptoMatch]
+              : false;
+          if (cryptoMatch && price) {
+            return (
+              <Tooltip
+                title={`${cryptoMatch} was ${price} on the day of this match.`}
+              >
+                <Link to={`/app/matches/${record.homeTeamId}`}>
+                  <b>{playerName}</b>
+                </Link>
+              </Tooltip>
+            );
+          } else {
+            return (
+              <Link to={`/app/matches/${record.homeTeamId}`}>
+                <b>{playerName}</b>
+              </Link>
+            );
+          }
         }
         return playerName;
       },
@@ -194,7 +255,7 @@ function DisplayMatches({match}) {
     headerContent = (
       <div>
         <h1>
-          Matches played by {team.name + ' '}
+          Matches played by {team.name + " "}
           <small>
             <Link to={"/app/matches"} onClick={() => setTeamId(null)}>
               (reset filter)

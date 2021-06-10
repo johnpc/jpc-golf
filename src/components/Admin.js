@@ -5,11 +5,12 @@ import setMatchSchedule from "../utils/setMatchSchedule";
 import seedData from "../utils/seedData";
 import nukeData from "../utils/nukeData";
 import {Link} from "react-router-dom";
+import recordAnalytics from "../utils/recordAnalytics";
 
 function Admin() {
   const [seedDisabled, setSeedDisabled] = useState(false);
   const [nukeDisabled, setNukeDisabled] = useState(false);
-
+  recordAnalytics('adminVisit');
   return (
     <div>
       <Link to="/app">
