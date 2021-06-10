@@ -112,7 +112,9 @@ function DisplayUpcomingMatch() {
           if (cryptoMatch && price) {
             return (
               <Tooltip
-                title={`${cryptoMatch} was ${price} on the day of this match.`}
+                title={`${cryptoMatch} was ${price} on ${new Date(
+                  record.matchDate
+                ).toDateString()}.`}
               >
                 <Link to={`/app/matches/${record.homeTeamId}`}>
                   <b>{playerName}</b>
@@ -162,7 +164,9 @@ function DisplayUpcomingMatch() {
           if (cryptoMatch && price) {
             return (
               <Tooltip
-                title={`${cryptoMatch} was ${price} on the day of this match.`}
+                title={`${cryptoMatch} was ${price} on ${new Date(
+                  record.matchDate
+                ).toDateString()}.`}
               >
                 <Link to={`/app/matches/${record.awayTeamId}`}>
                   <b>{playerName}</b>

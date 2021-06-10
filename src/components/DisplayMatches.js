@@ -1,26 +1,34 @@
 import React, {useState, useEffect} from "react";
-import {Table, Alert, Empty, Spin, Tooltip} from "antd";
+import {Table, Alert, Empty, Spin, Tooltip, Select} from "antd";
 import parseMatchData from "../utils/parseMatchData";
 import getMatches from "../data/getMatches";
+import getPlayers from "../data/getPlayers";
 import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
 import getTeams from "../data/getTeams";
 import listenCreateScore from "../data/listenCreateScore";
 import listenUpdateScore from "../data/listenUpdateScore";
 import getCryptoValue from "../utils/getCryptoValue";
+const {Option} = Select;
 
 function DisplayMatches({match}) {
   const [teams, setTeams] = useState([]);
   const [matches, setMatches] = useState([]);
   const [teamId, setTeamId] = useState(match.params.teamId);
+  const [players, setPlayers] = useState([]);
+  const [player, setPlayer] = useState({});
   const [matchId] = useState(match.params.matchId);
   const [prices, setPrices] = useState({});
 
   useEffect(() => {
     async function setupState() {
-      const teams = await getTeams();
-      const matches = await getMatches();
+      const [teams, matches, players] = await Promise.all([
+        getTeams(),
+        getMatches(),
+        getPlayers(),
+      ]);
       setTeams(teams);
+      setPlayers(players);
       setMatches(matches);
 
       async function setupPrices() {
@@ -62,6 +70,29 @@ function DisplayMatches({match}) {
       createScoreListener.unsubscribe();
     };
   }, []);
+  const playerSelectDropdown = (
+    <Select
+      showSearch
+      style={{width: "80vw", padding: "1vw 0"}}
+      placeholder="Select a player"
+      optionFilterProp="children"
+      filterOption={(input, option) =>
+        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      }
+      onChange={(value) => {
+        const player = players.find((player) => player.id === value);
+        setPlayer(player);
+      }}
+    >
+      {players.map((player) => {
+        return (
+          <Option key={player.id} value={player.id}>
+            {player.name} - {player.team.name}
+          </Option>
+        );
+      })}
+    </Select>
+  );
 
   const columns = [
     {
@@ -84,7 +115,7 @@ function DisplayMatches({match}) {
           if (cryptoMatch && price) {
             return (
               <Tooltip
-                title={`${cryptoMatch} was ${price} on the day of this match.`}
+                title={`${cryptoMatch} was ${price} on ${new Date(record.matchDate).toDateString()}.`}
               >
                 <Link to={`/app/matches/${record.homeTeamId}`}>
                   <b>{playerName}</b>
@@ -146,7 +177,7 @@ function DisplayMatches({match}) {
           if (cryptoMatch && price) {
             return (
               <Tooltip
-                title={`${cryptoMatch} was ${price} on the day of this match.`}
+                title={`${cryptoMatch} was ${price} on ${new Date(record.matchDate).toDateString()}.`}
               >
                 <Link to={`/app/matches/${record.homeTeamId}`}>
                   <b>{playerName}</b>
@@ -201,6 +232,19 @@ function DisplayMatches({match}) {
       }
       return true;
     })
+    .filter((match) => {
+      if (player.id) {
+        return (
+          match.homeTeam.players.items.some(
+            (matchPlayer) => player.id === matchPlayer.id
+          ) ||
+          match.awayTeam.players.items.some(
+            (matchPlayer) => player.id === matchPlayer.id
+          )
+        );
+      }
+      return true;
+    })
     .sort((match1, match2) => {
       return Date.parse(match1.date) - Date.parse(match2.date);
     })
@@ -234,6 +278,7 @@ function DisplayMatches({match}) {
         );
       return (
         <div style={{padding: "1vw"}} key={match.id}>
+          {playerSelectDropdown}
           <h1>
             {match.homeTeam?.name} vs {match.awayTeam?.name}:{" "}
             {new Date(match.date).toDateString()}
