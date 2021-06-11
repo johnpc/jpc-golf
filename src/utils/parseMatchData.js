@@ -55,10 +55,10 @@ const parseMatchData = (match) => {
     )?.score
   );
 
-  const homeLowAdjScore = homeLowRawScore + homeLowHandicap;
-  const homeHighAdjScore = homeHighRawScore + homeHighHandicap;
-  const awayLowAdjScore = awayLowRawScore + awayLowHandicap;
-  const awayHighAdjScore = awayHighRawScore + awayHighHandicap;
+  const homeLowAdjScore = homeLowRawScore - homeLowHandicap;
+  const homeHighAdjScore = homeHighRawScore - homeHighHandicap;
+  const awayLowAdjScore = awayLowRawScore - awayLowHandicap;
+  const awayHighAdjScore = awayHighRawScore - awayHighHandicap;
 
   const data = [
     {
