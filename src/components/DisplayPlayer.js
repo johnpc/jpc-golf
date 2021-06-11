@@ -32,6 +32,11 @@ function DisplayPlayer(props) {
       },
     },
     {
+      title: "Handicap",
+      dataIndex: "handicap",
+      key: "handicap",
+    },
+    {
       title: "VS",
       dataIndex: "vs",
       key: "vs",
@@ -58,6 +63,7 @@ function DisplayPlayer(props) {
       return {
         matchId: score.match.id,
         matchDate: score.match.date,
+        handicap: getHandicap(player, score.match.date),
         vs:
           score.match.homeTeam.id === player.team.id
             ? score.match.awayTeam?.name ?? "No opponent"
