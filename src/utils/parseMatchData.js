@@ -64,7 +64,7 @@ const parseMatchData = (match) => {
     {
       homeTeamId: match.homeTeam?.id,
       homeName: match.homeTeam?.name ?? "No opponent",
-      homeHandicap: homeLowHandicap + homeHighHandicap,
+      homeHandicap: parseFloat(homeLowHandicap) + parseFloat(homeHighHandicap),
       homeRaw: getScore(homeLowRawScore + homeHighRawScore),
       homeAdj: getScore(homeLowAdjScore + homeHighAdjScore),
       vs: getVs(
@@ -80,7 +80,7 @@ const parseMatchData = (match) => {
       ),
       awayTeamId: match.awayTeam?.id,
       awayName: match.awayTeam?.name,
-      awayHandicap: awayLowHandicap + awayHighHandicap,
+      awayHandicap: parseFloat(awayLowHandicap) + parseFloat(awayHighHandicap),
       awayRaw: getScore(awayLowRawScore + awayHighRawScore),
       awayAdj: getScore(awayLowAdjScore + awayHighAdjScore),
       matchDate: match.date,

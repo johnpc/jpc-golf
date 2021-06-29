@@ -3,7 +3,7 @@ const getHandicap = (player, thruDate) => {
     if (!thruDate) {
       return true;
     }
-    return Date.parse(score.match.date) <= Date.parse(thruDate);
+    return Date.parse(score.match.date) < Date.parse(thruDate);
   });
 
   if (scores < 2 || !scores) {
@@ -12,7 +12,7 @@ const getHandicap = (player, thruDate) => {
 
   const handicap =
     scores.reduce((total, score) => total + score.score, 0) / scores.length;
-  return Math.floor(handicap);
+  return handicap.toFixed(2);
 };
 
 export default getHandicap;
