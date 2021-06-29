@@ -12,7 +12,7 @@ const getHandicap = (player, thruDate) => {
 
   const handicap =
     scores.reduce((total, score) => total + score.score, 0) / scores.length;
-  return handicap.toFixed(2);
+  return parseFloat(handicap.toFixed(2));
 };
 
 export default getHandicap;

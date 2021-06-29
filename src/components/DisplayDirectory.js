@@ -72,7 +72,9 @@ function DisplayDirectory() {
     })
     .reduce((acc, cur) => {
       return acc.concat(cur);
-    }, []);
+    }, []).sort((a, b) => {
+      return a.handicap < b.handicap ? -1 : a.handicap > b.handicap ? 1 : 0;
+    });
 
   return (
     <Table

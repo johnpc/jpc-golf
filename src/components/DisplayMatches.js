@@ -50,7 +50,6 @@ function DisplayMatches({match}) {
         });
 
         await Promise.all(promises);
-        console.log(tempPrices);
         setPrices(tempPrices);
       }
       if (!Object.keys(prices).length) {
