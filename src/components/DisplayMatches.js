@@ -301,8 +301,12 @@ function DisplayMatches({match}) {
       return (
         <div style={{padding: "1vw"}} key={match.id}>
           <h1>
-            {match.homeTeam?.name} vs {match.awayTeam?.name}:{" "}
-            {new Date(match.date).toDateString()}
+            {Date.parse(match.date) < Date.now() ?
+            <Link to={`/app/matches/match/${match.id}`}>
+              {match.homeTeam?.name} vs {match.awayTeam?.name}:{" "}
+              {new Date(match.date).toDateString()}
+            </Link> : <div>{match.homeTeam?.name} vs {match.awayTeam?.name}:{" "}
+              {new Date(match.date).toDateString()}</div>}
           </h1>
           {pointsAwardedJsx}
           <Table columns={columns} dataSource={data} pagination={false} />

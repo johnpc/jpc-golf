@@ -13,6 +13,7 @@ import {
   HomeOutlined
 } from "@ant-design/icons";
 import recordAnalytics from "./utils/recordAnalytics";
+import DisplayMatch from "./components/DisplayMatch";
 
 const {Header, Content, Footer} = Layout;
 
@@ -47,10 +48,14 @@ function MainApp({match}) {
                 <Admin />
               </Route>
               <Route path={match.url + "/matches/match/:matchId"}>
-                <DisplayMatches />
+                <DisplayMatch />
               </Route>
               <Route path={match.url + "/matches/:teamId"}>
                 <DisplayMatches />
+              </Route>
+
+              <Route path={match.url + "/matches/:matchId"}>
+                <DisplayMatch />
               </Route>
               <Route path={match.url + "/matches"}>
                 <DisplayMatches />
