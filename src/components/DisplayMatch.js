@@ -1,8 +1,10 @@
+import {Alert} from "antd";
 import React, {useState, useEffect} from "react";
 import {withRouter} from "react-router";
 import getMatch from "../data/getMatch";
 import getCryptoValue from "../utils/getCryptoValue";
 import getHandicap from "../utils/getHandicap";
+import parseMatchData from "../utils/parseMatchData";
 
 function DisplayMatch(params) {
   const [matchId] = useState(params.match.params.matchId);
@@ -42,8 +44,33 @@ function DisplayMatch(params) {
   }
 
   const teams = [match.homeTeam, match.awayTeam];
+  const matchData =parseMatchData(match);
+  console.log('JCJC', matchData)
+  const homePoints = matchData.filter(
+    (datum) => datum.vs === "⬅️"
+  ).length;
+  const awayPoints = matchData.filter(
+    (datum) => datum.vs === "➡️"
+  ).length;
+
   return (
     <div>
+      <Alert
+        message={
+          homePoints >= awayPoints
+            ? `${match.homeTeam?.name} is awarded ${homePoints} points`
+            : `${match.awayTeam?.name} is awarded ${awayPoints} points`
+        }
+        type="success"
+      />
+      <Alert
+        message={
+          homePoints < awayPoints
+            ? `${match.homeTeam?.name} is awarded ${homePoints} points`
+            : `${match.awayTeam?.name} is awarded ${awayPoints} points`
+        }
+        type="info"
+      />{" "}
       {teams.map((team) => {
         let teamHeaderJsx;
         const cryptoMatch = ["BTC", "ETH", "DOGE", "ADA"].find((crypto) =>
@@ -63,19 +90,33 @@ function DisplayMatch(params) {
           teamHeaderJsx = <h2>{team.name}</h2>;
         }
 
-        console.log(match.date)
-        const teamBodyJsx = match.scores.items.filter(score => team.players.items.find((player) => score.player.id === player.id)).map(score => {
-          return <div key={`${score.player.id}`}>
-            <strong>{score.player.name}</strong>
-            <ul>
-              <li>Handicap: {getHandicap(score.player, match.date)}</li>
-              <li>Score: {score.score}</li>
-              <li>Adjusted Score: {score.score - getHandicap(score.player, match.date)}</li>
-            </ul>
-          </div>
-        })
+        console.log(match.date);
+        const teamBodyJsx = match.scores.items
+          .filter((score) =>
+            team.players.items.find((player) => score.player.id === player.id)
+          )
+          .map((score) => {
+            return (
+              <div key={`${score.player.id}`}>
+                <strong>{score.player.name}</strong>
+                <ul>
+                  <li>Handicap: {getHandicap(score.player, match.date)}</li>
+                  <li>Score: {score.score}</li>
+                  <li>
+                    Adjusted Score:{" "}
+                    {score.score - getHandicap(score.player, match.date)}
+                  </li>
+                </ul>
+              </div>
+            );
+          });
 
-        return <div key={`${team.id}`}>{teamHeaderJsx}{teamBodyJsx}</div>
+        return (
+          <div key={`${team.id}`}>
+            {teamHeaderJsx}
+            {teamBodyJsx}
+          </div>
+        );
       })}
     </div>
   );
