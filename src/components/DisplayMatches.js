@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Table, Alert, Empty, Spin, Tooltip, Select} from "antd";
+import {Table, Alert, Empty, Spin, Tooltip, Select, Button} from "antd";
 import parseMatchData from "../utils/parseMatchData";
 import getMatches from "../data/getMatches";
 import getPlayers from "../data/getPlayers";
@@ -19,6 +19,7 @@ function DisplayMatches({match}) {
   const [player, setPlayer] = useState({});
   const [matchId] = useState(match.params.matchId);
   const [prices, setPrices] = useState({});
+  const [filterType, setFilterType] = useState("all");
 
   useEffect(() => {
     async function setupState() {
@@ -267,7 +268,20 @@ function DisplayMatches({match}) {
       }
       return true;
     })
+    .filter((match) => {
+      switch (filterType) {
+        case "past":
+          return Date.parse(match.date) < Date.now();
+        case "upcoming":
+          return Date.parse(match.date) > Date.now();
+        default:
+          return true;
+      }
+    })
     .sort((match1, match2) => {
+      if (filterType === "past") {
+        return Date.parse(match2.date) - Date.parse(match1.date);
+      }
       return Date.parse(match1.date) - Date.parse(match2.date);
     })
     .map((match) => {
@@ -301,12 +315,17 @@ function DisplayMatches({match}) {
       return (
         <div style={{padding: "1vw"}} key={match.id}>
           <h1>
-            {Date.parse(match.date) < Date.now() ?
-            <Link to={`/app/matches/match/${match.id}`}>
-              {match.homeTeam?.name} vs {match.awayTeam?.name}:{" "}
-              {new Date(match.date).toDateString()}
-            </Link> : <div>{match.homeTeam?.name} vs {match.awayTeam?.name}:{" "}
-              {new Date(match.date).toDateString()}</div>}
+            {Date.parse(match.date) < Date.now() ? (
+              <Link to={`/app/matches/match/${match.id}`}>
+                {match.homeTeam?.name} vs {match.awayTeam?.name}:{" "}
+                {new Date(match.date).toDateString()}
+              </Link>
+            ) : (
+              <div>
+                {match.homeTeam?.name} vs {match.awayTeam?.name}:{" "}
+                {new Date(match.date).toDateString()}
+              </div>
+            )}
           </h1>
           {pointsAwardedJsx}
           <Table columns={columns} dataSource={data} pagination={false} />
@@ -342,10 +361,18 @@ function DisplayMatches({match}) {
       </div>
     );
   }
+  const filterJsx = (
+    <>
+      <Button onClick={() => setFilterType("all")}>All</Button>
+      <Button onClick={() => setFilterType("upcoming")}>Upcoming</Button>
+      <Button onClick={() => setFilterType("past")}>Past</Button>
+    </>
+  );
   return (
     <>
       {headerContent}
       {playerSelectDropdown}
+      {filterJsx}
       {matchJsx.length === 0 ? <Empty /> : matchJsx}
     </>
   );
