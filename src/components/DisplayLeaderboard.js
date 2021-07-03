@@ -8,6 +8,8 @@ import {Link} from "react-router-dom";
 
 function DisplayLeaderboard() {
   const [teams, setTeams] = useState([]);
+  const [maxScore, setMaxScore] = useState(false);
+  const [minScore, setMinScore] = useState(false);
   useEffect(() => {
     async function setupState() {
       const teams = await getTeams();
@@ -33,15 +35,19 @@ function DisplayLeaderboard() {
       dataIndex: "teamName",
       key: "teamName",
       render: (teamName, record) => {
-        return (
-          <Link to={`/app/matches/${record.teamId}`}>{teamName}</Link>
-        );
+        return <Link to={`/app/matches/${record.teamId}`}>{teamName}</Link>;
       },
     },
     {
       title: "Points",
       dataIndex: "points",
       key: "points",
+      render: (points) =>
+        points === maxScore
+          ? `${points} 👑`
+          : points === minScore
+          ? `${points} 💩`
+          : points,
     },
   ];
 
@@ -74,6 +80,8 @@ function DisplayLeaderboard() {
       return team2.points - team1.points;
     });
 
+  if (maxScore === false) setMaxScore(Math.max(...data.map((data) => data.points)));
+  if (minScore === false) setMinScore(Math.min(...data.map((data) => data.points)));
   return (
     <>
       <h1>Leaderboard:</h1>
