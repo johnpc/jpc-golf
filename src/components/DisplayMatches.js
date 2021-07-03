@@ -352,6 +352,7 @@ function DisplayMatches({match}) {
               onClick={() => {
                 setTeamId(null);
                 setPlayer({});
+                setFilterType('all')
               }}
             >
               (reset filter)
