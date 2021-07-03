@@ -1,6 +1,7 @@
 import {Alert} from "antd";
 import React, {useState, useEffect} from "react";
 import {withRouter} from "react-router";
+import {Link} from "react-router-dom";
 import getMatch from "../data/getMatch";
 import getCryptoValue from "../utils/getCryptoValue";
 import getHandicap from "../utils/getHandicap";
@@ -50,6 +51,7 @@ function DisplayMatch(params) {
 
   return (
     <div>
+      <h2>Match on {new Date(match.date).toDateString()}</h2>
       <Alert
         message={
           homePoints >= awayPoints
@@ -78,11 +80,16 @@ function DisplayMatch(params) {
         if (cryptoMatch && price) {
           teamHeaderJsx = (
             <h2>
-              {team.name} (price was {price})
+              <Link to={`/app/matches/${team.id}`}>{team.name}</Link> (price was{" "}
+              {price})
             </h2>
           );
         } else {
-          teamHeaderJsx = <h2>{team.name}</h2>;
+          teamHeaderJsx = (
+            <h2>
+              <Link to={`/app/matches/${team.id}`}>{team.name}</Link>
+            </h2>
+          );
         }
 
         const teamBodyJsx = match.scores.items
@@ -94,12 +101,18 @@ function DisplayMatch(params) {
               [data.homePlayerId, data.awayPlayerId].includes(score.player.id)
             );
             const isTie = ["=", "-"].includes(matchData.vs);
-            const isWinner = matchData.vs === "⬅️" && matchData.homePlayerId === score.player.id;
-            console.log(matchData, matchData.awayAdj, matchData.homeAdj, matchData.awayAdj - matchData.homeAdj)
+            const isWinner =
+              matchData.vs === "⬅️" &&
+              matchData.homePlayerId === score.player.id;
             const scoreDifference = matchData.awayAdj - matchData.homeAdj;
             return (
               <div key={`${score.player.id}`}>
-                <strong>{score.player.name} {isWinner ? '(winner! 🎉)' : ''}</strong>
+                <strong>
+                  <Link to={`/app/players/${score.player.id}`}>
+                    {score.player.name}
+                  </Link>{" "}
+                  {isWinner ? "(winner! 🎉)" : ""}
+                </strong>
                 <ul>
                   <li>Handicap: {getHandicap(score.player, match.date)}</li>
                   <li>Score: {score.score}</li>
@@ -110,7 +123,7 @@ function DisplayMatch(params) {
                     ).toFixed(2)}
                   </li>
                   {!isTie ? (
-                    <li style={{color: isWinner ? 'green' : 'red'}}>
+                    <li style={{color: isWinner ? "green" : "red"}}>
                       {`${
                         isWinner ? "Won" : "Lost"
                       } by ${scoreDifference} strokes`}
