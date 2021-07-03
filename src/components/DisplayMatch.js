@@ -44,14 +44,9 @@ function DisplayMatch(params) {
   }
 
   const teams = [match.homeTeam, match.awayTeam];
-  const matchData =parseMatchData(match);
-  console.log('JCJC', matchData)
-  const homePoints = matchData.filter(
-    (datum) => datum.vs === "⬅️"
-  ).length;
-  const awayPoints = matchData.filter(
-    (datum) => datum.vs === "➡️"
-  ).length;
+  const matchData = parseMatchData(match);
+  const homePoints = matchData.filter((datum) => datum.vs === "⬅️").length;
+  const awayPoints = matchData.filter((datum) => datum.vs === "➡️").length;
 
   return (
     <div>
