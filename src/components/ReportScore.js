@@ -4,11 +4,13 @@ import {Select, InputNumber, Button, Spin, Form, Alert} from "antd";
 import getMatches from "../data/getMatches";
 import getPlayers from "../data/getPlayers";
 import {MS_PER_WEEK} from "../utils/setMatchSchedule";
+import getScores from "../data/getScores";
 const {Option} = Select;
 
 function ReportScore() {
   const [players, setPlayers] = useState([]);
   const [matches, setMatches] = useState([]);
+  const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(null);
@@ -16,12 +18,14 @@ function ReportScore() {
 
   useEffect(() => {
     async function setupState() {
-      const [matches, players] = await Promise.all([
+      const [matches, players, scores] = await Promise.all([
         getMatches(),
         getPlayers(),
+        getScores(),
       ]);
       setMatches(matches);
       setPlayers(players);
+      setScores(scores);
     }
     setupState();
   }, []);
@@ -107,9 +111,16 @@ function ReportScore() {
         .filter((match) => {
           // Only display last week's and next week's match
           return (
-            Date.parse(match.date) - MS_PER_WEEK < Date.now() ||
-            Date.parse(match.date) + MS_PER_WEEK < Date.now()
+            // if the date is more than a week ago
+            Date.parse(match.date) > Date.now() - MS_PER_WEEK &&
+            // or if the date is less than a week from now
+            Date.parse(match.date) < Date.now() + MS_PER_WEEK
           );
+        })
+        .filter((match) => {
+          // Hide dates where the score was already reported
+          const matchScore = scores.find(score => score.match.id === match.id);
+          return !matchScore;
         })
         .map((match) => {
           return (
