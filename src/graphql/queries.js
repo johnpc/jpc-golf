@@ -487,7 +487,18 @@ export const getMatch = /* GraphQL */ `
           items {
             name
             id
+            scores {
+              items {
+                id
+                score
+                match {
+                  date
+                  id
+                }
+              }
+            }
           }
+          nextToken
         }
         createdAt
         updatedAt

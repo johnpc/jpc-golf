@@ -85,22 +85,39 @@ function DisplayMatch(params) {
           teamHeaderJsx = <h2>{team.name}</h2>;
         }
 
-        console.log(match.date);
         const teamBodyJsx = match.scores.items
           .filter((score) =>
             team.players.items.find((player) => score.player.id === player.id)
           )
           .map((score) => {
+            const matchData = parseMatchData(match).find((data) =>
+              [data.homePlayerId, data.awayPlayerId].includes(score.player.id)
+            );
+            const isTie = ["=", "-"].includes(matchData.vs);
+            const isWinner = matchData.vs === "⬅️" && matchData.homePlayerId === score.player.id;
+            console.log(matchData, matchData.awayAdj, matchData.homeAdj, matchData.awayAdj - matchData.homeAdj)
+            const scoreDifference = matchData.awayAdj - matchData.homeAdj;
             return (
               <div key={`${score.player.id}`}>
-                <strong>{score.player.name}</strong>
+                <strong>{score.player.name} {isWinner ? '(winner! 🎉)' : ''}</strong>
                 <ul>
                   <li>Handicap: {getHandicap(score.player, match.date)}</li>
                   <li>Score: {score.score}</li>
                   <li>
                     Adjusted Score:{" "}
-                    {score.score - getHandicap(score.player, match.date)}
+                    {(
+                      score.score - getHandicap(score.player, match.date)
+                    ).toFixed(2)}
                   </li>
+                  {!isTie ? (
+                    <li style={{color: isWinner ? 'green' : 'red'}}>
+                      {`${
+                        isWinner ? "Won" : "Lost"
+                      } by ${scoreDifference} strokes`}
+                    </li>
+                  ) : (
+                    <li>The match was a tie</li>
+                  )}
                 </ul>
               </div>
             );
