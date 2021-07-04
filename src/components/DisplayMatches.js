@@ -101,6 +101,11 @@ function DisplayMatches({match}) {
       dataIndex: "homeName",
       key: "homeName",
       render: (playerName, record) => {
+        const isTie = ["=", "-"].includes(record.vs);
+        const isWinner =
+          !isTie && record.vs === "⬅️" && record.homeName === playerName;
+        playerName = isWinner ? `${playerName} 🎉` : playerName;
+
         if (record.homePlayerId) {
           return (
             <Link to={`/app/players/${record.homePlayerId}`}>{playerName}</Link>
@@ -161,22 +166,26 @@ function DisplayMatches({match}) {
       responsive: ["lg"],
     },
     {
-      title: "Adj",
+      title: "Adj Score",
       dataIndex: "homeAdj",
       key: "homeAdj",
+      responsive: ["md"],
     },
     {
       title: "VS",
-      dataIndex: "vs",
-      key: "vs",
+      dataIndex: "vsWithDifference",
+      key: "vsWithDifference",
       className: "ant-tooltip-inner",
-      responsive: ["md"],
     },
     {
       title: "Name",
       dataIndex: "awayName",
       key: "awayName",
       render: (playerName, record) => {
+        const isTie = ["=", "-"].includes(record.vs);
+        const isWinner =
+          !isTie && record.vs === "⬅️" && record.homeName === playerName;
+        playerName = isWinner ? `${playerName} 🎉` : playerName;
         if (record.awayPlayerId) {
           return (
             <Link to={`/app/players/${record.awayPlayerId}`}>{playerName}</Link>
@@ -231,9 +240,16 @@ function DisplayMatches({match}) {
       responsive: ["lg"],
     },
     {
-      title: "Adj",
+      title: "Adj Score",
       dataIndex: "awayAdj",
       key: "awayAdj",
+      responsive: ["md"],
+    },
+    {
+      title: "Adj Score",
+      dataIndex: "awayAdj",
+      key: "awayAdj",
+      responsive: ["sm"],
     },
   ];
 
@@ -351,7 +367,7 @@ function DisplayMatches({match}) {
               onClick={() => {
                 setTeamId(null);
                 setPlayer({});
-                setFilterType('all')
+                setFilterType("all");
               }}
             >
               (reset filter)
