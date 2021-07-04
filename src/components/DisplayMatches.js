@@ -161,16 +161,16 @@ function DisplayMatches({match}) {
       responsive: ["lg"],
     },
     {
-      title: "Adj Score",
+      title: "Adj",
       dataIndex: "homeAdj",
       key: "homeAdj",
-      responsive: ["md"],
     },
     {
       title: "VS",
       dataIndex: "vs",
       key: "vs",
       className: "ant-tooltip-inner",
+      responsive: ["md"],
     },
     {
       title: "Name",
@@ -231,10 +231,9 @@ function DisplayMatches({match}) {
       responsive: ["lg"],
     },
     {
-      title: "Adj Score",
+      title: "Adj",
       dataIndex: "awayAdj",
       key: "awayAdj",
-      responsive: ["md"],
     },
   ];
 
