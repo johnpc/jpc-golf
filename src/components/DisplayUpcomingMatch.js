@@ -99,7 +99,13 @@ function DisplayUpcomingMatch() {
       render: (playerName, record) => {
         if (record.homePlayerId) {
           return (
-            <Link to={`/app/players/${record.homePlayerId}`}>{playerName}</Link>
+            <>
+              <Link to={`/app/players/${record.homePlayerId}`}>
+                {playerName}
+              </Link>
+              <br />
+              <small>{`(${record.homeHandicap} hdc)`}</small>
+            </>
           );
         } else if (record.homeTeamId) {
           const cryptoMatch = ["BTC", "ETH", "DOGE", "ADA"].find((crypto) =>
@@ -133,16 +139,11 @@ function DisplayUpcomingMatch() {
       },
     },
     {
-      title: "Handicap",
-      dataIndex: "homeHandicap",
-      key: "homeHandicap",
-      responsive: ["md"],
-    },
-    {
       title: "VS",
       dataIndex: "vs",
       key: "vs",
       className: "ant-tooltip-inner",
+      responsive: ["md"],
     },
     {
       title: "Name",
@@ -151,7 +152,13 @@ function DisplayUpcomingMatch() {
       render: (playerName, record) => {
         if (record.awayPlayerId) {
           return (
-            <Link to={`/app/players/${record.awayPlayerId}`}>{playerName}</Link>
+            <>
+              <Link to={`/app/players/${record.awayPlayerId}`}>
+                {playerName}
+              </Link>
+              <br />
+              <small>{`(${record.awayHandicap} hdc)`}</small>
+            </>
           );
         } else if (record.awayTeamId) {
           const cryptoMatch = ["BTC", "ETH", "DOGE", "ADA"].find((crypto) =>
@@ -177,12 +184,6 @@ function DisplayUpcomingMatch() {
         }
         return playerName;
       },
-    },
-    {
-      title: "Handicap",
-      dataIndex: "awayHandicap",
-      key: "awayHandicap",
-      responsive: ["md"],
     },
   ];
 
