@@ -184,7 +184,7 @@ function DisplayMatches({match}) {
       render: (playerName, record) => {
         const isTie = ["=", "-"].includes(record.vs);
         const isWinner =
-          !isTie && record.vs === "⬅️" && record.homeName === playerName;
+          !isTie && record.vs === "⬅️" && record.awayName === playerName;
         playerName = isWinner ? `${playerName} 🎉` : playerName;
         if (record.awayPlayerId) {
           return (
