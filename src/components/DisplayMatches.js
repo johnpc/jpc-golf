@@ -245,12 +245,6 @@ function DisplayMatches({match}) {
       key: "awayAdj",
       responsive: ["md"],
     },
-    {
-      title: "Adj Score",
-      dataIndex: "awayAdj",
-      key: "awayAdj",
-      responsive: ["sm"],
-    },
   ];
 
   if (matches.length === 0) {
