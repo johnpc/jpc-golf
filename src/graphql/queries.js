@@ -31,16 +31,63 @@ export const getPlayer = /* GraphQL */ `
         items {
           id
           score
+          player {
+            id
+          }
           match {
             id
             date
             homeTeam {
               id
               name
+              players {
+                items {
+                  id
+                  name
+                  scores {
+                    items {
+                      score
+                      id
+                      player {
+                        id
+                      }
+                      match {
+                        date
+                      }
+                    }
+                  }
+                }
+              }
             }
             awayTeam {
               id
               name
+              players {
+                items {
+                  id
+                  name
+                  scores {
+                    items {
+                      score
+                      id
+                      player {
+                        id
+                      }
+                      match {
+                        date
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            scores {
+              items {
+                score
+                player {
+                  id
+                }
+              }
             }
           }
           createdAt

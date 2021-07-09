@@ -5,6 +5,7 @@ import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
 import getPlayer from "../data/getPlayer";
 import getLowHandicap from "../utils/getLowHandicap";
+import parseMatchData from "../utils/parseMatchData";
 
 function DisplayPlayer(props) {
   const [player, setPlayer] = useState({});
@@ -57,6 +58,11 @@ function DisplayPlayer(props) {
       dataIndex: "adj",
       key: "adj",
     },
+    {
+      title: "Result",
+      dataIndex: "result",
+      key: "result",
+    },
   ];
 
   if (!player.id) {
@@ -65,6 +71,24 @@ function DisplayPlayer(props) {
 
   const data = player.scores.items
     .map((score) => {
+      let result;
+      const data = parseMatchData(score.match).find((data) =>
+        [data.homePlayerId, data.awayPlayerId].includes(player.id)
+      );
+      const isHomePlayer = data.homePlayerId === player.id;
+      switch (data.vs) {
+        case "-":
+          result = "N/A";
+          break;
+        case "=":
+          result = "tie";
+          break;
+        case "➡️":
+          result = isHomePlayer ? "lose" : "win 🎉";
+          break;
+        default:
+          result = isHomePlayer ? "win 🎉": "lose";
+      }
       return {
         matchId: score.match.id,
         matchDate: score.match.date,
@@ -78,7 +102,10 @@ function DisplayPlayer(props) {
             ? score.match.awayTeam?.id
             : score.match.homeTeam?.id,
         score: score.score,
-        adj: parseFloat((score.score - getHandicap(player, score.match.date)).toFixed(2)),
+        adj: parseFloat(
+          (score.score - getHandicap(player, score.match.date)).toFixed(2)
+        ),
+        result,
         key: score.id,
       };
     })
@@ -92,17 +119,21 @@ function DisplayPlayer(props) {
     ) : (
       <Table columns={columns} dataSource={data} pagination={false} />
     );
-  const partner = player.team.players.items.find(p => p.id !== player.id);
+  const partner = player.team.players.items.find((p) => p.id !== player.id);
   const handicap = getHandicap(player);
-  const isLowHandicap = getLowHandicap(player.team.players.items).id === player.id;
+  const isLowHandicap =
+    getLowHandicap(player.team.players.items).id === player.id;
   return (
     <div style={{padding: "1vw"}}>
       <h1>{player.name}</h1>
       <h2>
-        Currently the {isLowHandicap ? 'low' : 'high'} handicap player on{" "}
+        Currently the {isLowHandicap ? "low" : "high"} handicap player on{" "}
         <Link to={`/app/matches/${player.team.id}`}>{player.team.name}</Link>
       </h2>
-      <p>Partners with <Link to={`/app/players/${partner.id}`}>{partner.name}</Link></p>
+      <p>
+        Partners with{" "}
+        <Link to={`/app/players/${partner.id}`}>{partner.name}</Link>
+      </p>
       <p>{handicap} handicap</p>
       {content}
     </div>
