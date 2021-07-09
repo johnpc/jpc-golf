@@ -102,9 +102,9 @@ function DisplayMatch(params) {
             );
             const isTie = ["=", "-"].includes(matchData.vs);
             const isWinner =
-              matchData.vs === "⬅️" &&
-              matchData.homePlayerId === score.player.id;
-            const scoreDifference = matchData.awayAdj - matchData.homeAdj;
+              matchData.vs === "➡️" &&
+              matchData.awayPlayerId === score.player.id;
+            const scoreDifference = Math.abs(parseFloat((matchData.awayAdj - matchData.homeAdj).toFixed(2)));
             return (
               <div key={`${score.player.id}`}>
                 <strong>

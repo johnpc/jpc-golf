@@ -171,7 +171,7 @@ function getVsWithDifference(
   awayAdjScore,
   players
 ) {
-  const scoreDifference = homeAdjScore - awayAdjScore;
+  const scoreDifference = parseFloat((homeAdjScore - awayAdjScore).toFixed(2));
   const vs = getVs(
     isHandicapEstablishmentMatch,
     homeAdjScore,
