@@ -52,6 +52,11 @@ function DisplayPlayer(props) {
       dataIndex: "score",
       key: "score",
     },
+    {
+      title: "Adj",
+      dataIndex: "adj",
+      key: "adj",
+    },
   ];
 
   if (!player.id) {
@@ -73,6 +78,7 @@ function DisplayPlayer(props) {
             ? score.match.awayTeam?.id
             : score.match.homeTeam?.id,
         score: score.score,
+        adj: parseFloat((score.score - getHandicap(player, score.match.date)).toFixed(2)),
         key: score.id,
       };
     })
