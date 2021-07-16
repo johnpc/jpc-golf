@@ -171,7 +171,13 @@ function getVsWithDifference(
   awayAdjScore,
   players
 ) {
-  const scoreDifference = parseFloat((homeAdjScore - awayAdjScore).toFixed(2));
+  let scoreDifference = parseFloat((homeAdjScore - awayAdjScore).toFixed(2));
+  if (Number.isNaN(scoreDifference)) {
+    scoreDifference = "default";
+  } else {
+    scoreDifference = Math.abs(scoreDifference);
+  }
+
   const vs = getVs(
     isHandicapEstablishmentMatch,
     homeAdjScore,
@@ -180,7 +186,7 @@ function getVsWithDifference(
   );
   const isTie = ["=", "-"].includes(vs);
   if (isTie) return vs;
-  return `${vs} by ${Math.abs(scoreDifference)}`;
+  return `${vs} by ${scoreDifference}`;
 }
 
 function getVs(
@@ -189,15 +195,23 @@ function getVs(
   awayAdjScore,
   players
 ) {
-  return !isHandicapEstablishmentMatch
-    ? homeAdjScore !== awayAdjScore &&
-      !players.some((player) => !player) &&
-      !(Number.isNaN(homeAdjScore) && Number.isNaN(awayAdjScore))
-      ? homeAdjScore < awayAdjScore
-        ? "⬅️"
-        : "➡️"
-      : "="
-    : "-";
+  if (isHandicapEstablishmentMatch || players.some((player) => !player)) {
+    return "-";
+  }
+
+  if (homeAdjScore === awayAdjScore) {
+    return "=";
+  }
+
+  if (Number.isNaN(homeAdjScore) || homeAdjScore < awayAdjScore) {
+    return "➡️";
+  }
+
+  if (Number.isNaN(awayAdjScore) || homeAdjScore > awayAdjScore) {
+    return "⬅️";
+  }
+
+  return "🤷‍♂️";
 }
 
 export default parseMatchData;
