@@ -60,13 +60,13 @@ function DisplayLeaderboard() {
       const homePoints = team.homeMatches.items.reduce((acc, match) => {
         return (
           acc +
-          parseMatchData(match).filter((datum) => datum.vs === "⬅️").length
+          parseMatchData(match).filter((datum) => datum.vsWithDifference.includes("⬅️")).length
         );
       }, 0);
       const awayPoints = team.awayMatches.items.reduce((acc, match) => {
         return (
           acc +
-          parseMatchData(match).filter((datum) => datum.vs === "➡️").length
+          parseMatchData(match).filter((datum) => datum.vsWithDifference.includes("➡️")).length
         );
       }, 0);
       return {

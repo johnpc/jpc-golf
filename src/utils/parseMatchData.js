@@ -84,7 +84,8 @@ const parseMatchData = (match) => {
           awayHighHandicapPlayer,
           homeLowHandicapPlayer,
           awayLowHandicapPlayer,
-        ]
+        ],
+        match
       ),
       vsWithDifference: getVsWithDifference(
         isHandicapEstablishmentMatch,
@@ -95,7 +96,8 @@ const parseMatchData = (match) => {
           awayHighHandicapPlayer,
           homeLowHandicapPlayer,
           awayLowHandicapPlayer,
-        ]
+        ],
+        match
       ),
       awayTeamId: match.awayTeam?.id,
       awayName: match.awayTeam?.name,
@@ -115,13 +117,15 @@ const parseMatchData = (match) => {
         isHandicapEstablishmentMatch,
         homeLowAdjScore,
         awayLowAdjScore,
-        [homeLowHandicapPlayer, awayLowHandicapPlayer]
+        [homeLowHandicapPlayer, awayLowHandicapPlayer],
+        match
       ),
       vsWithDifference: getVsWithDifference(
         isHandicapEstablishmentMatch,
         homeLowAdjScore,
         awayLowAdjScore,
-        [homeLowHandicapPlayer, awayLowHandicapPlayer]
+        [homeLowHandicapPlayer, awayLowHandicapPlayer],
+        match
       ),
       awayPlayerId: awayLowHandicapPlayer?.id,
       awayName: awayLowHandicapPlayer?.name,
@@ -141,13 +145,15 @@ const parseMatchData = (match) => {
         isHandicapEstablishmentMatch,
         homeHighAdjScore,
         awayHighAdjScore,
-        [homeHighHandicapPlayer, awayHighHandicapPlayer]
+        [homeHighHandicapPlayer, awayHighHandicapPlayer],
+        match
       ),
       vsWithDifference: getVsWithDifference(
         isHandicapEstablishmentMatch,
         homeHighAdjScore,
         awayHighAdjScore,
-        [homeHighHandicapPlayer, awayHighHandicapPlayer]
+        [homeHighHandicapPlayer, awayHighHandicapPlayer],
+        match
       ),
       awayPlayerId: awayHighHandicapPlayer?.id,
       awayName: awayHighHandicapPlayer?.name,
@@ -169,7 +175,8 @@ function getVsWithDifference(
   isHandicapEstablishmentMatch,
   homeAdjScore,
   awayAdjScore,
-  players
+  players,
+  match
 ) {
   let scoreDifference = parseFloat((homeAdjScore - awayAdjScore).toFixed(2));
   if (Number.isNaN(scoreDifference)) {
@@ -182,7 +189,8 @@ function getVsWithDifference(
     isHandicapEstablishmentMatch,
     homeAdjScore,
     awayAdjScore,
-    players
+    players,
+    match
   );
   const isTie = ["=", "-"].includes(vs);
   if (isTie) return vs;
@@ -193,9 +201,10 @@ function getVs(
   isHandicapEstablishmentMatch,
   homeAdjScore,
   awayAdjScore,
-  players
+  players,
+  match
 ) {
-  if (isHandicapEstablishmentMatch || players.some((player) => !player)) {
+  if (isHandicapEstablishmentMatch || players.some((player) => !player) || Date.parse(match.date) > Date.now()) {
     return "-";
   }
 
@@ -203,11 +212,11 @@ function getVs(
     return "=";
   }
 
-  if (Number.isNaN(homeAdjScore) || homeAdjScore < awayAdjScore) {
+  if (Number.isNaN(homeAdjScore) || homeAdjScore > awayAdjScore) {
     return "➡️";
   }
 
-  if (Number.isNaN(awayAdjScore) || homeAdjScore > awayAdjScore) {
+  if (Number.isNaN(awayAdjScore) || homeAdjScore < awayAdjScore) {
     return "⬅️";
   }
 
