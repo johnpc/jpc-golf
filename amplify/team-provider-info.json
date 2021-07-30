@@ -40,7 +40,10 @@
     },
     "categories": {
       "function": {
-        "jpcgolf8adea8cc": {}
+        "jpcgolf8adea8cc": {
+          "deploymentBucketName": "amplify-jpcgolf-aaa-121437-deployment",
+          "s3Key": "amplify-builds/jpcgolf8adea8cc-66626d6d44456d745350-build.zip"
+        }
       },
       "hosting": {
         "amplifyhosting": {
