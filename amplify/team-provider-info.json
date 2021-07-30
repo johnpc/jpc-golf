@@ -25,5 +25,29 @@
         }
       }
     }
+  },
+  "aaa": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jpcgolf-aaa-121437-authRole",
+      "UnauthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaa-121437-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaa-121437-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-jpcgolf-aaa-121437-deployment",
+      "UnauthRoleName": "amplify-jpcgolf-aaa-121437-unauthRole",
+      "StackName": "amplify-jpcgolf-aaa-121437",
+      "StackId": "arn:aws:cloudformation:us-east-1:566092841021:stack/amplify-jpcgolf-aaa-121437/3da9b830-f151-11eb-9add-0e4875d6c3bd",
+      "AmplifyAppId": "d2bg4421igchao"
+    },
+    "categories": {
+      "function": {
+        "jpcgolf8adea8cc": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2bg4421igchao",
+          "type": "cicd"
+        }
+      }
+    }
   }
 }
