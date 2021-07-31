@@ -4,7 +4,7 @@ function DisplayInformation() {
       <h1>Welcome to the second (!) 2021 GolfA2 League!</h1>
       <small>See previous league results from <a href="https://s1.golfa2.com">the archive.</a></small>
       <p>
-        Rounds are every Thursday for 8 weeks, starting June 10th at Huron Hills
+        Rounds are every Thursday for 8 weeks, starting August 5th at Huron Hills
         Golf Course. Please arrive around 5:30 for tee times starting at 5:40
         and 5:50.
       </p>
