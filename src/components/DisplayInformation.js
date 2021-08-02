@@ -1,12 +1,17 @@
 function DisplayInformation() {
   return (
     <div style={{padding: "1vw"}}>
-      <h1>Welcome to the second (!) 2021 GolfA2 League!</h1>
-      <small>See previous league results from <a href="https://archive1.golfa2.com">the archive.</a></small>
+      <h1>Welcome to the second 2021 GolfA2 League!</h1>
       <p>
-        Rounds are every Thursday for 8 weeks, starting August 5th at Huron Hills
-        Golf Course. Please arrive around 5:30 for tee times starting at 5:40
-        and 5:50.
+        <small>
+          See previous league results from{" "}
+          <a href="https://archive1.golfa2.com">the archive.</a>
+        </small>
+      </p>
+      <p>
+        Rounds are every Thursday for 8 weeks, starting August 5th at Huron
+        Hills Golf Course. Please arrive around 5:30 for tee times starting at
+        5:40 and 5:50.
       </p>
       <p>
         Your league fee of $110 includes only your greens fee - if you'd like to
@@ -30,8 +35,8 @@ function DisplayInformation() {
         your lie before swinging, but you may *not* move it to take an obstacle
         out of play. "Swing-and-a-miss" shots are not scored, and if you graze a
         ball to where you can still reach it with your golf club without moving
-        your feet, you can redo the shot without counting the stroke (this may
-        include chipping and sand shots as well).
+        your feet, you can redo the shot without counting the stroke (this
+        excludes chips and sand shots).
       </p>
       <p>
         A putt is automatically considered "good" if you can lay your putter
@@ -68,6 +73,7 @@ function DisplayInformation() {
       <p>
         Known alternates:
         <ul>
+          <li>Jerry</li>
           <li>John H</li>
           <li>Courtney</li>
           <li>Jimmy</li>
@@ -84,10 +90,6 @@ function DisplayInformation() {
         Of course, bragging rights should be your primary motivation to win. But
         to up the stakes, each first place winner will receive a $25 Amazon gift
         card.
-      </p>
-      <p>
-        Additionally, the last place “winners” will be ordering Blazin’ wings at
-        our final post-league bdubs outing.
       </p>
       <p>
         Don’t worry - scores are handicap adjusted so you’ll have a fair chance
@@ -107,9 +109,18 @@ function DisplayInformation() {
         golfers in the group may hissssss like a snake to get in that golfer's
         head.
       </p>
-      <p>(Shots played with the putter from off the green - including fringe - do not count)</p>
+      <p>
+        (Shots played with the putter from off the green - including fringe - do
+        not count)
+      </p>
       <hr />
-      <small><center>Having trouble with this site? I'm not surprised. Help me resolve any problems by submitting issues or pull requests <a href="https://github.com/johnpc/jpc-golf">on github</a>.</center></small>
+      <small>
+        <center>
+          Having trouble with this site? I'm not surprised. Help me resolve any
+          problems by submitting issues or pull requests{" "}
+          <a href="https://github.com/johnpc/jpc-golf">on github</a>.
+        </center>
+      </small>
     </div>
   );
 }
