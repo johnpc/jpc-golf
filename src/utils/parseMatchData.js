@@ -192,7 +192,7 @@ function getVsWithDifference(
     players,
     match
   );
-  const isTie = ["=", "-"].includes(vs);
+  const isTie = ["=", "-", "🤷‍♂️"].includes(vs);
   if (isTie) return vs;
   return `${vs} by ${scoreDifference}`;
 }
@@ -212,11 +212,11 @@ function getVs(
     return "=";
   }
 
-  if (Number.isNaN(homeAdjScore) || homeAdjScore > awayAdjScore) {
+  if ((Number.isNaN(homeAdjScore) && !Number.isNaN(awayAdjScore)) || homeAdjScore > awayAdjScore) {
     return "➡️";
   }
 
-  if (Number.isNaN(awayAdjScore) || homeAdjScore < awayAdjScore) {
+  if ((Number.isNaN(awayAdjScore) && !Number.isNaN(homeAdjScore)) || homeAdjScore < awayAdjScore) {
     return "⬅️";
   }
 
