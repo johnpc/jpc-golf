@@ -52,5 +52,32 @@
         }
       }
     }
+  },
+  "aaahotfix": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jpcgolf-aaahotfix-142932-authRole",
+      "UnauthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaahotfix-142932-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaahotfix-142932-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-jpcgolf-aaahotfix-142932-deployment",
+      "UnauthRoleName": "amplify-jpcgolf-aaahotfix-142932-unauthRole",
+      "StackName": "amplify-jpcgolf-aaahotfix-142932",
+      "StackId": "arn:aws:cloudformation:us-east-1:566092841021:stack/amplify-jpcgolf-aaahotfix-142932/107a95d0-0440-11ec-88d2-0e8a861a6983",
+      "AmplifyAppId": "d2bg4421igchao"
+    },
+    "categories": {
+      "function": {
+        "jpcgolf8adea8cc": {
+          "deploymentBucketName": "amplify-jpcgolf-aaahotfix-142932-deployment",
+          "s3Key": "amplify-builds/jpcgolf8adea8cc-2f33755865474a6e6179-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2bg4421igchao",
+          "type": "cicd"
+        }
+      }
+    }
   }
 }
