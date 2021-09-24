@@ -1,0 +1,30 @@
+version: 1
+backend:
+  phases:
+    preBuild:
+      commands:
+        - echo 'Running pre-build for pr preview'
+        - wget https://amplify-pkg-cli.s3.amazonaws.com/amplify-pkg-linux-dev.zip && unzip amplify-pkg-linux-dev.zip && chmod +x amplify-pkg-linux-dev
+        - cp amplify-pkg-linux-dev $(which amplify)
+        - echo "VERBOSE_LOGGING=1" >> backend/.env
+        - echo 'Successfully installed pkg cli'
+    build:
+      commands:
+        - '# Execute Amplify CLI with the helper script'
+        - amplifyPush --simple
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - yarn install
+    build:
+      commands:
+        - yarn run build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+
