@@ -15,6 +15,7 @@ function App() {
   const registrationLink = useRef(null);
   useEffect(() => {
     const navigate = async () => {
+      console.log('DO NOT MERGE ME!')
       if (window.location.pathname === "/") {
         // End registration a week prior to league start
         if (Date.now() > Date.parse(FIRST_MATCH_DATE) - MS_PER_WEEK) {
