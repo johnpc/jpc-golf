@@ -10,6 +10,21 @@ To join the league, visit [the site](https://golfa2.com) and register there.
 
 All skill levels are accepted, just note that there is a league fee that must be paid before your registration can be completed. If the league has already started, it may be too late to join, but feel free to contact me for details.
 
+## Building as a Mobile app
+
+The golfa2 website also available as a mobile app!
+
+Unfortunately it is not (yet!) available in the App Store.
+
+You can manually install it by running
+
+```sh
+npm run build
+npx cap open ios
+```
+
+then running the project in XCode, which should have been launched by the previous command.
+
 ## Contribute to the site
 
 I built this site mainly to test out the features of AWS Amplify for myself. The idea was that by using the app for a real world use-case, I would be able to see more clearly where Amplify shines (and doesn't).

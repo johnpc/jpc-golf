@@ -1,0 +1,7 @@
+{
+	"name": "golfa2",
+	"integrations": {
+	  "capacitor": {}
+	},
+	"type": "react"
+  }
