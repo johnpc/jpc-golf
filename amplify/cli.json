@@ -20,6 +20,9 @@
     },
     "appsync": {
       "generategraphqlpermissions": true
+    },
+    "project": {
+      "overrides": true
     }
   }
 }

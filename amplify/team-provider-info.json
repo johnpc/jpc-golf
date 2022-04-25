@@ -1,83 +1,107 @@
 {
-  "develop": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-jpcgolf-develop-183317-authRole",
-      "UnauthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-develop-183317-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-develop-183317-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-jpcgolf-develop-183317-deployment",
-      "UnauthRoleName": "amplify-jpcgolf-develop-183317-unauthRole",
-      "StackName": "amplify-jpcgolf-develop-183317",
-      "StackId": "arn:aws:cloudformation:us-east-1:566092841021:stack/amplify-jpcgolf-develop-183317/e5b84c30-a93a-11eb-8e0d-0e23aa861d3d",
-      "AmplifyAppId": "d2bg4421igchao"
+    "develop": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-jpcgolf-develop-183317-authRole",
+            "UnauthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-develop-183317-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-develop-183317-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-jpcgolf-develop-183317-deployment",
+            "UnauthRoleName": "amplify-jpcgolf-develop-183317-unauthRole",
+            "StackName": "amplify-jpcgolf-develop-183317",
+            "StackId": "arn:aws:cloudformation:us-east-1:566092841021:stack/amplify-jpcgolf-develop-183317/e5b84c30-a93a-11eb-8e0d-0e23aa861d3d",
+            "AmplifyAppId": "d2bg4421igchao"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d2bg4421igchao",
+                    "type": "cicd"
+                }
+            },
+            "function": {
+                "jpcgolf8adea8cc": {
+                    "deploymentBucketName": "amplify-jpcgolf-develop-183317-deployment",
+                    "s3Key": "amplify-builds/jpcgolf8adea8cc-697637772b4d3365614a-build.zip"
+                }
+            }
+        }
     },
-    "categories": {
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d2bg4421igchao",
-          "type": "cicd"
+    "aaa": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-jpcgolf-aaa-121437-authRole",
+            "UnauthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaa-121437-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaa-121437-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-jpcgolf-aaa-121437-deployment",
+            "UnauthRoleName": "amplify-jpcgolf-aaa-121437-unauthRole",
+            "StackName": "amplify-jpcgolf-aaa-121437",
+            "StackId": "arn:aws:cloudformation:us-east-1:566092841021:stack/amplify-jpcgolf-aaa-121437/3da9b830-f151-11eb-9add-0e4875d6c3bd",
+            "AmplifyAppId": "d2bg4421igchao"
+        },
+        "categories": {
+            "function": {
+                "jpcgolf8adea8cc": {
+                    "deploymentBucketName": "amplify-jpcgolf-aaa-121437-deployment",
+                    "s3Key": "amplify-builds/jpcgolf8adea8cc-66626d6d44456d745350-build.zip"
+                }
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d2bg4421igchao",
+                    "type": "cicd"
+                }
+            }
         }
-      },
-      "function": {
-        "jpcgolf8adea8cc": {
-          "deploymentBucketName": "amplify-jpcgolf-develop-183317-deployment",
-          "s3Key": "amplify-builds/jpcgolf8adea8cc-697637772b4d3365614a-build.zip"
-        }
-      }
-    }
-  },
-  "aaa": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-jpcgolf-aaa-121437-authRole",
-      "UnauthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaa-121437-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaa-121437-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-jpcgolf-aaa-121437-deployment",
-      "UnauthRoleName": "amplify-jpcgolf-aaa-121437-unauthRole",
-      "StackName": "amplify-jpcgolf-aaa-121437",
-      "StackId": "arn:aws:cloudformation:us-east-1:566092841021:stack/amplify-jpcgolf-aaa-121437/3da9b830-f151-11eb-9add-0e4875d6c3bd",
-      "AmplifyAppId": "d2bg4421igchao"
     },
-    "categories": {
-      "function": {
-        "jpcgolf8adea8cc": {
-          "deploymentBucketName": "amplify-jpcgolf-aaa-121437-deployment",
-          "s3Key": "amplify-builds/jpcgolf8adea8cc-66626d6d44456d745350-build.zip"
+    "aaahotfix": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-jpcgolf-aaahotfix-142932-authRole",
+            "UnauthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaahotfix-142932-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaahotfix-142932-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-jpcgolf-aaahotfix-142932-deployment",
+            "UnauthRoleName": "amplify-jpcgolf-aaahotfix-142932-unauthRole",
+            "StackName": "amplify-jpcgolf-aaahotfix-142932",
+            "StackId": "arn:aws:cloudformation:us-east-1:566092841021:stack/amplify-jpcgolf-aaahotfix-142932/107a95d0-0440-11ec-88d2-0e8a861a6983",
+            "AmplifyAppId": "d2bg4421igchao"
+        },
+        "categories": {
+            "function": {
+                "jpcgolf8adea8cc": {
+                    "deploymentBucketName": "amplify-jpcgolf-aaahotfix-142932-deployment",
+                    "s3Key": "amplify-builds/jpcgolf8adea8cc-2f33755865474a6e6179-build.zip"
+                }
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d2bg4421igchao",
+                    "type": "cicd"
+                }
+            }
         }
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d2bg4421igchao",
-          "type": "cicd"
-        }
-      }
-    }
-  },
-  "aaahotfix": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-jpcgolf-aaahotfix-142932-authRole",
-      "UnauthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaahotfix-142932-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-aaahotfix-142932-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-jpcgolf-aaahotfix-142932-deployment",
-      "UnauthRoleName": "amplify-jpcgolf-aaahotfix-142932-unauthRole",
-      "StackName": "amplify-jpcgolf-aaahotfix-142932",
-      "StackId": "arn:aws:cloudformation:us-east-1:566092841021:stack/amplify-jpcgolf-aaahotfix-142932/107a95d0-0440-11ec-88d2-0e8a861a6983",
-      "AmplifyAppId": "d2bg4421igchao"
     },
-    "categories": {
-      "function": {
-        "jpcgolf8adea8cc": {
-          "deploymentBucketName": "amplify-jpcgolf-aaahotfix-142932-deployment",
-          "s3Key": "amplify-builds/jpcgolf8adea8cc-2f33755865474a6e6179-build.zip"
+    "springtwo": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-jpcgolf-springtwo-153025-authRole",
+            "UnauthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-springtwo-153025-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::566092841021:role/amplify-jpcgolf-springtwo-153025-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-jpcgolf-springtwo-153025-deployment",
+            "UnauthRoleName": "amplify-jpcgolf-springtwo-153025-unauthRole",
+            "StackName": "amplify-jpcgolf-springtwo-153025",
+            "StackId": "arn:aws:cloudformation:us-east-1:566092841021:stack/amplify-jpcgolf-springtwo-153025/29d33f60-c4ce-11ec-80d3-120bbea1e37b",
+            "AmplifyAppId": "d2bg4421igchao"
+        },
+        "categories": {
+            "function": {
+                "jpcgolf8adea8cc": {}
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d2bg4421igchao",
+                    "type": "cicd"
+                }
+            }
         }
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d2bg4421igchao",
-          "type": "cicd"
-        }
-      }
     }
-  }
 }
