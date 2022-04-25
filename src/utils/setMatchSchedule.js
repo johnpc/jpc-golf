@@ -3,7 +3,7 @@ import getTeams from "../data/getTeams";
 import {createMatch} from "../graphql/mutations";
 import Permutation from "iterative-permutation";
 
-export const FIRST_MATCH_DATE = "2021-08-05T21:47:30.499Z";
+export const FIRST_MATCH_DATE = "2021-05-05T21:47:30.499Z";
 export const MS_PER_DAY = 1000 * 60 * 60 * 24;
 export const MS_PER_WEEK = MS_PER_DAY * 7;
 const WEEKS_OF_PLAY = 8;
