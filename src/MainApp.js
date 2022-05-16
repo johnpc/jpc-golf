@@ -36,9 +36,6 @@ function MainApp({match}) {
             <Menu.Item key="directory">
               <Link to={match.url + "/directory"}>Player Directory</Link>
             </Menu.Item>
-            <Menu.Item key="about">
-              <Link to={match.url + "/about"}>About</Link>
-            </Menu.Item>
           </Menu>
         </Header>
         <Layout>
@@ -68,9 +65,6 @@ function MainApp({match}) {
               </Route>
               <Route path={match.url + "/directory"}>
                 <DisplayDirectory />
-              </Route>
-              <Route path={match.url + "/about"}>
-                <DisplayInformation />
               </Route>
               <Route path={match.url}>
                 <ReportScore />

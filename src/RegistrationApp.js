@@ -16,9 +16,6 @@ function RegistrationApp({match}) {
           <Menu.Item key="home">
             <Link to={url}>Register</Link>
           </Menu.Item>
-          <Menu.Item key="about">
-            <Link to={url + "/about"}>About</Link>
-          </Menu.Item>
           <Menu.Item key="preview">
             <Link to="/app">Preview</Link>
           </Menu.Item>
@@ -26,7 +23,6 @@ function RegistrationApp({match}) {
       </Header>
       <Content style={{padding: "0 10vw"}}>
         <Switch>
-          <Route path={path + "/about"} component={DisplayInformation} />
           <Route exact path={path} component={Registration} />
         </Switch>
       </Content>
