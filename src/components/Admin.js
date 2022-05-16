@@ -6,6 +6,7 @@ import seedData from "../utils/seedData";
 import nukeData from "../utils/nukeData";
 import {Link} from "react-router-dom";
 import recordAnalytics from "../utils/recordAnalytics";
+import nukeMatches from "../utils/nukeMatches";
 
 function Admin() {
   const [seedDisabled, setSeedDisabled] = useState(false);
@@ -41,6 +42,17 @@ function Admin() {
         }}
       >
         Nuke data
+      </Button>
+      <Button
+        danger
+        disabled={nukeDisabled}
+        onClick={async () => {
+          setNukeDisabled(true);
+          nukeMatches();
+          setNukeDisabled(false);
+        }}
+      >
+        Remove All Matches
       </Button>
       <ManageTeams />
     </div>
