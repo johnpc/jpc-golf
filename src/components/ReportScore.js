@@ -112,7 +112,7 @@ function ReportScore() {
           // Only display last week's and next week's match
           return (
             // if the date is more than a week ago
-            // Date.parse(match.date) > Date.now() - MS_PER_WEEK &&
+            Date.parse(match.date) > Date.now() - MS_PER_WEEK &&
             // or if the date is less than a week from now
             Date.parse(match.date) < Date.now() + MS_PER_WEEK
           );
